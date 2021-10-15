@@ -146,7 +146,7 @@ echo"<!DOCTYPE html>
 			<div id=\"logo\">
 				<a href=\"index.php\">QuickStats</a>
 			</div>
-		<!- //Logo -->
+		<!-- //Logo -->
 
 	
 		<!-- Header navigation -->

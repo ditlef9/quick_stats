@@ -45,24 +45,6 @@ if($get_my_user_id == ""){
 }
 if($process == "1"){
 
-	$inp_user_email = $_POST['inp_user_email'];
-	$inp_user_email = output_html($inp_user_email);
-	$inp_user_email = strtolower($inp_user_email);
-	$inp_user_email_mysql = quote_smart($link, $inp_user_email);
-			
-	$inp_user_name = $_POST['inp_user_name'];
-	$inp_user_name = output_html($inp_user_name);
-	$inp_user_name = ucfirst($inp_user_name);
-	$inp_user_name_mysql = quote_smart($link, $inp_user_name);
-
-	$inp_user_language = $_POST['inp_user_language'];
-	$inp_user_language = output_html($inp_user_language);
-	$inp_user_language_mysql = quote_smart($link, $inp_user_language);
-
-	$inp_user_rank = $_POST['inp_user_rank'];
-	$inp_user_rank = output_html($inp_user_rank);
-	$inp_user_rank_mysql = quote_smart($link, $inp_user_rank);
-
 	$inp_user_first_name = $_POST['inp_user_first_name'];
 	$inp_user_first_name = output_html($inp_user_first_name);
 	$inp_user_first_name = ucwords($inp_user_first_name);
@@ -77,20 +59,33 @@ if($process == "1"){
 	$inp_user_last_name = output_html($inp_user_last_name);
 	$inp_user_last_name = ucwords($inp_user_last_name);
 	$inp_user_last_name_mysql = quote_smart($link, $inp_user_last_name);
+
+	$inp_user_email = $_POST['inp_user_email'];
+	$inp_user_email = output_html($inp_user_email);
+	$inp_user_email = strtolower($inp_user_email);
+	$inp_user_email_mysql = quote_smart($link, $inp_user_email);
+			
+	$inp_user_name = $_POST['inp_user_name'];
+	$inp_user_name = output_html($inp_user_name);
+	$inp_user_name = ucfirst($inp_user_name);
+	$inp_user_name_mysql = quote_smart($link, $inp_user_name);
+
+	$inp_user_rank = $_POST['inp_user_rank'];
+	$inp_user_rank = output_html($inp_user_rank);
+	$inp_user_rank_mysql = quote_smart($link, $inp_user_rank);
+
 	
 	// Check empty email
 	if(empty($inp_user_email)){
 		$ft = "warning";
 		$fm = "please_enter_a_email_address";
 		$url = "index.php?open=$open&page=users_new&ft=$ft&fm=$fm";
-		$url = $url . "&inp_user_email=$inp_user_email";
-		$url = $url . "&inp_user_name=$inp_user_name";
-		$url = $url . "&inp_user_language=$inp_user_language";
-		$url = $url . "&inp_user_rank=$inp_user_rank";
 		$url = $url . "&inp_user_first_name=$inp_user_first_name";
 		$url = $url . "&inp_user_middle_name=$inp_user_middle_name";
 		$url = $url . "&inp_user_last_name=$inp_user_last_name";
-		$url = $url . "&editor_language=$editor_language";
+		$url = $url . "&inp_user_email=$inp_user_email";
+		$url = $url . "&inp_user_name=$inp_user_name";
+		$url = $url . "&inp_user_rank=$inp_user_rank";
 
 		header("Location: $url");
 		exit;
@@ -106,13 +101,12 @@ if($process == "1"){
 		$fm = "email_alreaddy_in_use";
 		$ft = "warning";
 		$url = "index.php?open=$open&page=users_new&ft=$ft&fm=$fm";
-		$url = $url . "&inp_user_name=$inp_user_name";
-		$url = $url . "&inp_user_language=$inp_user_language";
-		$url = $url . "&inp_user_rank=$inp_user_rank";
 		$url = $url . "&inp_user_first_name=$inp_user_first_name";
 		$url = $url . "&inp_user_middle_name=$inp_user_middle_name";
 		$url = $url . "&inp_user_last_name=$inp_user_last_name";
-		$url = $url . "&editor_language=$editor_language";
+		$url = $url . "&inp_user_email=$inp_user_email";
+		$url = $url . "&inp_user_name=$inp_user_name";
+		$url = $url . "&inp_user_rank=$inp_user_rank";
 
 		header("Location: $url");
 		exit;
@@ -122,13 +116,12 @@ if($process == "1"){
 		$ft = "warning";
 		$fm = "please_enter_a_user_name";
 		$url = "index.php?open=$open&page=users_new&ft=$ft&fm=$fm";
-		$url = $url . "&inp_user_email=$inp_user_email";
-		$url = $url . "&inp_user_language=$inp_user_language";
-		$url = $url . "&inp_user_rank=$inp_user_rank";
 		$url = $url . "&inp_user_first_name=$inp_user_first_name";
 		$url = $url . "&inp_user_middle_name=$inp_user_middle_name";
 		$url = $url . "&inp_user_last_name=$inp_user_last_name";
-		$url = $url . "&editor_language=$editor_language";
+		$url = $url . "&inp_user_email=$inp_user_email";
+		$url = $url . "&inp_user_name=$inp_user_name";
+		$url = $url . "&inp_user_rank=$inp_user_rank";
 
 		header("Location: $url");
 		exit;
@@ -143,14 +136,12 @@ if($process == "1"){
 		$fm = "user_name_alreaddy_in_use";
 		$ft = "warning";
 		$url = "index.php?open=$open&page=users_new&ft=$ft&fm=$fm";
-		$url = $url . "&inp_user_email=$inp_user_email";
-		$url = $url . "&inp_user_name=$inp_user_name";
-		$url = $url . "&inp_user_language=$inp_user_language";
-		$url = $url . "&inp_user_rank=$inp_user_rank";
 		$url = $url . "&inp_user_first_name=$inp_user_first_name";
 		$url = $url . "&inp_user_middle_name=$inp_user_middle_name";
 		$url = $url . "&inp_user_last_name=$inp_user_last_name";
-		$url = $url . "&editor_language=$editor_language";
+		$url = $url . "&inp_user_email=$inp_user_email";
+		$url = $url . "&inp_user_name=$inp_user_name";
+		$url = $url . "&inp_user_rank=$inp_user_rank";
 
 		header("Location: $url");
 		exit;
@@ -203,21 +194,15 @@ if($process == "1"){
 
 	// Insert user
 	mysqli_query($link, "INSERT INTO $t_users
-	(user_id, user_email, user_name, user_alias, user_password, 
-	user_salt, user_security, user_rank, user_verified_by_moderator, user_first_name, 
-	user_middle_name, user_last_name, user_language, user_timezone_utc_diff, user_timezone_value, 
-	user_measurement, user_date_format, user_registered, user_registered_time, user_registered_date_saying, user_newsletter, 
-	user_privacy, user_views, user_views_ipblock, user_points, user_points_rank, 
-	user_likes, user_dislikes, user_status, user_login_tries, user_last_online, 
-	user_last_online_time, user_synchronized, user_notes, user_marked_as_spammer) 
+	(user_id, user_email, user_name, user_password, user_password_replacement, 
+	user_password_date, user_salt, user_security, user_rank, user_verified_by_moderator, 
+	user_first_name, user_middle_name, user_last_name, user_login_tries, user_last_online, 
+	user_last_online_time, user_last_ip, user_notes, user_marked_as_spammer) 
 	VALUES 
-	(NULL, $inp_user_email_mysql, $inp_user_name_mysql, $inp_user_name_mysql, $inp_user_password_mysql, 
-	$inp_user_salt_mysql, '$inp_user_security', $inp_user_rank_mysql, 1, $inp_user_first_name_mysql, 
-	$inp_user_middle_name_mysql,  $inp_user_last_name_mysql, $inp_user_language_mysql, $inp_user_timezone_utc_diff_mysql, $inp_user_timezone_value_mysql, 
-	$inp_user_mesurment_mysql, $inp_user_date_format_mysql, '$datetime', '$time', '$date_saying', 0, 
-	'public', 0, '', 0, 'Newbie',
-	0, 0, '', 0, '$datetime', 
-	'$time', 0, '', 0)")
+	(NULL, $inp_user_email_mysql, $inp_user_name_mysql, $inp_user_password_mysql, '', 
+	'$date', $inp_user_salt_mysql, '$inp_user_security', $inp_user_rank_mysql, 1, 
+	$inp_user_first_name_mysql, $inp_user_middle_name_mysql,  $inp_user_last_name_mysql, 0, '$datetime',
+	'$time', '', '', 0)")
 	or die(mysqli_error($link));
 
 
@@ -228,62 +213,32 @@ if($process == "1"){
 	list($get_user_id) = $row;
 			
 
-	// Link
-	$pageURL = 'http';
-	$pageURL .= "://";
-
-	if ($_SERVER["SERVER_PORT"] != "80") {
-		$pageURL .= $_SERVER["SERVER_NAME"].":".$_SERVER["SERVER_PORT"].$_SERVER["REQUEST_URI"];
-	} 
-	else {
-		$pageURL .= $_SERVER["SERVER_NAME"].$_SERVER["REQUEST_URI"];
-	}
-	$link_admin = str_replace("index.php?open=$open&page=users_new&process=1", "", $pageURL);
-	$link_site = str_replace("_admin/index.php?open=$open&page=users_new&process=1", "", $pageURL);
-
-
 
 	// Send e-mail
 	$host = $_SERVER['HTTP_HOST'];
-	$from = "no-reply@" . $_SERVER['HTTP_HOST'];
-	$reply = "post@" . $_SERVER['HTTP_HOST'];
 
 	$subject = "Username and password for " . $host;
-	$message = "Hello $inp_profile_first_name $inp_profile_last_name,\n\nWelcome to $host. This e-mail contains your username and password. Once logged in you can change your password.\n\nUsername: $inp_user_email\nPassword: $inp_user_password\nControl panel: $link_admin\nSite: $link_site\n\n---\n" . $host;
+	$message = "Hello $inp_profile_first_name $inp_profile_last_name,\n";
+	$message = $message . "Welcome to $host. This e-mail contains your username and password. Once logged in you can change your password.\n\n";
+	$message = $message . "Email: $inp_user_email\n";
+	$message = $message . "Password: $inp_user_password\n";
+	$message = $message . "URL: $configStatsURLSav\n";
+	$message = $message . "---\n";
+	$message = $message . "Regards\n";
+	$message = $message . "$configStatsTitleSav\n";
+	$message = $message . "$configFromNameSav\n";
+	$message = $message . "$configFromEmailSav";
 
-	$headers = "From: $from" . "\r\n" .
-	    "Reply-To: $reply" . "\r\n" .
+	$headers = "From: $configFromEmailSav" . "\r\n" .
+	    "Reply-To: $configFromEmailSav" . "\r\n" .
 	    'X-Mailer: PHP/' . phpversion();
 	if($configMailSendActiveSav == "1"){
 		mail($inp_user_email, $subject, $message, $headers);
 	}
 
-	// Search engine
-	if($configShowUsersOnSearchEngineIndexSav == "1"){
-		// Title
-		include("_translations/site/$l/users/ts_users.php");
-
-		$inp_index_title = "$inp_user_name | $l_users";
-		$inp_index_title_mysql = quote_smart($link, $inp_index_title);
-
-		$inp_index_url = "users/view_profile.php?user_id=$get_user_id";
-		$inp_index_url_mysql = quote_smart($link, $inp_index_url);
-
-		mysqli_query($link, "INSERT INTO $t_search_engine_index 
-		(index_id, index_title, index_url, index_short_description, index_keywords, 
-		index_module_name, index_module_part_name, index_module_part_id, index_reference_name, index_reference_id, 
-		index_has_access_control, index_is_ad, index_created_datetime, index_created_datetime_print, index_language, 
-		index_unique_hits) 
-		VALUES 
-		(NULL, $inp_index_title_mysql, $inp_index_url_mysql, '', '', 
-		'users', 'users', '0', 'user_id', '$get_user_id',
-		'0', '0', '$datetime', '$datetime_saying', '',
-		0)")
-		or die(mysqli_error($link));
-	}
 
 	// Header
-	$url = "index.php?open=$open&page=users_new&ft=success&fm=user_created_and_mail_sent&editor_language=$editor_language";
+	$url = "index.php?open=$open&page=users_new&ft=success&fm=user_created_and_mail_sent";
 	header("Location: $url");
 	exit;
 }
