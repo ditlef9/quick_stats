@@ -1,0 +1,224 @@
+﻿/**
+*
+* File: _stats/liquidbase/liquidbase.css
+* Version 1
+* Date 09:51 15.10.2021
+* Copyright (c) 2021 Sindre Andre Ditlefsen
+* License: http://opensource.org/licenses/gpl-license.php GNU Public License
+*
+*/
+
+/*- Nullstilling ------------------------------------------------------------------ */
+div.clear{
+	clear: both;
+}
+
+/*- Body -------------------------------------------------------------------------- */
+html{
+	height: 100%;
+}
+body {
+	background: #1d2531;
+	color: #000;
+	font: normal 16px 'Open Sans',sans-serif;
+	padding: 0;
+	margin: 0;
+	height: 100%;
+	margin: 0;
+}
+
+
+/*- Bilder ----------------------------------------------------------------------- */
+img{
+	max-width: 100%;
+}
+
+
+/*- Overskrifter ----------------------------------------------------------------- */
+h1 {
+	font: normal 20px 'Open Sans',sans-serif;
+    	color: #292625;
+	padding: 0px 0 20px 0px;
+	margin: 0px 0px 0px 0px;
+}
+
+/*- Paragrafer og span ----------------------------------------------------------- */
+p{
+	margin: 0;
+	font: normal 16px 'Open Sans',sans-serif;
+        color: #000;
+}
+span{
+        color: #000;
+}
+
+
+/*- Input ------------------------------------------------------------------------ */
+input {  /* Submit button */
+	padding: 3px;
+	border: 1px solid #BBB;
+	font: normal 16px 'Open Sans',sans-serif;
+	background-color: #FFF; 
+}
+textarea { 
+	padding: 3px; border: 1px solid #BBB; 
+	font: normal 16px 'Open Sans',sans-serif;
+	background-color: #FFF; 
+}
+select  { border: 1px solid #BBB; padding: 2px; }
+.checkbox { border: none;}
+input.submit { background-color: #8EAF0D;  border: none; color: #FFF; padding: 3px 5px; margin: 0 3px; font-size: 12px; }
+button { background-color: #8EAF0D;  border: 1px solid #698208; color: #FFF; padding: 3px 5px; margin: 0 3px; font-size: 12px; }
+.radio {border: 0; margin: 0 3px -3px 0; background: transparent; }
+label { width: 150px; height: 20px; float: left;}
+.bredlabel { width: 550px; height: 20px; margin: 0 5px 0 0; float: none;}
+
+.inp_email_registration{ display: none; }
+
+@media screen and (max-width: 52.375em) {
+	input.textarea,.uneditable-input{
+		width: 206px; 
+	}
+}
+
+
+
+
+
+
+
+
+/*- Linker ------------------------------------------------------------------ */
+a {
+	color: #44a8ec;
+	font: normal 16px 'Open Sans',sans-serif;
+	text-decoration: none;
+}
+a:hover {
+	color: #48b0f7;
+	text-decoration: none;
+}
+
+
+/*- Wrapper ------------------------------------------------------------------ */
+#wrapper {
+	margin: 0;
+	padding: 0;
+	background: url('_gfx/bg/04.jpg') no-repeat center center fixed; 
+	background-size: cover;
+	height: 100%;
+}
+#content { 
+	width: 1200px; 
+	margin: 0px auto; 
+	padding-top: 10%;
+}
+
+
+/*- Header ---------------------------------------------------------------- */
+header{
+	width: 100%;
+	background: #263544;
+	border-radius: 5px;
+	border-bottom-right-radius: 0px;
+	border-bottom-left-radius: 0px;
+
+	padding: 20px 30px 20px 30px;
+}
+header p{
+	padding: 0px 0px 0px 0px;
+	margin: 0;	
+	color: #fff;
+	font: bold 20px 'Open Sans',sans-serif;
+}
+
+header > p.header_right{
+	padding: 0px 0px 0px 0px;
+	margin: 0;	
+	color: #fff;
+	font: bold 20px 'Open Sans',sans-serif;
+	float: right;
+}
+
+@media screen and (max-width: 52.375em) {
+	header{
+		width: 70%;
+	}
+}
+
+/*- Main --------------------------------------------------------------- */
+#main{
+	width: 100%;
+	background: #fff; 
+	padding: 20px 30px 20px 30px;
+	border-top: #000 1px solid;
+	border-bottom: #e5e5e5 1px solid;
+}
+@media screen and (max-width: 52.375em) {
+	#main{
+		width: 70%;
+	}
+}
+
+
+/*- Login ------------------------------------------------------------------------ */
+input.inp_email, input.inp_password{
+	background: url("images/login_email.png") no-repeat 5px center;
+	padding: 5px 5px 5px 30px;
+	font: normal 16px 'Open Sans',sans-serif;
+	color: #292625;
+	border-radius: 5px;
+	border: #bbbbbb 1px solid;
+	margin-top: 4px;
+}
+input.inp_email:active, input.inp_email:focus, input.inp_password:active, input.inp_password:focus {
+	border: #bbbbbb 1px solid;
+	
+}
+
+input.inp_password{
+	background: url("images/login_password.png") no-repeat 5px center;
+}
+.inp_submit {
+	background: #44a8ec;
+	border: #44a8ec 1px solid; 
+	color: #fff;
+	padding: 6px 30px 6px 30px; 
+	margin: 0 3px; 
+	font: normal 16px 'Open Sans',sans-serif;
+	border-radius: 5px;
+	text-align: right;
+	
+}
+input.inp_submit:hover {
+	background: #48b0f7;
+	border: #48b0f7 1px solid; 
+	color: #fff;
+}
+
+
+/*- Footer ------------------------------------------------------------------------ */
+footer{
+	width: 100%;
+	background: #f2f0f0;
+	border-radius: 5px;
+	border-top-right-radius: 0px;
+	border-top-left-radius: 0px;
+	padding: 5px 30px 5px 30px;
+	text-align: right;
+}
+@media screen and (max-width: 52.375em) {
+	footer{
+		width: 70%;
+	}
+}
+
+footer a{
+	background: url("_gfx/footer_go_right.png") no-repeat right 0px;
+	color: #4f4846;
+	padding: 0px 18px 0px 0px;
+}
+footer a:hover{
+	background: url("_gfx/footer_go_right_hover.png") no-repeat right 0px;
+	color: #000;
+}
