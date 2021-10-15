@@ -76,7 +76,12 @@ echo"<!DOCTYPE html>
 	echo"Quick Stats";
 	echo"</title>
 
-	<link rel=\"icon\" href=\"favicon.ico\" />
+	<!-- Favicon -->
+		<link rel=\"icon\" href=\"../_layout/favicon/stats_16x16.png\" type=\"image/png\" sizes=\"16x16\" />
+		<link rel=\"icon\" href=\"../_layout/favicon/stats_32x32.png\" type=\"image/png\" sizes=\"32x32\" />
+		<link rel=\"icon\" href=\"../_layout/favicon/stats_256x256.png\" type=\"image/png\" sizes=\"256x256\" />
+	<!-- //Favicon -->
+
 	<meta name=\"viewport\" content=\"width=device-width; initial-scale=1.0;\"/>
 	<link rel=\"stylesheet\" href=\"_setup_design/setup.css?date="; echo date("ymdhis"); echo"\" type=\"text/css\" />
 	<meta http-equiv=\"Content-Type\" content=\"text/html; charset=UFT-8\" />

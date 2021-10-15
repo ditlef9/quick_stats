@@ -1,10 +1,10 @@
 <?php
 // General
-$configStatsTitleSav		 = "Localhost";
-$configStatsTitleCleanSav	 = "localhost";
-$configFromEmailSav 		 = "post@localhost";
-$configFromNameSav 		 = "Localhost";
-
+$configStatsTitleSav		 = "a";
+$configStatsTitleCleanSav	 = "a";
+$configFromEmailSav 		 = "b";
+$configFromNameSav 		 = "c";
+ 
 $configMailSendActiveSav	= "1";
 
 // URLs
@@ -17,5 +17,6 @@ $configStatsURLPathSav		= "/quick_statistics/_stats";
 
 // Statisics
 $configStatsUseGethostbyaddrSav = "1";
-$configStatsDaysToKeepPageVisitsSav = "730";
+$configStatsDaysToKeepPageVisitsSav = "700";
+
 ?>
