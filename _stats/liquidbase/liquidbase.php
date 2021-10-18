@@ -56,6 +56,22 @@ if(isset($_GET['counter'])) {
 else{
 	$counter = "1";
 }
+if(isset($_GET['refererer_open'])) {
+	$refererer_open = $_GET['refererer_open'];
+	$refererer_open = strip_tags(stripslashes($refererer_open));
+}
+else{
+	$refererer_open = "";
+}
+if(isset($_GET['refererer_page'])) {
+	$refererer_page = $_GET['refererer_page'];
+	$refererer_page = strip_tags(stripslashes($refererer_page));
+}
+else{
+	$refererer_page = "";
+}
+
+
 
 /*- Start --------------------------------------------------------------------------- */
 // Loop trough years
@@ -151,7 +167,7 @@ if ($handle = opendir($path)) {
 						// Refresh and load again
 						$refresh_after = rand(0,1);
 						echo"
-	<meta http-equiv=refresh content=\"$refresh_after; url=liquidbase.php?counter=$counter&amp;last_module=$module&amp;last_name=$liquidbase_name&amp;last_datetime=$datetime\">
+	<meta http-equiv=refresh content=\"$refresh_after; url=liquidbase.php?counter=$counter&amp;last_module=$module&amp;last_name=$liquidbase_name&amp;last_datetime=$datetime&amp;refererer_open=$refererer_open&amp;refererer_page=$refererer_page\">
 	</div>
 	<!-- //Main -->
 

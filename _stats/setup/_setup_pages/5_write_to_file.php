@@ -89,6 +89,11 @@ $inp_user_salt_mysql = quote_smart($link, $salt);
 // 5.2 user and assword
 $inp_user_email_mysql = quote_smart($link, $adminEmailSav);
 $inp_user_password_mysql = quote_smart($link, $adminPasswordSav);
+if($adminEmailSav == ""){
+	echo"<p>Admin e-mail is blank. We need to wait for flat file to be written. Please hold!</p>
+	<meta http-equiv=\"refresh\" content=\"3;url=index.php?page=5_write_to_file&amp;random=$salt\" />";
+	die;
+}
 
 // 5.3 Security
 $year = date("Y");

@@ -6,7 +6,17 @@ if(file_exists("../_data/setup_finished.php")){
 }
 
 
-if($process == "1"){
+/*- Variables ------------------------------------------------------------------------ */
+if(isset($_GET['action'])) {
+	$action = $_GET['action'];
+	$action = strip_tags(stripslashes($action));
+}
+else{
+	$action = "";
+}
+
+
+if($action == "check"){
 	// Administrator
 	$inp_user_email = $_POST['inp_user_email'];
 	$inp_user_email = output_html($inp_user_email);
@@ -16,14 +26,14 @@ if($process == "1"){
 	$inp_user_password = sha1($inp_user_password);
 
 		
-	if(empty($inp_user_email)){
+	if(empty($inp_user_email) OR $inp_user_email == ""){
 		$ft = "warning";
 		$fm = "please_enter_your_email_address";
 		$url = "index.php?page=06_administrator&language=$language&ft=$ft&fm=$fm";
 		header("Location: $url");
 		exit;
 	}
-	if(empty($inp_user_password)){
+	if(empty($inp_user_password) OR $inp_user_password == ""){
 		$ft = "warning";
 		$fm = "please_enter_your_password";
 		$url = "index.php?page=06_administrator&language=$language&ft=$ft&fm=$fm";
@@ -73,20 +83,36 @@ if($process == "1"){
 
 
 	// Move to admin-panel
-	header("Location: index.php?page=5_write_to_file");
-	exit;
+	// We need to use refresh because header is to fast...
+	echo"
+	<h1>Administrator</h1>
+	
+	<table>
+	 <tr>
+	  <td>
+		<img src=\"../_layout/gfx/loading_22.gif\" alt=\"loading_22.gif\" />
+	  </td>
+	  <td>
+		<p>Loading...</p>
+	  </td>
+	 </tr>
+	</table>
+	
+	<p>The installation will now start. Please wait.</p>
 
+	<meta http-equiv=\"refresh\" content=\"3;url=index.php?page=5_write_to_file\" />
+	";
 }
 
+if($action == ""){
+	echo"
+	<h1>Administrator</h1>
 
-echo"
-<h1>Administrator</h1>
 
 
+	<!-- Administrator form -->
 
-<!-- Administrator form -->
-
-	<form method=\"post\" action=\"index.php?page=4_administrator&amp;process=1\" enctype=\"multipart/form-data\">
+	<form method=\"post\" action=\"index.php?page=4_administrator&amp;action=check\" enctype=\"multipart/form-data\">
 
 	<!-- Error -->
 		";
@@ -120,7 +146,8 @@ echo"
 
 	</form>
 
-<!-- //Administrator form -->
-";
+	<!-- //Administrator form -->
+	";
+}
 ?>
 
