@@ -57,10 +57,46 @@ else{
 }
 $year_mysql = quote_smart($link, $year);
 
+// Month saying
+$month_saying = "?";
+if($month == "1" OR $month == "1"){
+	$month_saying = "January";
+}
+elseif($month == "2" OR $month == "02"){
+	$month_saying = "February";
+}
+elseif($month == "3" OR $month == "03"){
+	$month_saying = "March";
+}
+elseif($month == "4" OR $month == "04"){
+	$month_saying = "April";
+}
+elseif($month == "5" OR $month == "05"){
+	$month_saying = "May";
+}
+elseif($month == "6" OR $month == "06"){
+	$month_saying = "Jane";
+}
+elseif($month == "7" OR $month == "07"){
+	$month_saying = "July";
+}
+elseif($month == "8" OR $month == "08"){
+	$month_saying = "August";
+}
+elseif($month == "9" OR $month == "09"){
+	$month_saying = "September";
+}
+elseif($month == "10"){
+	$month_saying = "October";
+}
+elseif($month == "11"){
+	$month_saying = "November";
+}
+elseif($month == "12"){
+	$month_saying = "January";
+}
+
 echo"
-<!-- Charts javascript -->
-	<script src=\"_libraries/amcharts/xy.js\"></script>
-<!-- //Charts javascript -->
 
 
 <!-- Feedback -->
@@ -88,6 +124,52 @@ echo"
 	}
 	echo"
 <!-- //Check if setup folder exists -->
+
+
+<h1>Statistics</h1>
+
+
+<!-- Javascripts -->
+	<script src=\"_libraries/amcharts/index.js\"></script>
+	<script src=\"_libraries/amcharts/xy.js\"></script>
+	<script src=\"_libraries/amcharts/themes/Animated.js\"></script>
+<!-- //Javascripts -->
+
+<!-- Visitors per year and per month -->
+	<div class=\"flex_row\">
+		<!-- Visitors pr year -->
+			<div class=\"flex_col_50_white_bg\">
+				<div class=\"flex_col_inner\">
+					<h2>$year visitors</h2>
+
+					<!-- Javascript years visitor -->
+						<div id=\"chartdiv\" style=\"width: 100%;height: 80vh;\"></div>";
+
+						include("_pages/stats/default_generate_visits_per_month.php");
+						echo"
+						<script src=\"_cache/default_visits_per_month_$configSecurityCodeSav.js?rand=$rand\"></script>
+						<!-- <script src=\"_cache/index.js\"></script> -->
+					<!-- //Javascript years visitor -->
+
+
+
+				</div>
+			</div>
+		<!-- //Visitors pr year -->
+		<!-- Visitors pr month -->
+			<div class=\"flex_col_50_white_bg\">
+				<div class=\"flex_col_inner\">
+					<h1>$month_saying visitors</h1>
+				</div>
+			</div>
+		<!-- //Visitors pr month -->
+	</div>
+
+<!-- //Visitors per year and per month -->
+
+
+Every month overview click
+
 ";
 
 

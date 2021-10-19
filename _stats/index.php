@@ -29,7 +29,7 @@ if(isset($_GET['open'])) {
 	$open = strip_tags(stripslashes($open));
 }
 else{
-	$open = "dashboard";
+	$open = "stats";
 }
 if(isset($_GET['page'])) {
 	$page = $_GET['page'];
@@ -117,6 +117,7 @@ else{
 
 /*- Design ---------------------------------------------------------------------------- */
 if($process != "1"){
+	$rand = date("ymdhis");
 echo"<!DOCTYPE html>
 <html lang=\"en\">
 <head>
@@ -135,8 +136,27 @@ echo"<!DOCTYPE html>
 	<!-- //Favicon -->
 
 	<meta name=\"viewport\" content=\"width=device-width; initial-scale=1.0;\"/>
-	<link rel=\"stylesheet\" href=\"_layout/layout.css?date="; echo date("ymdhis"); echo"\" type=\"text/css\" />
+	<link rel=\"stylesheet\" href=\"_layout/layout.css?date=$rand\" type=\"text/css\" />
+
+	<!-- Special CSS -->
+		";
+		if($page != ""){
+			$special_css = "_pages/$open/_stylesheets/$page.css";
+		}
+		else{
+			$special_css = "_pages/$open/_stylesheets/default.css";
+		}
+		if(file_exists("$special_css")){
+			echo"<link rel=\"stylesheet\" type=\"text/css\" href=\"$special_css?rand=$rand\" />";
+		}
+		else{
+			echo"<!-- $special_css doesnt exists -->";
+		}
+		echo"
+	<!-- //Special CSS -->
+
 	<meta http-equiv=\"Content-Type\" content=\"text/html; charset=UFT-8\" />
+
 </head>
 <body>
 
@@ -180,7 +200,11 @@ echo"<!DOCTYPE html>
 
 <!-- Main -->
 	<main>
-		<div class=\"main_inner\">
+		<div class=\"main_inner";
+		if($open == "stats" && $page == ""){
+			echo"_no_bg";
+		}
+		echo"\">
 		<!-- Includes -->
 		";
 } // process != 1
@@ -202,7 +226,7 @@ echo"<!DOCTYPE html>
 						else{
 							echo"
 							<h1>Server error 404</h1>
-							<p>Flatfilen _pages/$open/default.php finnes ikke på serveren.</p>
+							<p>Page _pages/$open/default.php doesnt exists.</p>
 							";
 						}
 					}

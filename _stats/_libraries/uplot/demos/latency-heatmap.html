@@ -1,0 +1,413 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Latency Heatmap</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<link rel="stylesheet" href="../dist/uPlot.min.css">
+	</head>
+	<body>
+		<script src="lib/rand.js"></script>
+		<script src="../dist/uPlot.iife.js"></script>
+		<script>
+			function rawData(xCount, ySeriesCount, yCountMin, yCountMax, yMin, yMax) {
+				xCount = xCount || 100;
+				ySeriesCount = ySeriesCount || 1;
+
+				// 50-300 samples per x
+				yCountMin = yCountMin || 200;
+				yCountMax = yCountMax || 500;
+
+				// y values in 0 - 1000 range
+				yMin = yMin || 5;
+				yMax = yMax || 1000;
+
+				let data = [
+					[],
+					...Array(ySeriesCount).fill(null).map(_ => []),
+				];
+
+				let now = Math.round(new Date() / 1e3);
+
+				let finalCount = 0;
+
+				for (let xi = 0; xi < xCount; xi++) {
+					data[0][xi] = now++;
+
+					for (let si = 1; si <= ySeriesCount; si++) {
+						let yCount = randInt(yCountMin, yCountMax);
+
+						let vals = data[si][xi] = [];
+
+						while (yCount-- > 0) {
+						//	vals.push(Math.round(randn_bm(yMin, yMax, 3)));
+							vals.push(Math.max(randomSkewNormal(Math.random, 30, 30, 3), yMin));
+							finalCount++;
+						}
+
+						vals.sort((a, b) => a - b);
+					}
+				}
+
+				console.log(finalCount);
+
+				return data;
+			}
+
+			function incrRound(num, incr) {
+				return Math.round(num/incr)*incr;
+			}
+
+			function incrRoundUp(num, incr) {
+				return Math.ceil(num/incr)*incr;
+			}
+
+			function incrRoundDn(num, incr) {
+				return Math.floor(num/incr)*incr;
+			}
+
+			function histogram(vals, bucket, filter, sort) {
+				let hist = new Map();
+
+				for (let i = 0; i < vals.length; i++) {
+					let v = vals[i];
+
+					if (v != null)
+						v = bucket(v);
+
+					let entry = hist.get(v);
+
+					if (entry)
+						entry.count++;
+					else
+						hist.set(v, {value: v, count: 1});
+				}
+
+				filter && filter.forEach(v => hist.delete(v));
+
+				let bins = [...hist.values()];
+
+				sort && bins.sort((a, b) => sort(a.value, b.value));
+
+				let values = Array(bins.length);
+				let counts = Array(bins.length);
+
+				for (let i = 0; i < bins.length; i++) {
+					values[i] = bins[i].value;
+					counts[i] = bins[i].count;
+				}
+
+				return [
+					values,
+					counts,
+				];
+			}
+
+			function aggAll(data, round, filter, sort) {
+				let allVals = [].concat(...data[1]);
+				return histogram(allVals, round, filter, sort);
+			}
+
+			function aggEach(data, round, filter, sort) {
+				let data2 = [
+					data[0],
+					[],
+					[],
+				];
+
+				data[1].forEach((vals, xi) => {
+					let [ bins, counts ] = histogram(vals, round, filter, sort);
+
+					data2[1].push(bins);
+					data2[2].push(counts);
+				});
+
+				return data2;
+			}
+
+			console.time("rawData");
+			let raw = rawData();
+			console.timeEnd("rawData");
+	//		console.log(raw);
+
+			let data = [
+				raw[0],
+				raw[1].map(vals => vals[0]),
+				raw[1].map(vals => vals[vals.length - 1]),
+				raw[1],
+			];
+
+			function heatmapPlugin() {
+				return {
+					hooks: {
+						draw: u => {
+							const { ctx, data } = u;
+
+							let yData = data[3];
+							
+							ctx.save()
+							ctx.beginPath();
+							ctx.rect(u.bbox.left, u.bbox.top, u.bbox.width, u.bbox.height);
+							ctx.clip();
+
+							yData.forEach((yVals, xi) => {
+								let xPos = Math.round(u.valToPos(data[0][xi], 'x', true));
+
+								yVals.forEach(yVal => {
+									let yPos = Math.round(u.valToPos(yVal, 'y', true));
+									ctx.fillStyle = "rgba(255,0,0,0.4)";
+									ctx.fillRect(
+										xPos - 4,
+										yPos,
+										10,
+										1,
+									);
+								});
+							});
+
+							ctx.restore()
+						}
+					}
+				};
+			}
+
+			const opts = {
+				width: 1800,
+				height: 600,
+				title: "Latency Heatmap (~20k)",
+				plugins: [
+					heatmapPlugin(),
+				],
+				cursor: {
+					drag: {
+						y: true,
+					},
+					points: {
+						show: false
+					}
+				},
+				series: [
+					{},
+					{
+						paths: () => null,
+						points: {show: false},
+					},
+					{
+						paths: () => null,
+						points: {show: false},
+					},
+				],
+			};
+
+			let u = new uPlot(opts, data, document.body);
+
+
+			let bucketIncr = 5;
+			let histOffset = 0;
+			const histBucket = v => incrRoundDn(v - histOffset, bucketIncr) + histOffset;
+			const histFilter = [null];
+			const histSort = (a, b) => a - b;
+
+			console.time("aggEach");
+			let agg = aggEach(raw, histBucket, histFilter, histSort);
+			console.timeEnd("aggEach");
+
+		//	console.log(raw);
+		//	console.log(agg);
+
+			let data2 = [
+				agg[0],
+				raw[1].map(vals => vals[0]),
+				raw[1].map(vals => vals[vals.length - 1]),
+				agg[1],
+				agg[2],
+			];
+
+			function heatmapPlugin2() {
+				// let global min/max
+				function fillStyle(count, minCount, maxCount) {
+				//	console.log(val);
+					return `hsla(${180 + count/maxCount * 180}, 80%, 50%, 1)`;
+				}
+
+				return {
+					hooks: {
+						draw: u => {
+							const { ctx, data } = u;
+
+							let yData = data[3];
+							let yQtys = data[4];
+/*
+							let maxCount = -Infinity;
+							let minCount = Infinity;
+
+							yQtys.forEach(qtys => {
+								maxCount = Math.max(maxCount, Math.max.apply(null, qtys));
+								minCount = Math.min(minCount, Math.min.apply(null, qtys));
+							});
+
+							console.log(maxCount, minCount);
+*/
+
+							// pre-calc rect height since we know the aggregation bucket
+							let yHgt = Math.floor(u.valToPos(bucketIncr, 'y', true) - u.valToPos(0, 'y', true));
+							
+							ctx.save()
+							ctx.beginPath();
+							ctx.rect(u.bbox.left, u.bbox.top, u.bbox.width, u.bbox.height);
+							ctx.clip();
+
+							yData.forEach((yVals, xi) => {
+								let xPos = Math.floor(u.valToPos(data[0][xi], 'x', true));
+
+								let maxCount = yQtys[xi].reduce((acc, val) => Math.max(val, acc), -Infinity);
+
+								yVals.forEach((yVal, yi) => {
+									let yPos =  Math.floor(u.valToPos(yVal, 'y', true));
+
+								//	ctx.fillStyle = fillStyle(yQtys[xi][yi], minCount, maxCount);
+									ctx.fillStyle = fillStyle(yQtys[xi][yi], 1, maxCount);
+									ctx.fillRect(
+										xPos - 4,
+										yPos,
+										10,
+										yHgt,
+									);
+								});
+							});
+
+							ctx.restore()
+						}
+					}
+				};
+			}
+
+			const opts2 = {
+				width: 1800,
+				height: 600,
+				title: "Latency Heatmap Aggregated 10ms (~20k)",
+				plugins: [
+					heatmapPlugin2(),
+				],
+				cursor: {
+					drag: {
+						y: true,
+					},
+					points: {
+						show: false
+					}
+				},
+				series: [
+					{},
+					{
+						paths: () => null,
+						points: {show: false},
+					},
+					{
+						paths: () => null,
+						points: {show: false},
+					},
+				],
+			};
+
+			let u2 = new uPlot(opts2, data2, document.body);
+
+
+		</script>
+
+		<br>
+		<br>
+		Bucket size: <input id="binsize" type="range" min="1", max="25" step="1" value="5">
+		<span id="cursize">5</span>
+		<br>
+		Bucket offset: <input id="binoffset" type="range" min="0", max="25" step="1" value="0">
+		<span id="curoffset">0</span>
+
+		<script>
+			let bars = uPlot.paths.bars({align: 1, size: [1, Infinity], gap: 4});
+
+			const opts3 = {
+				width: 1800,
+				height: 600,
+				title: "Latency Histogram",
+				scales: {
+					x: {
+						time: false,
+						auto: false,
+						dir: 1,
+						range: (u) => [
+							u.data[0][0],
+							u.data[0][u.data[0].length - 1] + bucketIncr,
+						]
+					}
+				},
+				axes: [
+					{
+						incrs: () => [0,1,2,3,4,5,6,7,8,9,10].map(mult => mult * bucketIncr),
+					//	space: 0,
+						splits: (u, axisIdx, scaleMin, scaleMax, foundIncr, foundSpace) => {
+							let minSpace = u.axes[axisIdx]._space;
+							let bucketWidth = u.valToPos(u.data[0][0] + bucketIncr, 'x') - u.valToPos(u.data[0][0], 'x');
+
+							let firstSplit = u.data[0][0];
+							let lastSplit = u.data[0][u.data[0].length - 1] + bucketIncr;
+
+							let splits = [];
+							let skip = Math.ceil(minSpace / bucketWidth);
+
+							for (let i = 0, s = firstSplit; s <= lastSplit; i++, s += bucketIncr)
+								!(i % skip) && splits.push(s);
+
+							return splits;
+						},
+					}
+				],
+				series: [
+					{},
+					{
+						paths: bars,
+						points: {
+							show: false,
+						},
+						fill: "rgba(255,0,0,0.5)",
+						stroke: "rgba(255,0,0,1)",
+						width: 2,
+					},
+				],
+			};
+
+			console.time("aggAll");
+			let hist = aggAll(raw, histBucket, histFilter, histSort);
+			console.timeEnd("aggAll");
+
+			let u3 = new uPlot(opts3, hist, document.body);
+
+			let curSizeEl = document.getElementById("cursize");
+
+			document.getElementById("binsize").oninput = e => {
+				bucketIncr = +e.target.value;
+				curSizeEl.textContent = bucketIncr;
+
+				console.time("aggAll");
+				hist = aggAll(raw, histBucket, histFilter, histSort);
+				console.timeEnd("aggAll");
+
+				u3.setData(hist);
+			};
+
+			let curOffsetEl = document.getElementById("curoffset");
+
+			document.getElementById("binoffset").oninput = e => {
+				histOffset = +e.target.value;
+				curOffsetEl.textContent = histOffset;
+
+				console.time("aggAll");
+				hist = aggAll(raw, histBucket, histFilter, histSort);
+				console.timeEnd("aggAll");
+
+				u3.setData(hist);
+			};
+		</script>
+	</body>
+</html>

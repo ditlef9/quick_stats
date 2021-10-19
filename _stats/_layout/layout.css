@@ -389,6 +389,10 @@ div.main_inner{
 	border-radius: 5px;
 	background: #ffffff;
 }
+div.main_inner_no_bg{
+	margin: 10px 70px 10px 30px;
+	padding: 0px 20px 20px 20px;
+}
 @media screen and (max-width: 52.375em) {
 	main{
 		float: none;
@@ -401,6 +405,10 @@ div.main_inner{
 		padding: 0px 10px 0px 10px;
 		border: #e3e7e8 1px solid;
 		border-radius: 5px;
+	}
+	div.main_inner_no_bg{
+		margin: 10px 10px 10px 10px;
+		padding: 0px 10px 0px 10px;
 	}
 }
 
@@ -447,4 +455,47 @@ table.hor-zebra>tbody>tr>td.danger {
 table.hor-zebra>tbody>tr:hover td {
 	background: #faf4f2;
 }
+
+/*- Flex ------------------------------------------------------------------ */
+div.flex_row{
+	display: flex;
+	flex-wrap: wrap;
+}
+@media screen and (max-width: 52.375em) {
+	div.flex_row{
+		display: flex;
+		flex-wrap: wrap;
+		margin: 0px 20px 0px 20px;
+	}
+}
+
+
+	/*- Flex 50 % ----------------------------------------------------- */
+	div.flex_col_50_white_bg{
+		flex: 48%;
+		max-width: 48%;
+		background: #fff;
+		border-radius: 5px;
+		border: #eaeef2 1px solid;
+		box-shadow: 0 2px 3px rgba(0,0,0,0.03);
+		margin: 0px 1% 20px 0px;
+	}
+	div.flex_col_50_white_bg:first-child{
+		margin: 0px 1% 20px 0px;
+	}
+	div.flex_col_50_white_bg:last-child{
+		margin: 0px 0px 20px 1%;
+	}
+	@media screen and (max-width: 52.375em) {
+		div.flex_col_50_white_bg{
+			flex: 100%;
+			max-width: 100%;
+			margin: 0px 0px 20px 0px;
+		}
+	}
+
+
+	div.flex_col_inner{
+		padding: 10px 10px 10px 10px;
+	}
 

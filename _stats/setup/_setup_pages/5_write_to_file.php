@@ -57,6 +57,7 @@ $input_meta="<?php
 \$configFromNameSav 		 = \"$configFromNameSav\";
 
 \$configMailSendActiveSav	= \"$configMailSendActiveSav\";
+\$configSecurityCodeSav		= \"$configSecurityCodeSav\";
 
 // URLs
 \$configStatsURLSav 		= \"$configStatsURLSav\";

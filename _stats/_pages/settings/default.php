@@ -72,6 +72,15 @@ if($mode == "save"){
 		die;
 	}
 
+	// Security
+	$characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+	$charactersLength = strlen($characters);
+	$inp_security_code = '';
+	for ($i = 0; $i < 20; $i++) {
+	      	$inp_security_code .= $characters[rand(0, $charactersLength - 1)];
+	}
+
+
 	$update_file="<?php
 // General
 \$configStatsTitleSav		 = \"$inp_title\";
@@ -80,6 +89,7 @@ if($mode == "save"){
 \$configFromNameSav 		 = \"$inp_from_name\";
  
 \$configMailSendActiveSav	= \"$inp_mail_send_active\";
+\$configSecurityCodeSav		= \"$inp_security_code\";
 
 // URLs
 \$configStatsURLSav 		= \"$inp_url\";

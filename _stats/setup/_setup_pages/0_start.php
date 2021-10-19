@@ -64,6 +64,15 @@ $inp_site_title_clean = clean($inp_site_title);
 
 $datetime = date("Y-m-d H:i:s");
 
+// Security
+$characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+$charactersLength = strlen($characters);
+$inp_security_code = '';
+for ($i = 0; $i < 20; $i++) {
+      	$inp_security_code .= $characters[rand(0, $charactersLength - 1)];
+}
+
+
 // Write to file
 $update_file="<?php
 /* Updated by: 0_start.php
@@ -83,6 +92,8 @@ $update_file="<?php
 \$configFromNameSav 		 = \"$inp_site_title\";
 
 \$configMailSendActiveSav	= \"1\";
+
+\$configSecurityCodeSav	= \"$inp_security_code\";
 
 // URLs
 \$configStatsURLSav 		= \"$inp_stats_url\";
