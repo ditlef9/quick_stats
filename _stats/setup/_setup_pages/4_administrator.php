@@ -60,6 +60,8 @@ if($action == "check"){
 
 \$configMailSendActiveSav	= \"$configMailSendActiveSav\";
 
+\$configSecurityCodeSav	= \"$configSecurityCodeSav\";
+
 // URLs
 \$configStatsURLSav 		= \"$configStatsURLSav\";
 \$configStatsRLLenSav 		= \"$configStatsRLLenSav\";
@@ -75,6 +77,9 @@ if($action == "check"){
 // Admin
 \$adminEmailSav = \"$inp_user_email\";
 \$adminPasswordSav = \"$inp_user_password\";
+
+// Test
+\$configGenerateTestDataSav = \"$configGenerateTestDataSav\";
 
 ?>";
 	$fh = fopen("../_data/setup_data.php", "w+") or die("can not open file");
@@ -98,9 +103,9 @@ if($action == "check"){
 	 </tr>
 	</table>
 	
-	<p>The installation will now start. Please wait.</p>
+	<p>Waiting on local disk.</p>
 
-	<meta http-equiv=\"refresh\" content=\"3;url=index.php?page=5_write_to_file\" />
+	<meta http-equiv=\"refresh\" content=\"3;url=index.php?page=5_settings\" />
 	";
 }
 

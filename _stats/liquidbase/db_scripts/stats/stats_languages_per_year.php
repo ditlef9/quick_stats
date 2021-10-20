@@ -1,5 +1,5 @@
 <?php
-if(isset($_SESSION['admin_user_id'])){
+if(isset($_SESSION['adm_user_id'])){
 
 
 	$t_stats_languages_per_year	= $dbPrefixSav . "stats_languages_per_year";

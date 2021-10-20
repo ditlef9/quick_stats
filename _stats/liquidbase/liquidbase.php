@@ -13,7 +13,7 @@ ini_set('arg_separator.output', '&amp;');
 */
 
 /*- Admin? --------------------------------------------------------------------------- */
-if(!(isset($_SESSION['admin_user_id']))){
+if(!(isset($_SESSION['adm_user_id']))){
 	echo"Not logged in";	
 	die;
 }

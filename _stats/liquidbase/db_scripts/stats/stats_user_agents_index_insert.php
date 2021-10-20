@@ -1,6 +1,5 @@
 <?php
-if(isset($_SESSION['admin_user_id'])){
-
+if(isset($_SESSION['adm_user_id'])){
 
 	$t_stats_user_agents_index = $dbPrefixSav . "stats_user_agents_index";
 

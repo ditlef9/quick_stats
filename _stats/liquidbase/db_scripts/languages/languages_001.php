@@ -10,7 +10,7 @@
 */
 
 // Access check
-if(isset($_SESSION['admin_user_id'])){
+if(isset($_SESSION['adm_user_id'])){
 
 
 	$t_languages	= $dbPrefixSav . "languages";

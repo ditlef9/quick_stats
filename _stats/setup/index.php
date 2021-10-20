@@ -30,6 +30,10 @@ if(file_exists("../_data/setup_finished.php")){
 if(file_exists("../_data/setup_data.php")){
 	include("../_data/setup_data.php");
 }
+else{
+	include("_setup_pages/0_start.php");
+	exit;
+}
 
 /*- Variables ------------------------------------------------------------------------ */
 if(isset($_GET['page'])) {
@@ -114,6 +118,7 @@ echo"<!DOCTYPE html>
 						<li><span"; if($page == "2_chmod"){ echo" class=\"active\" "; } echo">2. Chmod</span></li>
 						<li><span"; if($page == "3_database"){ echo" class=\"active\" "; } echo">3. Database</span></li>
 						<li><span"; if($page == "4_administrator"){ echo" class=\"active\" "; } echo">4. Administrator</span></li>
+						<li><span"; if($page == "5_settings"){ echo" class=\"active\" "; } echo">5. Settings</span></li>
 					</ul>
 				</div>
 			<!-- //Navigation -->

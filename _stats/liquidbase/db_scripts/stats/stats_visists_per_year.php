@@ -1,6 +1,5 @@
 <?php
-if(isset($_SESSION['admin_user_id'])){
-
+if(isset($_SESSION['adm_user_id'])){
 
 	$t_stats_visists_per_day = $dbPrefixSav . "stats_visists_per_day";
 	$t_stats_visists_per_month = $dbPrefixSav . "stats_visists_per_month";

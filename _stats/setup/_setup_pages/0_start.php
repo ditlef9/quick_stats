@@ -36,6 +36,8 @@ $page_url = htmlspecialchars($page_url, ENT_QUOTES, 'UTF-8');
 
 // Stats URL
 $inp_stats_url = str_replace("/setup/", "", $page_url);
+$inp_stats_url = str_replace("index.php?page=0_start&amp;process=1", "", $inp_stats_url);
+$inp_stats_url = str_replace("index.php?page=2_chmod", "", $inp_stats_url);
 $inp_stats_url_len = strlen($inp_stats_url);
 
 
@@ -110,6 +112,9 @@ $update_file="<?php
 // Admin
 \$adminEmailSav = \"\";
 \$adminPasswordSav = \"\";
+
+// Test
+\$configGenerateTestDataSav = \"0\";
 
 ?>";
 $fh = fopen("../_data/setup_data.php", "w+") or die("can not open file");

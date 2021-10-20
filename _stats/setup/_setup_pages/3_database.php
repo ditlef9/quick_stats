@@ -59,7 +59,6 @@ if($action == "test_connection"){
 \$dbDatabaseNameSav 	= \"$inp_mysql_database_name\";
 \$dbPrefixSav 		= \"$inp_mysql_prefix\";
 
-
 // General
 \$configStatsTitleSav		 = \"$configStatsTitleSav\";
 \$configStatsTitleCleanSav	 = \"$configStatsTitleCleanSav\";
@@ -67,6 +66,8 @@ if($action == "test_connection"){
 \$configFromNameSav 		 = \"$configFromNameSav\";
 
 \$configMailSendActiveSav	= \"$configMailSendActiveSav\";
+
+\$configSecurityCodeSav	= \"$configSecurityCodeSav\";
 
 // URLs
 \$configStatsURLSav 		= \"$configStatsURLSav\";
@@ -83,6 +84,9 @@ if($action == "test_connection"){
 // Admin
 \$adminEmailSav = \"$adminEmailSav\";
 \$adminPasswordSav = \"$adminPasswordSav\";
+
+// Test
+\$configGenerateTestDataSav = \"$configGenerateTestDataSav\";
 
 ?>";
 		$fh = fopen("../_data/setup_data.php", "w+") or die("can not open file");

@@ -10,7 +10,7 @@
 */
 
 // Access check
-if(isset($_SESSION['admin_user_id'])){
+if(isset($_SESSION['adm_user_id'])){
 
 
 	$t_languages_countries	= $dbPrefixSav . "languages_countries";
@@ -336,7 +336,6 @@ if(isset($_SESSION['admin_user_id'])){
 		$inp_country_flag_path_32x32_mysql 	= quote_smart($link, $v["country_flag_path_32x32"]);
 		$inp_country_flag_32x32_mysql 		= quote_smart($link, $v["country_flag_32x32"]);
 
-	
 		mysqli_query($link, "INSERT INTO $t_languages_countries
 		(country_id, country_name, country_name_clean, country_native_name, country_iso_two, 
 		country_iso_three, country_language_alt_a, country_language_alt_b, country_flag_path_16x16, country_flag_16x16, 

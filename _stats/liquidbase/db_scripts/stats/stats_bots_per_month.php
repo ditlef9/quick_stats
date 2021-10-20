@@ -1,5 +1,5 @@
 <?php
-if(isset($_SESSION['admin_user_id'])){
+if(isset($_SESSION['adm_user_id'])){
 
 
 	$t_stats_bots_per_month	= $dbPrefixSav . "stats_bots_per_month";

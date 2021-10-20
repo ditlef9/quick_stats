@@ -48,6 +48,8 @@ if(file_exists($db_config_file)){
 	$t_users_logins 	= $dbPrefixSav . "users_logins";
 
 	$t_stats_ip_to_country_lookup = $dbPrefixSav . "stats_ip_to_country_lookup";
+
+	$t_stats_user_agents_index  = $dbPrefixSav . "stats_user_agents_index";
 }
 else{
 	echo"No mysql"; die;
@@ -108,6 +110,26 @@ if($configStatsUseGethostbyaddrSav == "1"){
 }
 $my_hostname = output_html($my_hostname);
 $my_hostname_mysql = quote_smart($link, $my_hostname);
+
+
+
+
+// Find user agent. By looking for user agent we can know if it is human or bot
+$query = "SELECT stats_user_agent_id, stats_user_agent_string, stats_user_agent_type, stats_user_agent_browser, stats_user_agent_browser_version, stats_user_agent_browser_icon, stats_user_agent_os, stats_user_agent_os_version, stats_user_agent_os_icon, stats_user_agent_bot, stats_user_agent_bot_icon, stats_user_agent_bot_website, stats_user_agent_banned FROM $t_stats_user_agents_index WHERE stats_user_agent_string=$my_user_agent_mysql";
+$result = mysqli_query($link, $query);
+$row = mysqli_fetch_row($result);
+list($get_stats_user_agent_id, $get_stats_user_agent_string, $get_stats_user_agent_type, $get_stats_user_agent_browser, $get_stats_user_agent_browser_version, $get_stats_user_agent_browser_icon, $get_stats_user_agent_os, $get_stats_user_agent_os_version, $get_stats_user_agent_os_icon, $get_stats_user_agent_bot, $get_stats_user_agent_bot_icon, $get_stats_user_agent_bot_website, $get_stats_user_agent_banned) = $row;
+if($get_stats_user_agent_id == ""){
+	$define_in_register_stats = 1;
+	include("../reg_stats_autoinsert_new_user_agent.php");
+
+	$query = "SELECT stats_user_agent_id, stats_user_agent_string, stats_user_agent_type, stats_user_agent_browser, stats_user_agent_browser_version, stats_user_agent_browser_icon, stats_user_agent_os, stats_user_agent_os_version, stats_user_agent_os_icon, stats_user_agent_bot, stats_user_agent_bot_icon, stats_user_agent_bot_website, stats_user_agent_banned FROM $t_stats_user_agents_index WHERE stats_user_agent_string=$my_user_agent_mysql";
+	$result = mysqli_query($link, $query);
+	$row = mysqli_fetch_row($result);
+	list($get_stats_user_agent_id, $get_stats_user_agent_string, $get_stats_user_agent_type, $get_stats_user_agent_browser, $get_stats_user_agent_browser_version, $get_stats_user_agent_browser_icon, $get_stats_user_agent_os, $get_stats_user_agent_os_version, $get_stats_user_agent_os_icon, $get_stats_user_agent_bot, $get_stats_user_agent_bot_icon, $get_stats_user_agent_bot_website, $get_stats_user_agent_banned) = $row;
+
+}
+
 
 /*- Design ---------------------------------------------------------------------------- */
 if($process != "1"){

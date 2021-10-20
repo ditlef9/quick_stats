@@ -1,5 +1,5 @@
 <?php
-if(isset($_SESSION['admin_user_id'])){
+if(isset($_SESSION['adm_user_id'])){
 
 	/*- Tables -------------------------------------------------------------------------- */
 	$t_stats_ip_to_country_lookup 	= $dbPrefixSav . "stats_ip_to_country_lookup";
