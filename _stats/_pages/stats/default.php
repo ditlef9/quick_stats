@@ -143,7 +143,7 @@ echo"
 					<h2>$year visitors</h2>
 
 					<!-- Javascript years visitor -->
-						<div id=\"chartdiv\" style=\"width: 100%;height: 80vh;\"></div>";
+						<div id=\"chartdiv\" style=\"width: 100%;height: 270px;\"></div>";
 
 						include("_pages/stats/default_generate_visits_per_month.php");
 						echo"

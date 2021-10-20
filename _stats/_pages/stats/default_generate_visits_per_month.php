@@ -51,7 +51,7 @@ cursor.lineY.set(\"visible\", false);
 var xAxis = chart.xAxes.push(am5xy.DateAxis.new(root, {
   maxDeviation: 0.3,
   baseInterval: {
-    timeUnit: \"day\",
+    timeUnit: \"month\",
     count: 1
   },
   renderer: am5xy.AxisRendererX.new(root, {}),
@@ -67,7 +67,7 @@ var yAxis = chart.yAxes.push(am5xy.ValueAxis.new(root, {
 // Add series
 // https://www.amcharts.com/docs/v5/charts/xy-chart/series/
 var series = chart.series.push(am5xy.LineSeries.new(root, {
-  name: \"Series 1\",
+  name: \"This year\",
   xAxis: xAxis,
   yAxis: yAxis,
   valueYField: \"value1\",
@@ -82,7 +82,7 @@ tooltip.get(\"background\").set(\"fillOpacity\", 0.5);
 tooltip.label.set(\"text\", \"{valueX}: {valueY} {previousDate}: {value2}\");
 
 var series2 = chart.series.push(am5xy.LineSeries.new(root, {
-  name: \"Series 2\",
+  name: \"Last year\",
   xAxis: xAxis,
   yAxis: yAxis,
   valueYField: \"value2\",
