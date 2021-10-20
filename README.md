@@ -27,7 +27,7 @@ Open program Git Bash (C:\Program Files\Git\git-bash.exe). Browse to your www di
 1.5 Create database<br />
 Open phpMyAdmin at localhost/phpmyadmin/. Default username is root without password. Create a database named stats.
 
-1.6 Install Quick CMS<br />
+1.6 Install Quick Stats<br />
 Open http://localhost/quick_stats and follow the instructions to install the software.
 
 
