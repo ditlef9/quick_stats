@@ -75,18 +75,18 @@ if(isset($_SESSION['adm_user_id'])){
 					$inp_day_single = substr($inp_day_three, 0, 1);
 
  
-					$inp_human_unique = rand(0,100);
-					$inp_human_unique_diff_from_last_year = rand(0,100);
-					$inp_human_new_visitor_unique = rand(0,100);
-					$inp_returning_visitor_unique = rand(0,100);
-					$inp_unique_desktop = rand(0,100);
-					$inp_unique_mobile = rand(0,100);
-					$inp_unique_bots = rand(0,100);
-					$inp_hits_total = rand(0,100);
-					$inp_hits_human = rand(0,100);
-					$inp_hits_desktop = rand(0,100);
-					$inp_hits_mobile = rand(0,100);
-					$inp_hits_bots = rand(0,100);
+					$inp_human_unique = rand(50,100);
+					$inp_human_unique_diff_from_last_year = rand(50,100);
+					$inp_human_new_visitor_unique = rand(50,100);
+					$inp_returning_visitor_unique = rand(50,100);
+					$inp_unique_desktop = rand(50,100);
+					$inp_unique_mobile = rand(50,100);
+					$inp_unique_bots = rand(50,100);
+					$inp_hits_total = rand(50,100);
+					$inp_hits_human = rand(50,100);
+					$inp_hits_desktop = rand(50,100);
+					$inp_hits_mobile = rand(50,100);
+					$inp_hits_bots = rand(50,100);
 
 					echo"
 					 <tr>

@@ -143,16 +143,12 @@ echo"
 					<h2>$year visitors</h2>
 
 					<!-- Javascript years visitor -->
-						<div id=\"chartdiv\" style=\"width: 100%;height: 270px;\"></div>";
+						<div id=\"chartdiv_visits_per_month\" style=\"width: 100%;height: 270px;\"></div>";
 
-						include("_pages/stats/default_generate_visits_per_month.php");
+						include("_pages/stats/default_generate_visits_per_month_last_2_years.php");
 						echo"
-						<script src=\"_cache/default_visits_per_month_$configSecurityCodeSav.js?rand=$rand\"></script>
-						<!-- <script src=\"_cache/index.js\"></script> -->
+						<script src=\"_cache/default_generate_visits_per_month_last_2_years_$configSecurityCodeSav.js?rand=$rand\"></script>
 					<!-- //Javascript years visitor -->
-
-
-
 				</div>
 			</div>
 		<!-- //Visitors pr year -->
@@ -160,6 +156,14 @@ echo"
 			<div class=\"flex_col_50_white_bg\">
 				<div class=\"flex_col_inner\">
 					<h1>$month_saying visitors</h1>
+
+					<!-- Javascript month visitor -->
+						<div id=\"chartdiv_visits_per_day\" style=\"width: 100%;height: 270px;\"></div>";
+
+						include("_pages/stats/default_generate_visits_per_day_last_2_months.php");
+						echo"
+						<script src=\"_cache/default_generate_visits_per_day_last_2_months_$configSecurityCodeSav.js?rand=$rand\"></script>
+					<!-- //Javascript month visitor -->
 				</div>
 			</div>
 		<!-- //Visitors pr month -->

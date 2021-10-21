@@ -18,7 +18,7 @@ if(!(isset($define_access_to_control_panel))){
 /*- Header ----------------------------------------------------------------------------- */
 $inp_header ="// Create root element
 // https://www.amcharts.com/docs/v5/getting-started/#Root_element
-var root = am5.Root.new(\"chartdiv\");
+var root = am5.Root.new(\"chartdiv_visits_per_month\");
 
 
 // Set themes
@@ -51,7 +51,7 @@ cursor.lineY.set(\"visible\", false);
 var xAxis = chart.xAxes.push(am5xy.DateAxis.new(root, {
   maxDeviation: 0.3,
   baseInterval: {
-    timeUnit: \"month\",
+    timeUnit: \"day\",
     count: 1
   },
   renderer: am5xy.AxisRendererX.new(root, {}),
@@ -177,7 +177,7 @@ if(!(is_dir("_cache"))){
 	fclose($fp);
 
 }
-$fp = fopen("_cache/default_visits_per_month_$configSecurityCodeSav.js", "w") or die("Unable to open file!");
+$fp = fopen("_cache/default_generate_visits_per_month_last_2_years_$configSecurityCodeSav.js", "w") or die("Unable to open file!");
 fwrite($fp, $inp_header);
 fwrite($fp, $inp_data);
 fwrite($fp, $inp_footer);
