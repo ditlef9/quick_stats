@@ -2,9 +2,9 @@
 /**
 *
 * File: _admin/_inc/media/statistics_month.php
-* Version 3.0
-* Date 13:25 21.10.2020
-* Copyright (c) 2008-2020 Sindre Andre Ditlefsen
+* Version 1.0
+* Date 16:39 24.10.2021
+* Copyright (c) 2021 Sindre Andre Ditlefsen
 * License: http://opensource.org/licenses/gpl-license.php GNU Public License
 *
 */
@@ -123,28 +123,37 @@ else{
 	
 	<!-- Where am I? -->
 		<p><b>You are here:</b><br />
-		<a href=\"index.php?open=$open&amp;page=statistics&amp;l=$l\">Statistics</a>
+		<a href=\"index.php?open=$open&amp;page=statistics\">Statistics</a>
 		&gt;
-		<a href=\"index.php?open=$open&amp;page=statistics_year&amp;stats_year=$get_current_stats_visit_per_month_year&amp;l=$l\">$get_current_stats_visit_per_month_year</a>
+		<a href=\"index.php?open=$open&amp;page=statistics_year&amp;stats_year=$get_current_stats_visit_per_month_year\">$get_current_stats_visit_per_month_year</a>
 		&gt;
-		<a href=\"index.php?open=$open&amp;page=$page&amp;stats_year=$get_current_stats_visit_per_month_year&amp;stats_month=$get_current_stats_visit_per_month_month&amp;l=$l\">$get_current_stats_visit_per_month_month_full $get_current_stats_visit_per_month_year</a>
+		<a href=\"index.php?open=$open&amp;page=$page&amp;stats_year=$get_current_stats_visit_per_month_year&amp;stats_month=$get_current_stats_visit_per_month_month\">$get_current_stats_visit_per_month_month_full $get_current_stats_visit_per_month_year</a>
 		</p>
 	<!-- //Where am I? -->
 
 	
 
 	<!-- Charts javascript -->
-		<script src=\"_javascripts/amcharts4/core.js\"></script>
-		<script src=\"_javascripts/amcharts4/charts.js\"></script>
-		<script src=\"_javascripts/amcharts4/themes/animated.js\"></script>
-		<script src=\"_javascripts/amcharts4/plugins/venn.js\"></script>
-		<script src=\"_javascripts/amcharts4/maps.js\"></script>
-		<script src=\"_javascripts/amcharts4/geodata/worldLow.js\"></script>
+		<script src=\"_libraries/amcharts/index.js\"></script>
+		<script src=\"_libraries/amcharts/xy.js\"></script>
+		<script src=\"_libraries/amcharts/themes/Animated.js\"></script>
+		<script src=\"_libraries/amcharts/percent.js\"></script>
+		<script src=\"_libraries/amcharts/map.js\"></script>
+		<script src=\"_libraries/amcharts/geodata/worldLow.js\"></script>
 	<!-- //Charts javascript -->
 
 
 	<!-- Visits per day -->
 		<h2 style=\"padding-bottom:0;margin-bottom:0;\">Visits per day</h2>
+
+		<div id=\"chartdiv_visits_per_day\" style=\"height: 400px;\"></div>
+		";
+		$cache_file = "visits_per_day_" . $stats_year . "_" . $configSecurityCodeSav . ".js";
+		include("_pages/stats/statistics_month_generate/visits_per_month.php");
+		echo"
+		<script src=\"_cache/$cache_file?rand=$rand\"></script>
+
+
 
 		<script>
 		am4core.ready(function() {
@@ -191,7 +200,6 @@ else{
 			chart.cursor.xAxis = valueAxis;
 		}); // end am4core.ready()
 		</script>
-		<div id=\"chartdiv_visits_per_month\" style=\"height: 400px;\"></div>
 	<!-- //Visits per day -->
 
 
@@ -847,8 +855,8 @@ else{
 			</script>
 
 			<select id=\"inp_l\">
-				<option value=\"index.php?open=dashboard&amp;page=statistics_month&amp;stats_year=$stats_year&amp;stats_month=$stats_month&amp;editor_language=$editor_language&amp;l=$l\">$l_editor_language</option>
-				<option value=\"index.php?open=dashboard&amp;page=statistics_month&amp;stats_year=$stats_year&amp;stats_month=$stats_month&amp;editor_language=$editor_language&amp;l=$l\">-</option>\n";
+				<option value=\"index.php?open=dashboard&amp;page=statistics_month&amp;stats_year=$stats_year&amp;stats_month=$stats_month&amp;editor_language=$editor_language\">$l_editor_language</option>
+				<option value=\"index.php?open=dashboard&amp;page=statistics_month&amp;stats_year=$stats_year&amp;stats_month=$stats_month&amp;editor_language=$editor_language\">-</option>\n";
 
 				$query = "SELECT language_active_id, language_active_name, language_active_iso_two, language_active_default FROM $t_languages_active";
 				$result = mysqli_query($link, $query);
@@ -859,7 +867,7 @@ else{
 					if($editor_language == ""){
 							$editor_language = "$get_language_active_iso_two";
 					}
-					echo"	<option value=\"index.php?open=dashboard&amp;page=statistics_year&amp;stats_year=$stats_year&amp;stats_month=$stats_month&amp;editor_language=$get_language_active_iso_two&amp;l=$l#trackers\"";if($editor_language == "$get_language_active_iso_two"){ echo" selected=\"selected\"";}echo">$get_language_active_name</option>\n";
+					echo"	<option value=\"index.php?open=dashboard&amp;page=statistics_year&amp;stats_year=$stats_year&amp;stats_month=$stats_month&amp;editor_language=$get_language_active_iso_two#trackers\"";if($editor_language == "$get_language_active_iso_two"){ echo" selected=\"selected\"";}echo">$get_language_active_name</option>\n";
 				}
 			echo"
 			</select>
@@ -929,7 +937,7 @@ else{
 			echo"
 			 <tr>
 			  <td>
-				<span><a href=\"index.php?open=dashboard&amp;page=statistics_tracker&amp;tracker_id=$get_tracker_id&amp;editor_language=$editor_language&amp;l=$l\">$get_tracker_id</a></span>
+				<span><a href=\"index.php?open=dashboard&amp;page=statistics_tracker&amp;tracker_id=$get_tracker_id&amp;editor_language=$editor_language\">$get_tracker_id</a></span>
 			  </td>
 			  <td>
 				<span>$get_tracker_type</span>
