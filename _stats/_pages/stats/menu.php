@@ -27,7 +27,7 @@ if($page == "menu"){
 
 
 echo"
-			<li><a href=\"index.php?open=dashboard&amp;page=default\"";if($page == "stats"){echo" class=\"selected\"";}echo">Stats</a></li>
+			<li><a href=\"index.php?open=dashboard&amp;page=statistics\"";if($page == "statistics"){echo" class=\"selected\"";}echo">Statistics</a></li>
 			<li><a href=\"index.php?open=dashboard&amp;page=user_agents\"";if($page == "user_agents"){echo" class=\"selected\"";}echo">User agents</a></li>
 
 ";

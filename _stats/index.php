@@ -66,6 +66,13 @@ if(isset($_GET['action'])) {
 else{
 	$action = "";
 }
+if(isset($_GET['editor_language'])) {
+	$editor_language = $_GET['editor_language'];
+	$editor_language = strip_tags(stripslashes($editor_language));
+}
+else{
+	$editor_language = "";
+}
 
 
 /*- MySQL ---------------------------------------------------------------------------- */

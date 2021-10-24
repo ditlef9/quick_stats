@@ -24,6 +24,7 @@ if(isset($_SESSION['adm_user_id'])){
 
 				$inp_month = (new DateTime())->setISODate($inp_year, $inp_week)->format('m');
 				$inp_month_short = (new DateTime())->setISODate($inp_year, $inp_week)->format('M');
+				$inp_date = (new DateTime())->setISODate($inp_year, $inp_week)->format('Y-m-d');
 
 				$inp_human_unique = rand(0,1000);
 				$inp_human_unique_diff_from_last_year = rand(0,1000);
@@ -40,12 +41,13 @@ if(isset($_SESSION['adm_user_id'])){
 
 				mysqli_query($link, "INSERT INTO $t_stats_visists_per_week
 				(stats_visit_per_week_id, stats_visit_per_week_week, stats_visit_per_week_month, stats_visit_per_week_month_short, stats_visit_per_week_year, 
+				stats_visit_per_week_date, 
 				stats_visit_per_week_human_unique, stats_visit_per_week_human_unique_diff_from_last_week, stats_visit_per_week_human_average_duration, stats_visit_per_week_human_new_visitor_unique, stats_visit_per_week_human_returning_visitor_unique, 
 				stats_visit_per_week_unique_desktop, stats_visit_per_week_unique_mobile, stats_visit_per_week_unique_bots, stats_visit_per_week_hits_total, stats_visit_per_week_hits_human, 
 				stats_visit_per_week_hits_desktop, stats_visit_per_week_hits_mobile, stats_visit_per_week_hits_bots) 
 				VALUES
 				(NULL, $inp_week, $inp_month, '$inp_month_short', $inp_year,
-
+				'$inp_date',
 
 				$inp_human_unique, $inp_human_unique_diff_from_last_year, '0', $inp_human_new_visitor_unique, $inp_returning_visitor_unique, 
 				$inp_unique_desktop, $inp_unique_mobile, $inp_unique_bots, $inp_hits_total, $inp_hits_human, 

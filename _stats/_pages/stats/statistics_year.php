@@ -1,10 +1,10 @@
 <?php
 /**
 *
-* File: _admin/_inc/media/statistics_year.php
-* Version 3.0
-* Date 13:25 21.10.2020
-* Copyright (c) 2008-2020 Sindre Andre Ditlefsen
+* File: _stats/_pages/stats/statistics_year.php
+* Version 1.0
+* Date 11:18 23.10.2021
+* Copyright (c) 2021 Sindre Andre Ditlefsen
 * License: http://opensource.org/licenses/gpl-license.php GNU Public License
 *
 */
@@ -16,55 +16,53 @@ if(!(isset($define_access_to_control_panel))){
 
 
 /*- Tables ---------------------------------------------------------------------------------- */
-$t_stats_accepted_languages_per_month	= $mysqlPrefixSav . "stats_accepted_languages_per_month";
-$t_stats_accepted_languages_per_year	= $mysqlPrefixSav . "stats_accepted_languages_per_year";
+$t_stats_accepted_languages_per_month	= $dbPrefixSav . "stats_accepted_languages_per_month";
+$t_stats_accepted_languages_per_year	= $dbPrefixSav . "stats_accepted_languages_per_year";
 
-$t_stats_browsers_per_month	= $mysqlPrefixSav . "stats_browsers_per_month";
-$t_stats_browsers_per_year	= $mysqlPrefixSav . "stats_browsers_per_year";
+$t_stats_browsers_per_month	= $dbPrefixSav . "stats_browsers_per_month";
+$t_stats_browsers_per_year	= $dbPrefixSav . "stats_browsers_per_year";
 
-$t_stats_comments_per_month 	= $mysqlPrefixSav . "stats_comments_per_month";
-$t_stats_comments_per_year 	= $mysqlPrefixSav . "stats_comments_per_year";
+$t_stats_comments_per_month 	= $dbPrefixSav . "stats_comments_per_month";
+$t_stats_comments_per_year 	= $dbPrefixSav . "stats_comments_per_year";
 
-$t_stats_countries_per_year  = $mysqlPrefixSav . "stats_countries_per_year";
-$t_stats_countries_per_month = $mysqlPrefixSav . "stats_countries_per_month";
+$t_stats_countries_per_year  = $dbPrefixSav . "stats_countries_per_year";
+$t_stats_countries_per_month = $dbPrefixSav . "stats_countries_per_month";
 
-$t_stats_ip_to_country_ipv4 		= $mysqlPrefixSav . "stats_ip_to_country_ipv4";
-$t_stats_ip_to_country_ipv6 		= $mysqlPrefixSav . "stats_ip_to_country_ipv6";
-$t_stats_ip_to_country_geonames 	= $mysqlPrefixSav . "stats_ip_to_country_geonames";
+$t_stats_ip_to_country_ipv4 		= $dbPrefixSav . "stats_ip_to_country_ipv4";
+$t_stats_ip_to_country_ipv6 		= $dbPrefixSav . "stats_ip_to_country_ipv6";
+$t_stats_ip_to_country_geonames 	= $dbPrefixSav . "stats_ip_to_country_geonames";
 
-$t_stats_os_per_month = $mysqlPrefixSav . "stats_os_per_month";
-$t_stats_os_per_year = $mysqlPrefixSav . "stats_os_per_year";
+$t_stats_os_per_month = $dbPrefixSav . "stats_os_per_month";
+$t_stats_os_per_year = $dbPrefixSav . "stats_os_per_year";
 
-$t_stats_languages_per_year	= $mysqlPrefixSav . "stats_languages_per_year";
-$t_stats_languages_per_month	= $mysqlPrefixSav . "stats_languages_per_month";
+$t_stats_languages_per_year	= $dbPrefixSav . "stats_languages_per_year";
+$t_stats_languages_per_month	= $dbPrefixSav . "stats_languages_per_month";
 
-$t_stats_referers_per_year  = $mysqlPrefixSav . "stats_referers_per_year";
-$t_stats_referers_per_month = $mysqlPrefixSav . "stats_referers_per_month";
+$t_stats_referers_per_year  = $dbPrefixSav . "stats_referers_per_year";
+$t_stats_referers_per_month = $dbPrefixSav . "stats_referers_per_month";
 
-$t_stats_pages_visits_per_year = $mysqlPrefixSav . "stats_pages_visits_per_year";
+$t_stats_pages_visits_per_year = $dbPrefixSav . "stats_pages_visits_per_year";
 
-$t_stats_user_agents_index = $mysqlPrefixSav . "stats_user_agents_index";
+$t_stats_user_agents_index = $dbPrefixSav . "stats_user_agents_index";
 
-$t_stats_users_registered_per_month = $mysqlPrefixSav . "stats_users_registered_per_month";
-$t_stats_users_registered_per_year = $mysqlPrefixSav . "stats_users_registered_per_year";
+$t_stats_users_registered_per_month = $dbPrefixSav . "stats_users_registered_per_month";
+$t_stats_users_registered_per_year = $dbPrefixSav . "stats_users_registered_per_year";
 
-$t_stats_bots_per_month	= $mysqlPrefixSav . "stats_bots_per_month";
-$t_stats_bots_per_year	= $mysqlPrefixSav . "stats_bots_per_year";
+$t_stats_bots_per_month	= $dbPrefixSav . "stats_bots_per_month";
+$t_stats_bots_per_year	= $dbPrefixSav . "stats_bots_per_year";
 
-$t_stats_visists_per_day 	= $mysqlPrefixSav . "stats_visists_per_day";
-$t_stats_visists_per_day_ips 	= $mysqlPrefixSav . "stats_visists_per_day_ips";
-$t_stats_visists_per_month 	= $mysqlPrefixSav . "stats_visists_per_month";
-$t_stats_visists_per_month_ips 	= $mysqlPrefixSav . "stats_visists_per_month_ips";
-$t_stats_visists_per_year 	= $mysqlPrefixSav . "stats_visists_per_year";
-$t_stats_visists_per_year_ips 	= $mysqlPrefixSav . "stats_visists_per_year_ips";
+$t_stats_visists_per_day 	= $dbPrefixSav . "stats_visists_per_day";
+$t_stats_visists_per_day_ips 	= $dbPrefixSav . "stats_visists_per_day_ips";
+$t_stats_visists_per_month 	= $dbPrefixSav . "stats_visists_per_month";
+$t_stats_visists_per_month_ips 	= $dbPrefixSav . "stats_visists_per_month_ips";
+$t_stats_visists_per_year 	= $dbPrefixSav . "stats_visists_per_year";
+$t_stats_visists_per_year_ips 	= $dbPrefixSav . "stats_visists_per_year_ips";
 
-$t_search_engine_searches = $mysqlPrefixSav . "search_engine_searches";
+$t_search_engine_searches = $dbPrefixSav . "search_engine_searches";
 
-$t_stats_tracker_index = $mysqlPrefixSav . "stats_tracker_index";
-$t_stats_tracker_urls  = $mysqlPrefixSav . "stats_tracker_urls";
+$t_stats_tracker_index = $dbPrefixSav . "stats_tracker_index";
+$t_stats_tracker_urls  = $dbPrefixSav . "stats_tracker_urls";
 
-/*- Translation ----------------------------------------------------------------------- */
-include("_translations/admin/$l/dashboard/t_default.php");
 
 
 /*- Functions ----------------------------------------------------------------------- */
@@ -114,449 +112,186 @@ else{
 	
 	<!-- Where am I? -->
 		<p><b>You are here:</b><br />
-		<a href=\"index.php?open=$open&amp;page=statistics&amp;l=$l\">Statistics</a>
+		<a href=\"index.php?open=$open&amp;page=statistics\">Statistics</a>
 		&gt;
-		<a href=\"index.php?open=$open&amp;page=$page&amp;stats_year=$get_current_stats_visit_per_year_year&amp;l=$l\">$get_current_stats_visit_per_year_year</a>
+		<a href=\"index.php?open=$open&amp;page=$page&amp;stats_year=$get_current_stats_visit_per_year_year\">$get_current_stats_visit_per_year_year</a>
 		</p>
 	<!-- //Where am I? -->
 
 
 	<!-- Charts javascript -->
-		<script src=\"_javascripts/amcharts4/core.js\"></script>
-		<script src=\"_javascripts/amcharts4/charts.js\"></script>
-		<script src=\"_javascripts/amcharts4/themes/animated.js\"></script>
-		<script src=\"_javascripts/amcharts4/plugins/venn.js\"></script>
-		<script src=\"_javascripts/amcharts4/maps.js\"></script>
-		<script src=\"_javascripts/amcharts4/geodata/worldLow.js\"></script>
+		<script src=\"_libraries/amcharts/index.js\"></script>
+		<script src=\"_libraries/amcharts/xy.js\"></script>
+		<script src=\"_libraries/amcharts/themes/Animated.js\"></script>
+		<script src=\"_libraries/amcharts/percent.js\"></script>
+		<script src=\"_libraries/amcharts/map.js\"></script>
+		<script src=\"_libraries/amcharts/geodata/worldLow.js\"></script>
 	<!-- //Charts javascript -->
 
 
 	<!-- Visits per month -->
 		<h2 style=\"padding-bottom:0;margin-bottom:0;\">Visits per month</h2>
 
-		<script>
-		am4core.ready(function() {
-			var chart = am4core.create(\"chartdiv_visits_per_month\", am4charts.XYChart);
-			chart.data = [";
+		<div id=\"chartdiv_visits_per_month\" style=\"width: 100%;max-height: 400px;height: 100vh;\"></div>
+		";
+		$cache_file = "visits_per_month_" . $stats_year . "_" . $configSecurityCodeSav . ".js";
+		include("_pages/stats/statistics_year_generate/visits_per_month.php");
+		echo"
+		<script src=\"_cache/$cache_file?rand=$rand\"></script>
 
-			$x = 0;
-			$query = "SELECT stats_visit_per_month_id, stats_visit_per_month_month, stats_visit_per_month_month_short, stats_visit_per_month_year, stats_visit_per_month_human_unique, stats_visit_per_month_human_unique_diff_from_last_month, stats_visit_per_month_human_average_duration, stats_visit_per_month_human_new_visitor_unique, stats_visit_per_month_human_returning_visitor_unique, stats_visit_per_month_unique_desktop, stats_visit_per_month_unique_mobile, stats_visit_per_month_unique_bots, stats_visit_per_month_hits_total, stats_visit_per_month_hits_human, stats_visit_per_month_hits_desktop, stats_visit_per_month_hits_mobile, stats_visit_per_month_hits_bots FROM $t_stats_visists_per_month WHERE stats_visit_per_month_year=$get_current_stats_visit_per_year_year ORDER BY stats_visit_per_month_id ASC LIMIT 0,12";
-			$result = mysqli_query($link, $query);
-			while($row = mysqli_fetch_row($result)) {
-				list($get_stats_visit_per_month_id, $get_stats_visit_per_month_month, $get_stats_visit_per_month_month_short, $get_stats_visit_per_month_year, $get_stats_visit_per_month_human_unique, $get_stats_visit_per_month_human_unique_diff_from_last_month, $get_stats_visit_per_month_human_average_duration, $get_stats_visit_per_month_human_new_visitor_unique, $get_stats_visit_per_month_human_returning_visitor_unique, $get_stats_visit_per_month_unique_desktop, $get_stats_visit_per_month_unique_mobile, $get_stats_visit_per_month_unique_bots, $get_stats_visit_per_month_hits_total, $get_stats_visit_per_month_hits_human, $get_stats_visit_per_month_hits_desktop, $get_stats_visit_per_month_hits_mobile, $get_stats_visit_per_month_hits_bots) = $row;
-						
-				if($x > 0){
-					echo",";
-				}
-				echo"
-				{
-					\"x\": \"$get_stats_visit_per_month_month_short\",
-					\"value\": $get_stats_visit_per_month_human_unique
-				}";
-				$x++;
-			} // while
 
-			echo"
-			];
-			// Create axes
-			var categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
-			categoryAxis.dataFields.category = \"x\";
-			var valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
-							
-			// Create series
-			var series1 = chart.series.push(new am4charts.ColumnSeries);
-			series1.dataFields.valueY = \"value\";
-			series1.dataFields.categoryX = \"x\";
-			series1.name = \"Unique visits\";
-			series1.tooltipText = \"Unique visits: {valueY}\";
-			series1.fill = am4core.color(\"#99e4dc\");
-			series1.stroke = am4core.color(\"#66d5c9\");
-			series1.strokeWidth = 1;
-
-			// Tooltips
-			chart.cursor = new am4charts.XYCursor();
-			chart.cursor.snapToSeries = series;
-			chart.cursor.xAxis = valueAxis;
-		}); // end am4core.ready()
-		</script>
-		<div id=\"chartdiv_visits_per_month\" style=\"height: 400px;\"></div>
+		
 	<!-- //Visits per month -->
 
 	<!-- Countries -->
 		<h2 style=\"margin-top:20px;padding-bottom:0;margin-bottom:0;\">Unique Visits per Country</h2>
 
-		<script>
-		am4core.ready(function() {
-			am4core.useTheme(am4themes_animated);
-			var chart = am4core.create(\"chartdiv_unique_visits_per_country\", am4maps.MapChart);
-			chart.geodata = am4geodata_worldLow;
-
-
-			chart.projection = new am4maps.projections.Miller();
-
-			var polygonSeries = chart.series.push(new am4maps.MapPolygonSeries());
-			var polygonTemplate = polygonSeries.mapPolygons.template;
-			polygonTemplate.tooltipText = \"{name}: {value.value}\";
-			polygonSeries.useGeodata = true;
-			polygonSeries.heatRules.push({ property: \"fill\", target: polygonSeries.mapPolygons.template, min: am4core.color(\"#8ab7ff\"), max: am4core.color(\"#25529a\") });
-
-
-			// add heat legend
-			var heatLegend = chart.chartContainer.createChild(am4maps.HeatLegend);
-			heatLegend.align = \"center\";
-			heatLegend.valign = \"bottom\";
-			heatLegend.series = polygonSeries;
-			heatLegend.width = am4core.percent(50);
-			heatLegend.orientation = \"horizontal\";
-			heatLegend.padding(30, 30, 30, 30);
-			heatLegend.valueAxis.renderer.labels.template.fontSize = 10;
-			heatLegend.valueAxis.renderer.minGridDistance = 40;
-
-			polygonSeries.mapPolygons.template.events.on(\"over\", function (event) {
-			  handleHover(event.target);
-			})
-
-			polygonSeries.mapPolygons.template.events.on(\"hit\", function (event) {
-			  handleHover(event.target);
-			})
-
-			function handleHover(mapPolygon) {
-			  if (!isNaN(mapPolygon.dataItem.value)) {
-			    heatLegend.valueAxis.showTooltipAt(mapPolygon.dataItem.value)
-			  }
-			  else {
-			    heatLegend.valueAxis.hideTooltip();
-			  }
-			}
-
-			polygonSeries.mapPolygons.template.events.on(\"out\", function (event) {
-			  heatLegend.valueAxis.hideTooltip();
-			})
-
-
-			// data
-			polygonSeries.data = [";
-				$x = 0;
-				$query = "SELECT stats_country_id, stats_country_name, stats_country_alpha_2, stats_country_unique, stats_country_hits FROM $t_stats_countries_per_year WHERE stats_country_year=$get_current_stats_visit_per_year_year";
-				$result = mysqli_query($link, $query);
-				while($row = mysqli_fetch_row($result)) {
-					list($get_stats_country_id, $get_stats_country_name, $get_stats_country_alpha_2, $get_stats_country_unique, $get_stats_country_hits) = $row;
-
-					if($x > 0){
-						echo",";
-					}
-					echo"
-					{ \"id\": \"$get_stats_country_alpha_2\", \"value\": $get_stats_country_unique }";
-
-					// x++
-					$x++;
-				} // while
-			echo"];
-
-			// excludes Antarctica
-			polygonSeries.exclude = [\"AQ\"];
-
-			chart.seriesContainer.draggable = false;
-			chart.seriesContainer.resizable = false;
-			chart.maxZoomLevel = 1;
-			chart.chartContainer.wheelable = false;
-
-
-		}); // end am4core.ready()
-		</script>
 		<div id=\"chartdiv_unique_visits_per_country\" style=\"width: 100%;max-height: 600px;height: 100vh;\"></div>
 		
+		";
+		$cache_file = "visits_per_country_" . $stats_year . "_" . $configSecurityCodeSav . ".js";
+		include("_pages/stats/statistics_year_generate/unique_visits_per_country.php");
+		echo"
+		<script src=\"_cache/$cache_file?rand=$rand\"></script>
 	<!-- //Countries -->
 
 
 
-	<!-- Accepted languages -->
-		<div class=\"left_right_left\">
-			<h2 style=\"margin-top: 20px;\">$l_accepted_languages</h2>
+	<!-- Accepted languages + Languages used -->
+		<div class=\"flex_row\">
+			<!-- Accepted languages -->
+				<div class=\"flex_col_50\">
+					<h2 style=\"margin-top: 20px;\">Accepted languages</h2>
 
-
-			<script>
-			am4core.ready(function() {
-				var chart = am4core.create(\"chartdiv_accepted_language_year\", am4charts.PieChart);
-				chart.data = [";
-				$x = 0;
-				$query = "SELECT stats_accepted_language_id, stats_accepted_language_year, stats_accepted_language_name, stats_accepted_language_unique, stats_accepted_language_hits FROM $t_stats_accepted_languages_per_year WHERE stats_accepted_language_year=$get_current_stats_visit_per_year_year";
-				$result = mysqli_query($link, $query);
-				while($row = mysqli_fetch_row($result)) {
-					list($get_stats_accepted_language_id, $get_stats_accepted_language_year, $get_stats_accepted_language_name, $get_stats_accepted_language_unique, $get_stats_accepted_language_hits) = $row;
-
-					if($x > 0){
-						echo",";
-					}
+       					<div id=\"chartdiv_accepted_language_per_year\" style=\"height: 250px;margin-top:10px;\"></div>
+					";
+					$cache_file = "accepted_language_per_year_" . $stats_year . "_" . $configSecurityCodeSav . ".js";
+					include("_pages/stats/statistics_year_generate/accepted_language_per_year.php");
 					echo"
-					{
-					\"x\": \"$get_stats_accepted_language_name\",
-					\"value\": $get_stats_accepted_language_unique
-					}";
+					<script src=\"_cache/$cache_file?rand=$rand\"></script>
 
-					// x++
-					$x++;
-				} // while
-				echo"
-            			];
-				var series = chart.series.push(new am4charts.PieSeries());
-				series.dataFields.value = \"value\";
-				series.dataFields.category = \"x\";
-			}); // end am4core.ready()
-       			</script>
-       			<div id=\"chartdiv_accepted_language_year\" style=\"max-height: 250px;margin-top:10px;\"></div>
-		</div>
-	<!-- //Accepted languages -->
+				</div>
+			<!-- //Accepted languages -->
 
-	<!-- Language used -->
-		<div class=\"left_right_right\">
-			<h2 style=\"margin-top: 20px;\">Language used</h2>
+			<!-- Language used -->
+				<div class=\"flex_col_50\">
+					<h2 style=\"margin-top: 20px;\">Language used</h2>
 
-			<script>
-			am4core.ready(function() {
-				var chart = am4core.create(\"chartdiv_languages_per_year\", am4charts.PieChart);
-				chart.data = [";
-				$x = 0;
-				$query = "SELECT stats_language_id, stats_language_year, stats_language_name, stats_language_iso_two, stats_language_flag_path_16x16, stats_language_flag_16x16, stats_language_unique, stats_language_hits FROM $t_stats_languages_per_year WHERE stats_language_year=$get_current_stats_visit_per_year_year ORDER BY stats_language_unique ASC LIMIT 0,12";
-				$result = mysqli_query($link, $query);
-				while($row = mysqli_fetch_row($result)) {
-					list($get_stats_language_id, $get_stats_language_year, $get_stats_language_name, $get_stats_language_iso_two, $get_stats_language_flag_path_16x16, $get_stats_language_flag_16x16, $get_stats_language_unique, $get_stats_language_hits) = $row;
-						
-					if($x > 0){
-						echo",";
-					}
+       					<div id=\"chartdiv_languages_per_year\" style=\"height: 250px;margin-top:10px;\"></div>
+					";
+					$cache_file = "languages_per_year_" . $stats_year . "_" . $configSecurityCodeSav . ".js";
+					include("_pages/stats/statistics_year_generate/languages_per_year.php");
 					echo"
-					{
-						\"x\": \"$get_stats_language_name\",
-						\"value\": $get_stats_language_unique
-					}";
-					$x++;
-				} // while
+					<script src=\"_cache/$cache_file?rand=$rand\"></script>
+				</div>
+			<!-- //Language used -->
 
-				echo"];
-				var series = chart.series.push(new am4charts.PieSeries());
-				series.dataFields.value = \"value\";
-				series.dataFields.category = \"x\";
-			}); // end am4core.ready()
-       			</script>
-       			<div id=\"chartdiv_languages_per_year\" style=\"max-height: 250px;margin-top:10px;\"></div>
 		</div>
-		<div class=\"clear\"></div>
-	<!-- //Language used -->
+	<!-- //Accepted languages + Languages used -->
 
 
-	<!-- Os -->
-		<div class=\"left_right_left\">
-			<h2 style=\"margin-top: 20px;\">$l_os</h2>
 
-			<script>
-			am4core.ready(function() {
-				var chart = am4core.create(\"chartdiv_os_year\", am4charts.PieChart);
-				chart.data = [";
-				$x = 0;
-				$query = "SELECT stats_os_id, stats_os_year, stats_os_name, stats_os_type, stats_os_unique, stats_os_hits FROM $t_stats_os_per_year WHERE stats_os_year=$get_current_stats_visit_per_year_year";
-				$result = mysqli_query($link, $query);
-				while($row = mysqli_fetch_row($result)) {
-					list($get_stats_os_id, $get_stats_os_year, $get_stats_os_name, $get_stats_os_type, $get_stats_os_unique, $get_stats_os_hits) = $row;
+	<!-- Os + Mobile vs desktop -->
+		<div class=\"flex_row\">
 
-					if($x > 0){
-						echo",";
-					}
+
+			<!-- Os -->
+				<div class=\"flex_col_50\">
+					<h2 style=\"margin-top: 20px;\">OS</h2>
+
+       					<div id=\"chartdiv_os_per_year\" style=\"height: 250px;margin-top:10px;\"></div>
+					";
+					$cache_file = "os_per_year_" . $stats_year . "_" . $configSecurityCodeSav . ".js";
+					include("_pages/stats/statistics_year_generate/os_per_year.php");
 					echo"
-					{
-					\"x\": \"$get_stats_os_name\",
-					\"value\": $get_stats_os_unique
-					}";
+					<script src=\"_cache/$cache_file?rand=$rand\"></script>
 
-					// x++
-					$x++;
-				} // while
-				echo"
-            			];
-				var series = chart.series.push(new am4charts.PieSeries());
-				series.dataFields.value = \"value\";
-				series.dataFields.category = \"x\";
-			}); // end am4core.ready()
-       			</script>
-       			<div id=\"chartdiv_os_year\" style=\"max-height: 250px;margin-top:10px;\"></div>
-
-		</div>
-	<!-- //Os -->
+				</div>
+			<!-- //Os -->
 
 
-	<!-- Mobile vs desktop -->
-		<div class=\"left_right_right\">
+			<!-- Mobile vs desktop -->
+				<div class=\"flex_col_50\">
+					<h2 style=\"margin-top: 20px;\">Mobile vs desktop</h2>
 
-
-
-						<h2 style=\"margin-top: 20px;\">Mobile vs desktop</h2>
-
-			<script>
-			am4core.ready(function() {
-				var chart = am4core.create(\"chartdiv_mobile_vs_desktop\", am4charts.PieChart);
-				chart.data = [
-					{
-					\"x\": \"Desktop\",
-					\"value\": $get_current_stats_visit_per_year_unique_desktop
-					},
-					{
-					\"x\": \"Mobile\",
-					\"value\": $get_current_stats_visit_per_year_unique_mobile
-					}
-
-            			];
-				var series = chart.series.push(new am4charts.PieSeries());
-				series.dataFields.value = \"value\";
-				series.dataFields.category = \"x\";
-			}); // end am4core.ready()
-       			</script>
-       			<div id=\"chartdiv_mobile_vs_desktop\" style=\"max-height: 250px;margin-top:10px;\"></div>
-		</div>
-		<div class=\"clear\"></div>
-	<!-- //Mobile vs desktop -->
-
-
-
-	<!-- Browsers -->
-		<div class=\"left_right_left\">
-			<h2 style=\"margin-top: 20px;\">$l_browsers</h2>
-
-			<script>
-			am4core.ready(function() {
-				var chart = am4core.create(\"chartdiv_browsers_year\", am4charts.PieChart);
-				chart.data = [";
-				$x = 0;
-				$query = "SELECT stats_browser_id, stats_browser_year, stats_browser_name, stats_browser_unique, stats_browser_hits FROM $t_stats_browsers_per_year WHERE stats_browser_year=$get_current_stats_visit_per_year_year";
-				$result = mysqli_query($link, $query);
-				while($row = mysqli_fetch_row($result)) {
-					list($get_stats_browser_id, $get_stats_browser_year, $get_stats_browser_name, $get_stats_browser_unique, $get_stats_browser_hits) = $row;
-
-					if($x > 0){
-						echo",";
-					}
+       					<div id=\"chartdiv_mobile_vs_desktop_per_year\" style=\"height: 250px;margin-top:10px;\"></div>
+					";
+					$cache_file = "mobile_vs_desktop_per_year_" . $stats_year . "_" . $configSecurityCodeSav . ".js";
+					include("_pages/stats/statistics_year_generate/mobile_vs_desktop_per_year.php");
 					echo"
-					{
-					\"x\": \"$get_stats_browser_name\",
-					\"value\": $get_stats_browser_unique
-					}";
+					<script src=\"_cache/$cache_file?rand=$rand\"></script>
+				</div>
+			<!-- //Mobile vs desktop -->
+		</div>
+	<!-- //Os + Mobile vs desktop -->
 
-					// x++
-					$x++;
-				} // while
-				echo"
-            			];
-				var series = chart.series.push(new am4charts.PieSeries());
-				series.dataFields.value = \"value\";
-				series.dataFields.category = \"x\";
-			}); // end am4core.ready()
-       			</script>
-       			<div id=\"chartdiv_browsers_year\" style=\"max-height: 250px;margin-top:10px;\"></div>
+
+	<!-- Browsers + Humans vs bots unique -->
+		<div class=\"flex_row\">
+
+			<!-- Browsers -->
+				<div class=\"flex_col_50\">
+					<h2 style=\"margin-top: 20px;\">Browsers</h2>
+       					<div id=\"chartdiv_browsers_per_year\" style=\"height: 250px;margin-top:10px;\"></div>
+					";
+					$cache_file = "browsers_per_year_" . $stats_year . "_" . $configSecurityCodeSav . ".js";
+					include("_pages/stats/statistics_year_generate/browsers_per_year.php");
+					echo"
+					<script src=\"_cache/$cache_file?rand=$rand\"></script>
+
+				</div>
+			<!-- //Browsers -->
+
+
+			<!-- Humans vs bots unique -->
+				<div class=\"flex_col_50\">
+					<h2 style=\"margin-top: 20px;\">Human vs bots unique</h2>
+
+       					<div id=\"chartdiv_humans_vs_bots_unique_per_year\" style=\"height: 250px;margin-top:10px;\"></div>
+					";
+					$cache_file = "humans_vs_bots_unique_per_year_" . $stats_year . "_" . $configSecurityCodeSav . ".js";
+					include("_pages/stats/statistics_year_generate/humans_vs_bots_unique_per_year.php");
+					echo"
+					<script src=\"_cache/$cache_file?rand=$rand\"></script>
+
+				</div>
+			<!-- //Humans vs bots unique -->
 
 		</div>
-	<!-- //Browsers -->
+	<!-- Browsers + Humans vs bots unique -->
 
 
-	<!-- Humans vs bots unique -->
-		<div class=\"left_right_left\">
-			<h2 style=\"margin-top: 20px;\">Human vs bots unique</h2>
-
-			<script>
-			am4core.ready(function() {
-				var chart = am4core.create(\"chartdiv_humans_vs_bots_unique\", am4charts.PieChart);
-				chart.data = [
-					{
-					\"x\": \"Humans\",
-					\"value\": $get_current_stats_visit_per_year_human_unique
-					},
-					{
-					\"x\": \"Bots\",
-					\"value\": $get_current_stats_visit_per_year_unique_bots
-					}
-
-            			];
-				var series = chart.series.push(new am4charts.PieSeries());
-				series.dataFields.value = \"value\";
-				series.dataFields.category = \"x\";
-			}); // end am4core.ready()
-       			</script>
-       			<div id=\"chartdiv_humans_vs_bots_unique\" style=\"max-height: 250px;margin-top:10px;\"></div>
-
-		</div>
-		<div class=\"clear\"></div>
-	<!-- //Humans vs bots unique -->
 
 	<!-- Comments per month -->
 		<a id=\"comments_per_month\"></a>
-		<h2 style=\"margin-top: 20px;\">Comments per month <a href=\"#comments_per_month\" class=\"toggle\" data-divid=\"comments_per_month_information\"><img src=\"_design/gfx/icons/16x16/information.png\" alt=\"information.png\" /></a></h2>
+		<h2 style=\"margin-top: 20px;\">Comments per month <a href=\"#comments_per_month\" class=\"toggle\" data-divid=\"comments_per_month_information\"><img src=\"_pages/stats/_gfx/information_16x16.png\" alt=\"information.png\" /></a></h2>
 		<div class=\"comments_per_month_information\">
 			<p>
 			Comments per month is from the following modules: blog, courses, downloads, exercises, food, recipes and references
 			</p>
 		</div>
-
-
-		<script>
-		am4core.ready(function() {
-			var chart = am4core.create(\"chartdiv_comments_per_month\", am4charts.XYChart);
-			chart.data = [";
-
-			$x = 0;
-			$query = "SELECT stats_comments_id, stats_comments_month_short, stats_comments_comments_written FROM $t_stats_comments_per_month WHERE stats_comments_year=$get_current_stats_visit_per_year_year ORDER BY stats_comments_month";
-			$result = mysqli_query($link, $query);
-			while($row = mysqli_fetch_row($result)) {
-				list($get_stats_comments_id, $get_stats_comments_month_short, $get_stats_comments_comments_written) = $row;
-						
-				if($x > 0){
-					echo",";
-				}
-				echo"
-				{
-					\"x\": \"$get_stats_comments_month_short\",
-					\"value\": $get_stats_comments_comments_written
-				}";
-				$x++;
-			} // while
-
-			echo"
-			];
-			// Create axes
-			var categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
-			categoryAxis.dataFields.category = \"x\";
-			var valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
-							
-			// Create series
-			var series1 = chart.series.push(new am4charts.LineSeries());
-			series1.dataFields.valueY = \"value\";
-			series1.dataFields.categoryX = \"x\";
-			series1.name = \"Comments\";
-			series1.tooltipText = \"Comments: {valueY}\";
-			series1.fill = am4core.color(\"#99e4dc\");
-			series1.stroke = am4core.color(\"#66d5c9\");
-			series1.strokeWidth = 1;
-
-			// Tooltips
-			chart.cursor = new am4charts.XYCursor();
-			chart.cursor.snapToSeries = series;
-			chart.cursor.xAxis = valueAxis;
-		}); // end am4core.ready()
-		</script>
 		<div id=\"chartdiv_comments_per_month\" style=\"height: 400px;\"></div>
+		";
+		$cache_file = "comments_per_month_" . $stats_year . "_" . $configSecurityCodeSav . ".js";
+		include("_pages/stats/statistics_year_generate/comments_per_month.php");
+		echo"
+		<script src=\"_cache/$cache_file?rand=$rand\"></script>
 	<!-- //Comments per month -->
 
 
 	<!-- Bots -->
-		<h2>$l_bots</h2>
+		<h2>Bots</h2>
 		<table class=\"hor-zebra\">
 		 <thead>
 		  <tr>
 		   <th scope=\"col\" style=\"width: 40%;\">
-			<span>$l_bot</span>
+			<span>Bot</span>
 		   </th>
 		   <th scope=\"col\" style=\"width: 30%;\">
-			<span>$l_unique</span>
+			<span>Unique</span>
 		   </th>
 		   <th scope=\"col\" style=\"width: 30%;\">
-			<span>$l_hits</span>
+			<span>Hits</span>
 		   </th>
 		  </tr>
 		 </thead>
@@ -611,7 +346,7 @@ else{
 		 <thead>
 		  <tr>
 		   <th scope=\"col\" style=\"width: 40%;\">
-			<span>$l_bot</span>
+			<span>Page</span>
 		   </th>
 		   <th scope=\"col\" style=\"width: 30%;\">
 			<span>Human unique</span>
@@ -697,7 +432,7 @@ else{
 
 
 		$query = "SELECT search_id, search_query, search_unique_counter, search_language_used, search_unique_ip_block, search_number_of_results, search_created_datetime, search_created_datetime_print, search_updated_datetime, search_updated_datetime_print FROM $t_search_engine_searches WHERE search_updated_datetime > $between_from_mysql AND search_updated_datetime < $between_to_mysql ORDER BY search_updated_datetime DESC";
-		$result = mysqli_query($link, $query);
+	 	$result = mysqli_query($link, $query);
 		while($row = mysqli_fetch_row($result)) {
 			list($get_search_id, $get_search_query, $get_search_unique_counter, $get_search_language_used, $get_search_unique_ip_block, $get_search_number_of_results, $get_search_created_datetime, $get_search_created_datetime_print, $get_search_updated_datetime, $get_search_updated_datetime_print) = $row;
 			
@@ -818,8 +553,8 @@ else{
 			</script>
 
 			<select id=\"inp_l\">
-				<option value=\"index.php?open=dashboard&amp;page=statistics_year&amp;stats_year=$stats_year&amp;editor_language=$editor_language&amp;l=$l\">$l_editor_language</option>
-				<option value=\"index.php?open=dashboard&amp;page=statistics_year&amp;stats_year=$stats_year&amp;editor_language=$editor_language&amp;l=$l\">-</option>\n";
+				<option value=\"index.php?open=dashboard&amp;page=statistics_year&amp;stats_year=$stats_year&amp;editor_language=$editor_language\">Editor language</option>
+				<option value=\"index.php?open=dashboard&amp;page=statistics_year&amp;stats_year=$stats_year&amp;editor_language=$editor_language\">-</option>\n";
 
 				$query = "SELECT language_active_id, language_active_name, language_active_iso_two, language_active_default FROM $t_languages_active";
 				$result = mysqli_query($link, $query);
@@ -830,7 +565,7 @@ else{
 					if($editor_language == ""){
 							$editor_language = "$get_language_active_iso_two";
 					}
-					echo"	<option value=\"index.php?open=dashboard&amp;page=statistics_year&amp;stats_year=$stats_year&amp;editor_language=$get_language_active_iso_two&amp;l=$l#trackers\"";if($editor_language == "$get_language_active_iso_two"){ echo" selected=\"selected\"";}echo">$get_language_active_name</option>\n";
+					echo"	<option value=\"index.php?open=dashboard&amp;page=statistics_year&amp;stats_year=$stats_year&amp;editor_language=$get_language_active_iso_two#trackers\"";if($editor_language == "$get_language_active_iso_two"){ echo" selected=\"selected\"";}echo">$get_language_active_name</option>\n";
 				}
 			echo"
 			</select>
@@ -900,7 +635,7 @@ else{
 			echo"
 			 <tr>
 			  <td>
-				<span><a href=\"index.php?open=dashboard&amp;page=statistics_tracker&amp;tracker_id=$get_tracker_id&amp;editor_language=$editor_language&amp;l=$l\">$get_tracker_id</a></span>
+				<span><a href=\"index.php?open=dashboard&amp;page=statistics_tracker&amp;tracker_id=$get_tracker_id&amp;editor_language=$editor_language\">$get_tracker_id</a></span>
 			  </td>
 			  <td>
 				<span>$get_tracker_type</span>

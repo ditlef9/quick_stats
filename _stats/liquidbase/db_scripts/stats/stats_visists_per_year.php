@@ -23,6 +23,7 @@ if(isset($_SESSION['adm_user_id'])){
 					stats_visit_per_year_year YEAR,
 					stats_visit_per_year_human_unique INT,
 					stats_visit_per_year_human_unique_diff_from_last_year INT,
+					stats_visit_per_year_human_unique_diff_percentage DOUBLE,
 					stats_visit_per_year_human_average_duration VARCHAR(200),
 					stats_visit_per_year_human_new_visitor_unique INT,
 					stats_visit_per_year_human_returning_visitor_unique INT,

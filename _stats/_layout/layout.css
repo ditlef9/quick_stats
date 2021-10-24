@@ -24,7 +24,7 @@ html, body, div, span, object, iframe, img {
 body {
 	background: #f4f6f9;
 	color: #000;
-	font: normal 14px 'Open Sans',sans-serif;
+	font: normal 15px 'Open Sans',sans-serif;
 
 }
 /*- Nullstilling ------------------------------------------------------------------ */
@@ -39,7 +39,19 @@ img{
 
 /*- Overskrifter ----------------------------------------------------------------- */
 h1 {
-	font: normal 20px 'Open Sans',sans-serif;
+	font: normal 24px 'Open Sans',sans-serif;
+    	color: #111;
+	padding: 12px 0 12px 0px;
+	margin: 0px 0px 0px 0px;
+}
+h2 {
+	font: normal 18px 'Open Sans',sans-serif;
+    	color: #111;
+	padding: 12px 0 12px 0px;
+	margin: 0px 0px 0px 0px;
+}
+h3 {
+	font: bold 16px 'Open Sans',sans-serif;
     	color: #111;
 	padding: 12px 0 12px 0px;
 	margin: 0px 0px 0px 0px;
@@ -47,7 +59,7 @@ h1 {
 
 /*- Paragrafer og span ----------------------------------------------------------- */
 p{
-	font: normal 14px 'Open Sans',sans-serif;
+	font: normal 15px 'Open Sans',sans-serif;
         color: #000;
 	margin: 0;
 	padding: 8px 0 8px 0px;
@@ -470,7 +482,21 @@ div.flex_row{
 }
 
 
+	/*- Flex 100 % ----------------------------------------------------- */
+	div.white_bg{
+		background: #fff;
+		border-radius: 5px;
+		border: #eaeef2 1px solid;
+		box-shadow: 0 2px 3px rgba(0,0,0,0.03);
+		margin: 0px 0px 20px 0px;
+	}
+
 	/*- Flex 50 % ----------------------------------------------------- */
+	div.flex_col_50, div.flex_col_50_white_bg{
+		flex: 48%;
+		max-width: 48%;
+		margin: 0px 1% 20px 0px;
+	}
 	div.flex_col_50_white_bg{
 		flex: 48%;
 		max-width: 48%;
@@ -480,14 +506,14 @@ div.flex_row{
 		box-shadow: 0 2px 3px rgba(0,0,0,0.03);
 		margin: 0px 1% 20px 0px;
 	}
-	div.flex_col_50_white_bg:first-child{
+	div.flex_col_50:first-child, div.flex_col_50_white_bg:first-child{
 		margin: 0px 1% 20px 0px;
 	}
-	div.flex_col_50_white_bg:last-child{
+	div.flex_col_50:last-child, div.flex_col_50_white_bg:last-child{
 		margin: 0px 0px 20px 1%;
 	}
 	@media screen and (max-width: 52.375em) {
-		div.flex_col_50_white_bg{
+		div.flex_col_50, div.flex_col_50_white_bg{
 			flex: 100%;
 			max-width: 100%;
 			margin: 0px 0px 20px 0px;
@@ -499,3 +525,10 @@ div.flex_row{
 		padding: 10px 10px 10px 10px;
 	}
 
+/*- Left and right --------------------------------------------------------------- */
+div.left{
+	float: left;
+}
+div.right{
+	float: right;
+}

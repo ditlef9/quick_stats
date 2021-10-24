@@ -4,6 +4,8 @@ if(isset($_SESSION['adm_user_id'])){
 
 	$t_stats_visists_per_year  = $dbPrefixSav . "stats_visists_per_year";
 
+	mysqli_query($link, "TRUNCATE TABLE $t_stats_visists_per_year") or die(mysqli_error($link));
+
 
 	if(isset($configGenerateTestDataSav) && $configGenerateTestDataSav == "1"){
 		echo"
@@ -11,7 +13,7 @@ if(isset($_SESSION['adm_user_id'])){
 		";
 
 		$year = date("Y");
-		$start = $year-5;
+		$start = $year-2;
 		$stop = $year+1;
 		for($x=$start;$x<$stop;$x++){
 			$inp_year = "$x";

@@ -19,7 +19,7 @@ include("_translations/admin/$l/dashboard/t_unknown_agents.php");
 
 
 /*- Tables ------------------------------------------------------------------------ */
-$t_stats_user_agents_index = $mysqlPrefixSav . "stats_user_agents_index";
+$t_stats_user_agents_index = $dbPrefixSav . "stats_user_agents_index";
 
 /*- Variables -------------------------------------------------------------------------- */
 if(isset($_GET['user_agent_id'])) {

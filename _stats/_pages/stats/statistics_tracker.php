@@ -16,52 +16,52 @@ if(!(isset($define_access_to_control_panel))){
 
 
 /*- Tables ---------------------------------------------------------------------------------- */
-$t_stats_accepted_languages_per_month	= $mysqlPrefixSav . "stats_accepted_languages_per_month";
-$t_stats_accepted_languages_per_year	= $mysqlPrefixSav . "stats_accepted_languages_per_year";
+$t_stats_accepted_languages_per_month	= $dbPrefixSav . "stats_accepted_languages_per_month";
+$t_stats_accepted_languages_per_year	= $dbPrefixSav . "stats_accepted_languages_per_year";
 
-$t_stats_browsers_per_month	= $mysqlPrefixSav . "stats_browsers_per_month";
-$t_stats_browsers_per_year	= $mysqlPrefixSav . "stats_browsers_per_year";
+$t_stats_browsers_per_month	= $dbPrefixSav . "stats_browsers_per_month";
+$t_stats_browsers_per_year	= $dbPrefixSav . "stats_browsers_per_year";
 
-$t_stats_comments_per_month 	= $mysqlPrefixSav . "stats_comments_per_month";
-$t_stats_comments_per_year 	= $mysqlPrefixSav . "stats_comments_per_year";
+$t_stats_comments_per_month 	= $dbPrefixSav . "stats_comments_per_month";
+$t_stats_comments_per_year 	= $dbPrefixSav . "stats_comments_per_year";
 
-$t_stats_countries_per_year  = $mysqlPrefixSav . "stats_countries_per_year";
-$t_stats_countries_per_month = $mysqlPrefixSav . "stats_countries_per_month";
+$t_stats_countries_per_year  = $dbPrefixSav . "stats_countries_per_year";
+$t_stats_countries_per_month = $dbPrefixSav . "stats_countries_per_month";
 
-$t_stats_ip_to_country_ipv4 		= $mysqlPrefixSav . "stats_ip_to_country_ipv4";
-$t_stats_ip_to_country_ipv6 		= $mysqlPrefixSav . "stats_ip_to_country_ipv6";
-$t_stats_ip_to_country_geonames 	= $mysqlPrefixSav . "stats_ip_to_country_geonames";
+$t_stats_ip_to_country_ipv4 		= $dbPrefixSav . "stats_ip_to_country_ipv4";
+$t_stats_ip_to_country_ipv6 		= $dbPrefixSav . "stats_ip_to_country_ipv6";
+$t_stats_ip_to_country_geonames 	= $dbPrefixSav . "stats_ip_to_country_geonames";
 
-$t_stats_os_per_month = $mysqlPrefixSav . "stats_os_per_month";
-$t_stats_os_per_year = $mysqlPrefixSav . "stats_os_per_year";
+$t_stats_os_per_month = $dbPrefixSav . "stats_os_per_month";
+$t_stats_os_per_year = $dbPrefixSav . "stats_os_per_year";
 
-$t_stats_languages_per_year	= $mysqlPrefixSav . "stats_languages_per_year";
-$t_stats_languages_per_month	= $mysqlPrefixSav . "stats_languages_per_month";
+$t_stats_languages_per_year	= $dbPrefixSav . "stats_languages_per_year";
+$t_stats_languages_per_month	= $dbPrefixSav . "stats_languages_per_month";
 
-$t_stats_referers_per_year  = $mysqlPrefixSav . "stats_referers_per_year";
-$t_stats_referers_per_month = $mysqlPrefixSav . "stats_referers_per_month";
+$t_stats_referers_per_year  = $dbPrefixSav . "stats_referers_per_year";
+$t_stats_referers_per_month = $dbPrefixSav . "stats_referers_per_month";
 
-$t_stats_pages_visits_per_year = $mysqlPrefixSav . "stats_pages_visits_per_year";
+$t_stats_pages_visits_per_year = $dbPrefixSav . "stats_pages_visits_per_year";
 
-$t_stats_user_agents_index = $mysqlPrefixSav . "stats_user_agents_index";
+$t_stats_user_agents_index = $dbPrefixSav . "stats_user_agents_index";
 
-$t_stats_users_registered_per_month = $mysqlPrefixSav . "stats_users_registered_per_month";
-$t_stats_users_registered_per_year = $mysqlPrefixSav . "stats_users_registered_per_year";
+$t_stats_users_registered_per_month = $dbPrefixSav . "stats_users_registered_per_month";
+$t_stats_users_registered_per_year = $dbPrefixSav . "stats_users_registered_per_year";
 
-$t_stats_bots_per_month	= $mysqlPrefixSav . "stats_bots_per_month";
-$t_stats_bots_per_year	= $mysqlPrefixSav . "stats_bots_per_year";
+$t_stats_bots_per_month	= $dbPrefixSav . "stats_bots_per_month";
+$t_stats_bots_per_year	= $dbPrefixSav . "stats_bots_per_year";
 
-$t_stats_visists_per_day 	= $mysqlPrefixSav . "stats_visists_per_day";
-$t_stats_visists_per_day_ips 	= $mysqlPrefixSav . "stats_visists_per_day_ips";
-$t_stats_visists_per_month 	= $mysqlPrefixSav . "stats_visists_per_month";
-$t_stats_visists_per_month_ips 	= $mysqlPrefixSav . "stats_visists_per_month_ips";
-$t_stats_visists_per_year 	= $mysqlPrefixSav . "stats_visists_per_year";
-$t_stats_visists_per_year_ips 	= $mysqlPrefixSav . "stats_visists_per_year_ips";
+$t_stats_visists_per_day 	= $dbPrefixSav . "stats_visists_per_day";
+$t_stats_visists_per_day_ips 	= $dbPrefixSav . "stats_visists_per_day_ips";
+$t_stats_visists_per_month 	= $dbPrefixSav . "stats_visists_per_month";
+$t_stats_visists_per_month_ips 	= $dbPrefixSav . "stats_visists_per_month_ips";
+$t_stats_visists_per_year 	= $dbPrefixSav . "stats_visists_per_year";
+$t_stats_visists_per_year_ips 	= $dbPrefixSav . "stats_visists_per_year_ips";
 
-$t_search_engine_searches = $mysqlPrefixSav . "search_engine_searches";
+$t_search_engine_searches = $dbPrefixSav . "search_engine_searches";
 
-$t_stats_tracker_index = $mysqlPrefixSav . "stats_tracker_index";
-$t_stats_tracker_urls  = $mysqlPrefixSav . "stats_tracker_urls";
+$t_stats_tracker_index = $dbPrefixSav . "stats_tracker_index";
+$t_stats_tracker_urls  = $dbPrefixSav . "stats_tracker_urls";
 
 /*- Translation ----------------------------------------------------------------------- */
 include("_translations/admin/$l/dashboard/t_default.php");
