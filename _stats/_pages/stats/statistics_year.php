@@ -137,7 +137,7 @@ else{
 		$cache_file = "visits_per_month_" . $stats_year . "_" . $configSecurityCodeSav . ".js";
 		include("_pages/stats/statistics_year_generate/visits_per_month.php");
 		echo"
-		<script src=\"_cache/$cache_file?rand=$rand\"></script>
+		<script src=\"_cache/year/$cache_file?rand=$rand\"></script>
 
 
 		
@@ -152,7 +152,7 @@ else{
 		$cache_file = "visits_per_country_" . $stats_year . "_" . $configSecurityCodeSav . ".js";
 		include("_pages/stats/statistics_year_generate/unique_visits_per_country.php");
 		echo"
-		<script src=\"_cache/$cache_file?rand=$rand\"></script>
+		<script src=\"_cache/year/$cache_file?rand=$rand\"></script>
 	<!-- //Countries -->
 
 
@@ -168,7 +168,7 @@ else{
 					$cache_file = "accepted_language_per_year_" . $stats_year . "_" . $configSecurityCodeSav . ".js";
 					include("_pages/stats/statistics_year_generate/accepted_language_per_year.php");
 					echo"
-					<script src=\"_cache/$cache_file?rand=$rand\"></script>
+					<script src=\"_cache/year/$cache_file?rand=$rand\"></script>
 
 				</div>
 			<!-- //Accepted languages -->
@@ -182,7 +182,7 @@ else{
 					$cache_file = "languages_per_year_" . $stats_year . "_" . $configSecurityCodeSav . ".js";
 					include("_pages/stats/statistics_year_generate/languages_per_year.php");
 					echo"
-					<script src=\"_cache/$cache_file?rand=$rand\"></script>
+					<script src=\"_cache/year/$cache_file?rand=$rand\"></script>
 				</div>
 			<!-- //Language used -->
 
@@ -204,7 +204,7 @@ else{
 					$cache_file = "os_per_year_" . $stats_year . "_" . $configSecurityCodeSav . ".js";
 					include("_pages/stats/statistics_year_generate/os_per_year.php");
 					echo"
-					<script src=\"_cache/$cache_file?rand=$rand\"></script>
+					<script src=\"_cache/year/$cache_file?rand=$rand\"></script>
 
 				</div>
 			<!-- //Os -->
@@ -219,7 +219,7 @@ else{
 					$cache_file = "mobile_vs_desktop_per_year_" . $stats_year . "_" . $configSecurityCodeSav . ".js";
 					include("_pages/stats/statistics_year_generate/mobile_vs_desktop_per_year.php");
 					echo"
-					<script src=\"_cache/$cache_file?rand=$rand\"></script>
+					<script src=\"_cache/year/$cache_file?rand=$rand\"></script>
 				</div>
 			<!-- //Mobile vs desktop -->
 		</div>
@@ -237,7 +237,7 @@ else{
 					$cache_file = "browsers_per_year_" . $stats_year . "_" . $configSecurityCodeSav . ".js";
 					include("_pages/stats/statistics_year_generate/browsers_per_year.php");
 					echo"
-					<script src=\"_cache/$cache_file?rand=$rand\"></script>
+					<script src=\"_cache/year/$cache_file?rand=$rand\"></script>
 
 				</div>
 			<!-- //Browsers -->
@@ -252,7 +252,7 @@ else{
 					$cache_file = "humans_vs_bots_unique_per_year_" . $stats_year . "_" . $configSecurityCodeSav . ".js";
 					include("_pages/stats/statistics_year_generate/humans_vs_bots_unique_per_year.php");
 					echo"
-					<script src=\"_cache/$cache_file?rand=$rand\"></script>
+					<script src=\"_cache/year/$cache_file?rand=$rand\"></script>
 
 				</div>
 			<!-- //Humans vs bots unique -->
@@ -275,7 +275,7 @@ else{
 		$cache_file = "comments_per_month_" . $stats_year . "_" . $configSecurityCodeSav . ".js";
 		include("_pages/stats/statistics_year_generate/comments_per_month.php");
 		echo"
-		<script src=\"_cache/$cache_file?rand=$rand\"></script>
+		<script src=\"_cache/year/$cache_file?rand=$rand\"></script>
 	<!-- //Comments per month -->
 
 

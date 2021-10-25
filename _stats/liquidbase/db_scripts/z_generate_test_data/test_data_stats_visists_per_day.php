@@ -9,6 +9,8 @@ if(isset($_SESSION['adm_user_id'])){
 
 
 	$t_stats_visists_per_day  = $dbPrefixSav . "stats_visists_per_day";
+	mysqli_query($link, "TRUNCATE TABLE $t_stats_visists_per_day") or die(mysqli_error($link));
+
 
 
 	// Months

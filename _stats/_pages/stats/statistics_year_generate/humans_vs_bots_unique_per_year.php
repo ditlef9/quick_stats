@@ -76,7 +76,18 @@ if(!(is_dir("_cache"))){
 	fclose($fp);
 
 }
-$fp = fopen("_cache/$cache_file", "w") or die("Unable to open file!");
+if(!(is_dir("_cache/year"))){
+	mkdir("_cache/year");
+
+	$fp = fopen("_cache/year/index.html", "w") or die("Unable to open file!");
+	fwrite($fp, "Server error 403");
+	fclose($fp);
+	$fp = fopen("_cache/year/index.css", "w") or die("Unable to open file!");
+	fwrite($fp, "");
+	fclose($fp);
+
+}
+$fp = fopen("_cache/year/$cache_file", "w") or die("Unable to open file!");
 fwrite($fp, $inp_header);
 fwrite($fp, $inp_data);
 fwrite($fp, $inp_footer);
@@ -97,15 +108,15 @@ $inp_test="<!DOCTYPE html>
 <body>
     <div id=\"chartdiv_humans_vs_bots_unique_per_year\" style=\"width: 100%;height: 80vh;\"></div>
 
-<script src=\"../_libraries/amcharts/index.js\"></script>
-<script src=\"../_libraries/amcharts/percent.js\"></script>
-<script src=\"../_libraries/amcharts/themes/Animated.js\"></script>
+<script src=\"../../_libraries/amcharts/index.js\"></script>
+<script src=\"../../_libraries/amcharts/percent.js\"></script>
+<script src=\"../../_libraries/amcharts/themes/Animated.js\"></script>
 <script src=\"$cache_file\"></script>
   </body>
 </html>";
 
 
-$fp = fopen("_cache/$cache_file.html", "w") or die("Unable to open file!");
+$fp = fopen("_cache/year/$cache_file.html", "w") or die("Unable to open file!");
 fwrite($fp, $inp_test);
 fclose($fp);
 

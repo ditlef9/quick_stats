@@ -76,7 +76,7 @@ $inp_footer = "
 
 
 /*- Write to file ----------------------------------------------------------------------------- */
-$fp = fopen("_cache/$cache_file", "w") or die("Unable to open file!");
+$fp = fopen("_cache/year/$cache_file", "w") or die("Unable to open file!");
 fwrite($fp, $inp_header);
 fwrite($fp, $inp_data);
 fwrite($fp, $inp_footer);
@@ -97,21 +97,21 @@ $inp_test="<!DOCTYPE html>
 <body>
     <div id=\"chartdiv_unique_visits_per_country\" style=\"width: 100%;height: 80vh;\"></div>
 
-<script src=\"../_libraries/amcharts/index.js\"></script>
-<script src=\"../_libraries/amcharts/themes/Animated.js\"></script>
+<script src=\"../../_libraries/amcharts/index.js\"></script>
+<script src=\"../../_libraries/amcharts/themes/Animated.js\"></script>
 
-<script src=\"../_libraries/amcharts/map.js\"></script>
-<script src=\"../_libraries/amcharts/geodata/worldLow.js\"></script>
+<script src=\"../../_libraries/amcharts/map.js\"></script>
+<script src=\"../../_libraries/amcharts/geodata/worldLow.js\"></script>
 
-<script src=\"../_libraries/amcharts/geodata/data/countries.js\"></script>
-<script src=\"../_libraries/amcharts/geodata/data/countries2.js\"></script>
+<script src=\"../../_libraries/amcharts/geodata/data/countries.js\"></script>
+<script src=\"../../_libraries/amcharts/geodata/data/countries2.js\"></script>
 
 <script src=\"$cache_file\"></script>
   </body>
 </html>";
 
 
-$fp = fopen("_cache/$cache_file.html", "w") or die("Unable to open file!");
+$fp = fopen("_cache/year/$cache_file.html", "w") or die("Unable to open file!");
 fwrite($fp, $inp_test);
 fclose($fp);
 

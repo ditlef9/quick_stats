@@ -3,6 +3,7 @@ if(isset($_SESSION['adm_user_id'])){
 
 
 	$t_stats_visists_per_week  = $dbPrefixSav . "stats_visists_per_week";
+	mysqli_query($link, "TRUNCATE TABLE $t_stats_visists_per_week") or die(mysqli_error($link));
 
 
 	if(isset($configGenerateTestDataSav) && $configGenerateTestDataSav == "1"){

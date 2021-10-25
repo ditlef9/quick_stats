@@ -1,7 +1,7 @@
 <?php
 /**
 *
-* File: _stats/_pages/stats/statistics_year_generate/accepted_language_per_year.php
+* File: _stats/_pages/stats/statistics_year_generate/accepted_language_per_month.php
 * Version 1
 * Date 12:04 18.10.2021
 * Copyright (c) 2021 Sindre Andre Ditlefsen
@@ -18,7 +18,7 @@ if(!(isset($define_access_to_control_panel))){
 /*- Header ----------------------------------------------------------------------------- */
 $inp_header ="// Create root element
 // https://www.amcharts.com/docs/v5/getting-started/#Root_element
-var root = am5.Root.new(\"chartdiv_accepted_language_per_year\");
+var root = am5.Root.new(\"chartdiv_accepted_language_per_month\");
 
 // Set themes
 // https://www.amcharts.com/docs/v5/concepts/themes/
@@ -50,11 +50,10 @@ series.data.setAll([";
 
 
 $x = 0;
-$query = "SELECT stats_accepted_language_id, stats_accepted_language_year, stats_accepted_language_name, stats_accepted_language_unique, stats_accepted_language_hits FROM $t_stats_accepted_languages_per_year WHERE stats_accepted_language_year=$get_current_stats_visit_per_year_year";
+$query = "SELECT stats_accepted_language_id, stats_accepted_language_year, stats_accepted_language_name, stats_accepted_language_unique, stats_accepted_language_hits FROM $t_stats_accepted_languages_per_month WHERE stats_accepted_language_month=$get_current_stats_visit_per_month_month AND stats_accepted_language_year=$get_current_stats_visit_per_month_year";
 $result = mysqli_query($link, $query);
 while($row = mysqli_fetch_row($result)) {
 	list($get_stats_accepted_language_id, $get_stats_accepted_language_year, $get_stats_accepted_language_name, $get_stats_accepted_language_unique, $get_stats_accepted_language_hits) = $row;
-
 
 
 	$inp_data = $inp_data  . "{ value: $get_stats_accepted_language_unique, category: \"$get_stats_accepted_language_name\" },
@@ -88,7 +87,7 @@ if(!(is_dir("_cache"))){
 	fclose($fp);
 
 }
-$fp = fopen("_cache/$cache_file", "w") or die("Unable to open file!");
+$fp = fopen("_cache/month/$cache_file", "w") or die("Unable to open file!");
 fwrite($fp, $inp_header);
 fwrite($fp, $inp_data);
 fwrite($fp, $inp_footer);
@@ -107,17 +106,17 @@ $inp_test="<!DOCTYPE html>
     <link rel=\"stylesheet\" href=\"index.css\" />
 </head>
 <body>
-    <div id=\"chartdiv_accepted_language_per_year\" style=\"width: 100%;height: 80vh;\"></div>
+    <div id=\"chartdiv_accepted_language_per_month\" style=\"width: 100%;height: 80vh;\"></div>
 
-<script src=\"../_libraries/amcharts/index.js\"></script>
-<script src=\"../_libraries/amcharts/percent.js\"></script>
-<script src=\"../_libraries/amcharts/themes/Animated.js\"></script>
+<script src=\"../../_libraries/amcharts/index.js\"></script>
+<script src=\"../../_libraries/amcharts/percent.js\"></script>
+<script src=\"../../_libraries/amcharts/themes/Animated.js\"></script>
 <script src=\"$cache_file\"></script>
   </body>
 </html>";
 
 
-$fp = fopen("_cache/$cache_file.html", "w") or die("Unable to open file!");
+$fp = fopen("_cache/month/$cache_file.html", "w") or die("Unable to open file!");
 fwrite($fp, $inp_test);
 fclose($fp);
 

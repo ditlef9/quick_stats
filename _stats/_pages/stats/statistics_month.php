@@ -63,8 +63,6 @@ $t_search_engine_searches = $dbPrefixSav . "search_engine_searches";
 
 $t_stats_tracker_index = $dbPrefixSav . "stats_tracker_index";
 
-/*- Translation ----------------------------------------------------------------------- */
-include("_translations/admin/$l/dashboard/t_default.php");
 
 /*- Variables -------------------------------------------------------------------------- */
 if(isset($_GET['stats_year'])) {
@@ -149,219 +147,61 @@ else{
 		<div id=\"chartdiv_visits_per_day\" style=\"height: 400px;\"></div>
 		";
 		$cache_file = "visits_per_day_" . $stats_year . "_" . $configSecurityCodeSav . ".js";
-		include("_pages/stats/statistics_month_generate/visits_per_month.php");
+		include("_pages/stats/statistics_month_generate/visits_per_day.php");
 		echo"
-		<script src=\"_cache/$cache_file?rand=$rand\"></script>
+		<script src=\"_cache/month/$cache_file?rand=$rand\"></script>
 
 
-
-		<script>
-		am4core.ready(function() {
-			var chart = am4core.create(\"chartdiv_visits_per_month\", am4charts.XYChart);
-			chart.data = [";
-
-			$x = 0;
-			$query = "SELECT stats_visit_per_day_id, stats_visit_per_day_day, stats_visit_per_day_day_full, stats_visit_per_day_day_three, stats_visit_per_day_day_single, stats_visit_per_day_month, stats_visit_per_day_month_full, stats_visit_per_day_month_short, stats_visit_per_day_year, stats_visit_per_day_human_unique, stats_visit_per_day_human_unique_diff_from_yesterday, stats_visit_per_day_human_average_duration, stats_visit_per_day_human_new_visitor_unique, stats_visit_per_day_human_returning_visitor_unique, stats_visit_per_day_unique_desktop, stats_visit_per_day_unique_mobile, stats_visit_per_day_unique_bots, stats_visit_per_day_hits_total, stats_visit_per_day_hits_human, stats_visit_per_day_hits_desktop, stats_visit_per_day_hits_mobile, stats_visit_per_day_hits_bots FROM $t_stats_visists_per_day WHERE stats_visit_per_day_month=$get_current_stats_visit_per_month_month AND stats_visit_per_day_year=$get_current_stats_visit_per_month_year ORDER BY stats_visit_per_day_id";
-			$result = mysqli_query($link, $query);
-			while($row = mysqli_fetch_row($result)) {
-				list($get_stats_visit_per_day_id, $get_stats_visit_per_day_day, $get_stats_visit_per_day_day_full, $get_stats_visit_per_day_day_three, $get_stats_visit_per_day_day_single, $get_stats_visit_per_day_month, $get_stats_visit_per_day_month_full, $get_stats_visit_per_day_month_short, $get_stats_visit_per_day_year, $get_stats_visit_per_day_human_unique, $get_stats_visit_per_day_human_unique_diff_from_yesterday, $get_stats_visit_per_day_human_average_duration, $get_stats_visit_per_day_human_new_visitor_unique, $get_stats_visit_per_day_human_returning_visitor_unique, $get_stats_visit_per_day_unique_desktop, $get_stats_visit_per_day_unique_mobile, $get_stats_visit_per_day_unique_bots, $get_stats_visit_per_day_hits_total, $get_stats_visit_per_day_hits_human, $get_stats_visit_per_day_hits_desktop, $get_stats_visit_per_day_hits_mobile, $get_stats_visit_per_day_hits_bots) = $row;
-						
-				if($x > 0){
-					echo",";
-				}
-				echo"
-				{
-					\"x\": \"$get_stats_visit_per_day_day_three $get_stats_visit_per_day_day\",
-					\"value\": $get_stats_visit_per_day_human_unique
-				}";
-				$x++;
-			} // while
-
-			echo"
-			];
-			// Create axes
-			var categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
-			categoryAxis.dataFields.category = \"x\";
-			var valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
-							
-			// Create series
-			var series1 = chart.series.push(new am4charts.LineSeries());
-			series1.dataFields.valueY = \"value\";
-			series1.dataFields.categoryX = \"x\";
-			series1.name = \"Unique visits\";
-			series1.tooltipText = \"Unique visits: {valueY}\";
-			series1.fill = am4core.color(\"#99e4dc\");
-			series1.stroke = am4core.color(\"#66d5c9\");
-			series1.strokeWidth = 1;
-
-			// Tooltips
-			chart.cursor = new am4charts.XYCursor();
-			chart.cursor.snapToSeries = series;
-			chart.cursor.xAxis = valueAxis;
-		}); // end am4core.ready()
-		</script>
 	<!-- //Visits per day -->
 
 
 	<!-- Countries -->
 		<h2 style=\"margin-top:20px;padding-bottom:0;margin-bottom:0;\">Unique Visits per Country for $get_current_stats_visit_per_month_month_full</h2>
 
-		<script>
-		am4core.ready(function() {
-			am4core.useTheme(am4themes_animated);
-			var chart = am4core.create(\"chartdiv_unique_visits_per_country\", am4maps.MapChart);
-			chart.geodata = am4geodata_worldLow;
-
-
-			chart.projection = new am4maps.projections.Miller();
-
-			var polygonSeries = chart.series.push(new am4maps.MapPolygonSeries());
-			var polygonTemplate = polygonSeries.mapPolygons.template;
-			polygonTemplate.tooltipText = \"{name}: {value.value}\";
-			polygonSeries.useGeodata = true;
-			polygonSeries.heatRules.push({ property: \"fill\", target: polygonSeries.mapPolygons.template, min: am4core.color(\"#8ab7ff\"), max: am4core.color(\"#25529a\") });
-
-
-			// add heat legend
-			var heatLegend = chart.chartContainer.createChild(am4maps.HeatLegend);
-			heatLegend.align = \"center\";
-			heatLegend.valign = \"bottom\";
-			heatLegend.series = polygonSeries;
-			heatLegend.width = am4core.percent(50);
-			heatLegend.orientation = \"horizontal\";
-			heatLegend.padding(30, 30, 30, 30);
-			heatLegend.valueAxis.renderer.labels.template.fontSize = 10;
-			heatLegend.valueAxis.renderer.minGridDistance = 40;
-
-			polygonSeries.mapPolygons.template.events.on(\"over\", function (event) {
-			  handleHover(event.target);
-			})
-
-			polygonSeries.mapPolygons.template.events.on(\"hit\", function (event) {
-			  handleHover(event.target);
-			})
-
-			function handleHover(mapPolygon) {
-			  if (!isNaN(mapPolygon.dataItem.value)) {
-			    heatLegend.valueAxis.showTooltipAt(mapPolygon.dataItem.value)
-			  }
-			  else {
-			    heatLegend.valueAxis.hideTooltip();
-			  }
-			}
-
-			polygonSeries.mapPolygons.template.events.on(\"out\", function (event) {
-			  heatLegend.valueAxis.hideTooltip();
-			})
-
-
-			// data
-			polygonSeries.data = [";
-				$x = 0;
-				$query = "SELECT stats_country_id, stats_country_name, stats_country_alpha_2, stats_country_unique, stats_country_hits FROM $t_stats_countries_per_month WHERE stats_country_month=$get_current_stats_visit_per_month_month AND stats_country_year=$get_current_stats_visit_per_month_year";
-				$result = mysqli_query($link, $query);
-				while($row = mysqli_fetch_row($result)) {
-					list($get_stats_country_id, $get_stats_country_name, $get_stats_country_alpha_2, $get_stats_country_unique, $get_stats_country_hits) = $row;
-
-					if($x > 0){
-						echo",";
-					}
-					echo"
-					{ \"id\": \"$get_stats_country_alpha_2\", \"value\": $get_stats_country_unique }";
-
-					// x++
-					$x++;
-				} // while
-			echo"];
-
-			// excludes Antarctica
-			polygonSeries.exclude = [\"AQ\"];
-
-			chart.seriesContainer.draggable = false;
-			chart.seriesContainer.resizable = false;
-			chart.maxZoomLevel = 1;
-			chart.chartContainer.wheelable = false;
-		}); // end am4core.ready()
-		</script>
 		<div id=\"chartdiv_unique_visits_per_country\" style=\"width: 100%;max-height: 600px;height: 100vh;\"></div>
+		";
+		$cache_file = "visits_per_country_" . $stats_year . "_" . $stats_month  . "_" . $configSecurityCodeSav . ".js";
+		include("_pages/stats/statistics_month_generate/unique_visits_per_country.php");
+		echo"
+		<script src=\"_cache/month/$cache_file?rand=$rand\"></script>
 		
 	<!-- //Countries -->
 
 
-	<!-- Accepted languages -->
-		<div class=\"left_right_left\">
-			<h2 style=\"margin-top: 20px;\">$l_accepted_languages</h2>
 
+	<!-- Accepted languages + Languages used -->
+		<div class=\"flex_row\">
+			<!-- Accepted languages -->
+				<div class=\"flex_col_50\">
+					<h2 style=\"margin-top: 20px;\">Accepted languages</h2>
 
-			<script>
-			am4core.ready(function() {
-				var chart = am4core.create(\"chartdiv_accepted_language_year\", am4charts.PieChart);
-				chart.data = [";
-				$x = 0;
-				$query = "SELECT stats_accepted_language_id, stats_accepted_language_year, stats_accepted_language_name, stats_accepted_language_unique, stats_accepted_language_hits FROM $t_stats_accepted_languages_per_month WHERE stats_accepted_language_month=$get_current_stats_visit_per_month_month AND stats_accepted_language_year=$get_current_stats_visit_per_month_year";
-				$result = mysqli_query($link, $query);
-				while($row = mysqli_fetch_row($result)) {
-					list($get_stats_accepted_language_id, $get_stats_accepted_language_year, $get_stats_accepted_language_name, $get_stats_accepted_language_unique, $get_stats_accepted_language_hits) = $row;
-
-					if($x > 0){
-						echo",";
-					}
+       					<div id=\"chartdiv_accepted_language_per_month\" style=\"height: 250px;margin-top:10px;\"></div>
+					";
+					$cache_file = "accepted_language_per_month_" . $stats_year . "_" . $stats_month . "_" .$configSecurityCodeSav . ".js";
+					include("_pages/stats/statistics_month_generate/accepted_language_per_month.php");
 					echo"
-					{
-					\"x\": \"$get_stats_accepted_language_name\",
-					\"value\": $get_stats_accepted_language_unique
-					}";
+					<script src=\"_cache/month/$cache_file?rand=$rand\"></script>
 
-					// x++
-					$x++;
-				} // while
-				echo"
-            			];
-				var series = chart.series.push(new am4charts.PieSeries());
-				series.dataFields.value = \"value\";
-				series.dataFields.category = \"x\";
-			}); // end am4core.ready()
-       			</script>
-       			<div id=\"chartdiv_accepted_language_year\" style=\"max-height: 250px;margin-top:10px;\"></div>
-		</div>
-	<!-- //Accepted languages -->
+				</div>
+			<!-- //Accepted languages -->
+
+			<!-- Language used -->
+				<div class=\"flex_col_50\">
 
 
-	<!-- Language used -->
-		<div class=\"left_right_right\">
-			<h2 style=\"margin-top: 20px;\">Language used</h2>
+					<h2 style=\"margin-top: 20px;\">Language used</h2>
 
-			<script>
-			am4core.ready(function() {
-				var chart = am4core.create(\"chartdiv_languages_per_month\", am4charts.PieChart);
-				chart.data = [";
-				$x = 0;
-				$query = "SELECT stats_language_id, stats_language_name, stats_language_iso_two, stats_language_flag_path_16x16, stats_language_flag_16x16, stats_language_unique, stats_language_hits FROM $t_stats_languages_per_month WHERE stats_language_month=$get_current_stats_visit_per_month_month AND stats_language_year=$get_current_stats_visit_per_month_year ORDER BY stats_language_unique ASC LIMIT 0,12";
-				$result = mysqli_query($link, $query);
-				while($row = mysqli_fetch_row($result)) {
-					list($get_stats_language_id, $get_stats_language_name, $get_stats_language_iso_two, $get_stats_language_flag_path_16x16, $get_stats_language_flag_16x16, $get_stats_language_unique, $get_stats_language_hits) = $row;
-						
-					if($x > 0){
-						echo",";
-					}
+       					<div id=\"chartdiv_languages_per_month\" style=\"height: 250px;margin-top:10px;\"></div>
+					";
+					$cache_file = "languages_per_month_" . $stats_year . "_" . $stats_month . "_" . $configSecurityCodeSav . ".js";
+					include("_pages/stats/statistics_month_generate/languages_per_month.php");
 					echo"
-					{
-						\"x\": \"$get_stats_language_name\",
-						\"value\": $get_stats_language_unique
-					}";
-					$x++;
-				} // while
+					<script src=\"_cache/month/$cache_file?rand=$rand\"></script>
+				</div>
+			<!-- //Language used -->
 
-				echo"];
-				var series = chart.series.push(new am4charts.PieSeries());
-				series.dataFields.value = \"value\";
-				series.dataFields.category = \"x\";
-			}); // end am4core.ready()
-       			</script>
-       			<div id=\"chartdiv_languages_per_month\" style=\"max-height: 250px;margin-top:10px;\"></div>
 		</div>
-		<div class=\"clear\"></div>
-	<!-- //Language used -->
+	<!-- //Accepted languages + Languages used -->
 
 
 	<!-- Os -->
