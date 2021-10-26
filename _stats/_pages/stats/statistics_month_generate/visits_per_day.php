@@ -32,77 +32,77 @@ $last_month_saying = $datetime_class->format('F');
 /*- Header ----------------------------------------------------------------------------- */
 $inp_header ="// Create root element
 // https://www.amcharts.com/docs/v5/getting-started/#Root_element
-var root = am5.Root.new(\"chartdiv_visits_per_day\");
+var rootV = am5.Root.new(\"chartdiv_visits_per_day\");
 
 
 // Set themes
 // https://www.amcharts.com/docs/v5/concepts/themes/
-root.setThemes([
-  am5themes_Animated.new(root)
+rootV.setThemes([
+  am5themes_Animated.new(rootV)
 ]);
 
 
 // Create chart
 // https://www.amcharts.com/docs/v5/charts/xy-chart/
-var chart = root.container.children.push(am5xy.XYChart.new(root, {
+var chartV = rootV.container.children.push(am5xy.XYChart.new(rootV, {
   panX: true,
   panY: true,
-  layout: root.verticalLayout, // Legend at bottom
+  layout: rootV.verticalLayout, // Legend at bottom
   maxTooltipDistance: 0
 }));
 
-chart.get(\"colors\").set(\"step\", 3);
+chartV.get(\"colors\").set(\"step\", 3);
 
 
 // Add cursor
 // https://www.amcharts.com/docs/v5/charts/xy-chart/cursor/
-var cursor = chart.set(\"cursor\", am5xy.XYCursor.new(root, {}));
-cursor.lineY.set(\"visible\", false);
+var cursorV = chartV.set(\"cursor\", am5xy.XYCursor.new(rootV, {}));
+cursorV.lineY.set(\"visible\", false);
 
 
 // Create axes
 // https://www.amcharts.com/docs/v5/charts/xy-chart/axes/
-var xAxis = chart.xAxes.push(am5xy.DateAxis.new(root, {
+var xAxisV = chartV.xAxes.push(am5xy.DateAxis.new(rootV, {
   maxDeviation: 0.3,
   baseInterval: {
     timeUnit: \"day\",
     count: 1
   },
-  renderer: am5xy.AxisRendererX.new(root, {}),
-  tooltip: am5.Tooltip.new(root, {})
+  renderer: am5xy.AxisRendererX.new(rootV, {}),
+  tooltip: am5.Tooltip.new(rootV, {})
 }));
 
-var yAxis = chart.yAxes.push(am5xy.ValueAxis.new(root, {
+var yAxisV = chartV.yAxes.push(am5xy.ValueAxis.new(rootV, {
   maxDeviation: 0.3,
-  renderer: am5xy.AxisRendererY.new(root, {})
+  renderer: am5xy.AxisRendererY.new(rootV, {})
 }));
 
 
 // Add series
 // https://www.amcharts.com/docs/v5/charts/xy-chart/series/
-var series = chart.series.push(am5xy.LineSeries.new(root, {
+var seriesV = chartV.series.push(am5xy.LineSeries.new(rootV, {
   name: \"$this_month_saying\",
-  xAxis: xAxis,
-  yAxis: yAxis,
+  xAxis: xAxisV,
+  yAxis: yAxisV,
   valueYField: \"value1\",
   valueXField: \"date\"
 }));
-series.strokes.template.setAll({
+seriesV.strokes.template.setAll({
   strokeWidth: 2
 });
 
-var tooltip = series.set(\"tooltip\", am5.Tooltip.new(root, {}));
-tooltip.get(\"background\").set(\"fillOpacity\", 0.5);
-tooltip.label.set(\"text\", \"{text1}: {valueY}\\n{text2}: {value2}\");
+var tooltipV = seriesV.set(\"tooltip\", am5.Tooltip.new(rootV, {}));
+tooltipV.get(\"background\").set(\"fillOpacity\", 0.5);
+tooltipV.label.set(\"text\", \"{text1}: {valueY}\\n{text2}: {value2}\");
 
-var series2 = chart.series.push(am5xy.LineSeries.new(root, {
+var seriesV2 = chartV.series.push(am5xy.LineSeries.new(rootV, {
   name: \"$last_month_saying\",
-  xAxis: xAxis,
-  yAxis: yAxis,
+  xAxis: xAxisV,
+  yAxis: yAxisV,
   valueYField: \"value2\",
   valueXField: \"date\"
 }));
-series2.strokes.template.setAll({
+seriesV2.strokes.template.setAll({
   strokeDasharray: [2, 2],
   strokeWidth: 2
 });
@@ -111,7 +111,7 @@ series2.strokes.template.setAll({
 
 // Set date fields
 // https://www.amcharts.com/docs/v5/concepts/data/#Parsing_dates
-root.dateFormatter.setAll({
+rootV.dateFormatter.setAll({
   dateFormat: \"yyyy-MM-dd\",
   dateFields: [\"valueX\"]
 });
@@ -119,8 +119,8 @@ root.dateFormatter.setAll({
 
 // Add legend
 // https://www.amcharts.com/docs/v5/charts/xy-chart/legend-xy-series/
-var legend = chart.children.push(am5.Legend.new(root, {}));
-legend.data.setAll(chart.series.values);
+var legendV = chartV.children.push(am5.Legend.new(rootV, {}));
+legendV.data.setAll(chartV.series.values);
 ";
 
 /*- Visits per year -------------------------------------------------------------------------- */
@@ -172,15 +172,15 @@ $inp_data = $inp_data . "]";
 /*- Footer ------------------------------------------------------------------------------------ */
 $inp_footer = "
 
-series.data.setAll(data);
-series2.data.setAll(data);
+seriesV.data.setAll(data);
+seriesV2.data.setAll(data);
 
 
 // Make stuff animate on load
 // https://www.amcharts.com/docs/v5/concepts/animations/#Forcing_appearance_animation
-series.appear(1000);
-series2.appear(1000);
-chart.appear(1000, 100);";
+seriesV.appear(1000);
+seriesV2.appear(1000);
+chartV.appear(1000, 100);";
 
 
 
@@ -221,17 +221,21 @@ $inp_test="<!DOCTYPE html>
 <html>
   <head>
     <meta charset=\"UTF-8\" />
-    <title>visits_per_month</title>
+    <title>visits_per_day</title>
     <link rel=\"stylesheet\" href=\"index.css\" />
 </head>
 <body>
-    <div id=\"chartdiv_visits_per_day\" style=\"width: 100%;height: 400px;\"></div>
+
+
+<div id=\"chartdiv_visits_per_day\" style=\"width: 100%;height: 400px;\"></div>
 
 <script src=\"../../_libraries/amcharts/index.js\"></script>
 <script src=\"../../_libraries/amcharts/xy.js\"></script>
 <script src=\"../../_libraries/amcharts/themes/Animated.js\"></script>
 <script src=\"$cache_file\"></script>
-  </body>
+
+
+</body>
 </html>";
 
 

@@ -146,7 +146,7 @@ echo"
 						<h2>$year visitors</h2>
 					</div>
 					<div class=\"right\">
-						<p><a href=\"x\">View report</a></p>
+						<p><a href=\"index.php?open=stats&amp;page=statistics_year&amp;stats_year=$year&amp;editor_language=$editor_language\">View report</a></p>
 					</div>
 					<div class=\"clear\"></div>
 
@@ -231,7 +231,7 @@ echo"
 						<h2>$month_saying visitors</h2>
 					</div>
 					<div class=\"right\">
-						<p><a href=\"x\">View report</a></p>
+						<p><a href=\"index.php?open=stats&amp;page=statistics_month&amp;stats_year=$year&amp;stats_month=$month&amp;editor_language=$editor_language\">View report</a></p>
 					</div>
 					<div class=\"clear\"></div>
 

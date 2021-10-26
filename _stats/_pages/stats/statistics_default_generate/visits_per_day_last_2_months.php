@@ -197,9 +197,15 @@ if(!(is_dir("_cache"))){
 	$fp = fopen("_cache/index.html", "w") or die("Unable to open file!");
 	fwrite($fp, "Server error 403");
 	fclose($fp);
-
 }
-$fp = fopen("_cache/visits_per_day_last_2_months_$configSecurityCodeSav.js", "w") or die("Unable to open file!");
+if(!(is_dir("_cache/default"))){
+	mkdir("_cache/default");
+
+	$fp = fopen("_cache/default/index.html", "w") or die("Unable to open file!");
+	fwrite($fp, "Server error 403");
+	fclose($fp);
+}
+$fp = fopen("_cache/default/visits_per_day_last_2_months_$configSecurityCodeSav.js", "w") or die("Unable to open file!");
 fwrite($fp, $inp_header);
 fwrite($fp, $inp_data);
 fwrite($fp, $inp_footer);
@@ -211,20 +217,20 @@ $inp_test="<!DOCTYPE html>
 <html>
   <head>
     <meta charset=\"UTF-8\" />
-    <title>default_generate_visits_per_day_last_2_months</title>
+    <title>visits_per_day_last_2_months</title>
     <link rel=\"stylesheet\" href=\"index.css\" />
 </head>
 <body>
     <div id=\"chartdiv_visits_per_day\" style=\"width: 100%;height: 80vh;\"></div>
 
-<script src=\"../_libraries/amcharts/index.js\"></script>
-<script src=\"../_libraries/amcharts/xy.js\"></script>
-<script src=\"../_libraries/amcharts/themes/Animated.js\"></script>
+<script src=\"../../_libraries/amcharts/index.js\"></script>
+<script src=\"../../_libraries/amcharts/xy.js\"></script>
+<script src=\"../../_libraries/amcharts/themes/Animated.js\"></script>
 <script src=\"visits_per_day_last_2_months_$configSecurityCodeSav.js\"></script>
   </body>
 </html>";
 
-$fp = fopen("_cache/default_generate_visits_per_day_last_2_months_$configSecurityCodeSav.html", "w") or die("Unable to open file!");
+$fp = fopen("_cache/default/default_generate_visits_per_day_last_2_months_$configSecurityCodeSav.html", "w") or die("Unable to open file!");
 fwrite($fp, $inp_test);
 fclose($fp);
 

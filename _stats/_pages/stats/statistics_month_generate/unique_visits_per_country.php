@@ -21,70 +21,65 @@ if(!(isset($define_access_to_control_panel))){
 /*- Header ----------------------------------------------------------------------------- */
 $inp_header ="
 // Create root and chart
-var root = am5.Root.new(\"chartdiv_unique_visits_per_country\"); 
+var root = am5.Root.new(\"chartdiv_unique_visits_per_country\");
+
+ 
+// Set themes
+root.setThemes([
+  am5themes_Animated.new(root)
+]);
+
+// Create chart
 var chart = root.container.children.push(
   am5map.MapChart.new(root, {
     panX: \"none\",
-    wheelY: \"none\",
-    projection: am5map.geoNaturalEarth1()
-
+    panY: \"none\"
   })
 );
+
+
 
 // Create polygon series
 var polygonSeries = chart.series.push(
   am5map.MapPolygonSeries.new(root, {
-	geoJSON: am5geodata_worldLow,
-	valueField: \"value\",
-	categoryField: \"id\"
+    geoJSON: am5geodata_worldLow,
+    valueField: \"value\",
+    calculateAggregates: true,
+    exclude: [\"AQ\"],
+    fill: am5.color(0xf6ffd4),
+    stroke: am5.color(0xffffff)
   })
 );
-polygonSeries.useGeodata = true;
-polygonSeries.heatRules.push({ property: \"fill\", target: polygonSeries.mapPolygons.template, min: am4core.color(\"#8ab7ff\"), max: am4core.color(\"#25529a\") });
 
-			polygonSeries.exclude = [\"AQ\"];
+polygonSeries.mapPolygons.template.setAll({
+  tooltipText: \"{name}: {value}\"
+});
 
-
-			// add heat legend
-			var heatLegend = chart.chartContainer.createChild(am5maps.HeatLegend);
-			heatLegend.align = \"center\";
-			heatLegend.valign = \"bottom\";
-			heatLegend.series = polygonSeries;
-			heatLegend.width = am4core.percent(50);
-			heatLegend.orientation = \"horizontal\";
-			heatLegend.padding(30, 30, 30, 30);
-			heatLegend.valueAxis.renderer.labels.template.fontSize = 10;
-			heatLegend.valueAxis.renderer.minGridDistance = 40;
-
-			polygonSeries.mapPolygons.template.events.on(\"over\", function (event) {
-			  handleHover(event.target);
-			})
-
-			polygonSeries.mapPolygons.template.events.on(\"hit\", function (event) {
-			  handleHover(event.target);
-			})
-
-			function handleHover(mapPolygon) {
-			  if (!isNaN(mapPolygon.dataItem.value)) {
-			    heatLegend.valueAxis.showTooltipAt(mapPolygon.dataItem.value)
-			  }
-			  else {
-			    heatLegend.valueAxis.hideTooltip();
-			  }
-			}
-
-			polygonSeries.mapPolygons.template.events.on(\"out\", function (event) {
-			  heatLegend.valueAxis.hideTooltip();
-			})
+polygonSeries.mapPolygons.template.setAll({
+  stroke: am5.color(0xe0e0e0),
+  strokeWidth: 2
+});
 
 
+polygonSeries.set(\"heatRules\", [{
+  target: polygonSeries.mapPolygons.template,
+  dataField: \"value\",
+  min: am5.color(0xd9d9d9),
+  max: am5.color(0x25529a),
+  key: \"fill\"
+}]);
+
+
+polygonSeries.mapPolygons.template.states.create(\"hover\", {
+  fill: am5.color(0x85b2fa)
+});
 
 
 ";
 
-/*- Visits per year -------------------------------------------------------------------------- */
+/*- Visits per month -------------------------------------------------------------------------- */
 $inp_data = "// Set data
-var data = [";
+polygonSeries.data.setAll([";
 
 
 $x = 0;
@@ -98,21 +93,17 @@ while($row = mysqli_fetch_row($result)) {
 	if($x > 0){
 		$inp_data = $inp_data . ",";
 	}
-	$inp_data = $inp_data . "{
-  id: \"$get_stats_country_alpha_2\",
-  name: \"$get_stats_country_name\",
-  value: $get_stats_country_unique
-}";
+	$inp_data = $inp_data . "\n  { id: \"$get_stats_country_alpha_2\", value: $get_stats_country_unique }";
 
 	// x++
 	$x++;
 } // while
-$inp_data = $inp_data . "]";
+$inp_data = $inp_data . "
+]);";
 
 
 /*- Footer ------------------------------------------------------------------------------------ */
 $inp_footer = "
-polygonSeries.data.setAll(data);
 
 ";
 

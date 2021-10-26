@@ -144,7 +144,7 @@ else{
 	<!-- Visits per day -->
 		<h2 style=\"padding-bottom:0;margin-bottom:0;\">Visits per day</h2>
 
-		<div id=\"chartdiv_visits_per_day\" style=\"height: 400px;\"></div>
+		<div id=\"chartdiv_visits_per_day\" style=\"width: 100%;height: 400px;\"></div>
 		";
 		$cache_file = "visits_per_day_" . $stats_year . "_" . $configSecurityCodeSav . ".js";
 		include("_pages/stats/statistics_month_generate/visits_per_day.php");

@@ -22,23 +22,47 @@ if(!(isset($define_access_to_control_panel))){
 $inp_header ="
 // Create root and chart
 var root = am5.Root.new(\"chartdiv_unique_visits_per_country\"); 
+
+
+ 
+// Set themes
+root.setThemes([
+  am5themes_Animated.new(root)
+]);
+
+// Create chart
 var chart = root.container.children.push(
   am5map.MapChart.new(root, {
     panX: \"none\",
-    wheelY: \"none\",
-    projection: am5map.geoNaturalEarth1()
-
+    panY: \"none\"
   })
 );
 
 // Create polygon series
 var polygonSeries = chart.series.push(
   am5map.MapPolygonSeries.new(root, {
-	geoJSON: am5geodata_worldLow,
-	valueField: \"value\",
-	categoryField: \"id\"
+    geoJSON: am5geodata_worldLow,
+    valueField: \"value\",
+    calculateAggregates: true,
+    exclude: [\"AQ\"]
   })
 );
+
+polygonSeries.mapPolygons.template.setAll({
+  tooltipText: \"{name}: {value}\"
+});
+
+polygonSeries.set(\"heatRules\", [{
+  target: polygonSeries.mapPolygons.template,
+  dataField: \"value\",
+  min: am5.color(0xff621f),
+  max: am5.color(0x661f00),
+  key: \"fill\"
+}]);
+
+polygonSeries.mapPolygons.template.states.create(\"hover\", {
+  fill: am5.color(0x677935)
+});
 ";
 
 /*- Visits per year -------------------------------------------------------------------------- */
@@ -52,19 +76,17 @@ $result = mysqli_query($link, $query);
 while($row = mysqli_fetch_row($result)) {
 	list($get_stats_country_id, $get_stats_country_name, $get_stats_country_alpha_2, $get_stats_country_unique, $get_stats_country_hits) = $row;
 	$get_stats_country_alpha_2 = strtoupper($get_stats_country_alpha_2);
+
 	if($x > 0){
 		$inp_data = $inp_data . ",";
 	}
-	$inp_data = $inp_data . "{
-  id: \"$get_stats_country_alpha_2\",
-  name: \"$get_stats_country_name\",
-  value: $get_stats_country_unique
-}";
+	$inp_data = $inp_data . "\n  { id: \"$get_stats_country_alpha_2\", value: $get_stats_country_unique }";
 
 	// x++
 	$x++;
 } // while
-$inp_data = $inp_data . "]);";
+$inp_data = $inp_data . "
+]);";
 
 
 /*- Footer ------------------------------------------------------------------------------------ */
