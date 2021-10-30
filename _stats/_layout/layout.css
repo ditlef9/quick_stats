@@ -468,6 +468,39 @@ table.hor-zebra>tbody>tr:hover td {
 	background: #faf4f2;
 }
 
+/*- Tabs ----------------------------------------------------------------------------- */
+div.tabs {
+	margin-bottom: 10px;
+	padding-bottom: 10px;
+}
+div.tabs > ul {
+	margin:0;
+	padding: 0;
+	list-style:none;
+}
+div.tabs > ul > li {
+	float: left;
+	margin: 0px 1px 0px 0px;
+}
+div.tabs > ul > li > a {
+	display: block;
+	font: normal 14px 'Open Sans',sans-serif;
+	background: #f2f0f0;
+	color: #333;
+	border: #c9c9c9 1px solid;
+	border-bottom: #c9c9c9 0px solid;
+	border-top-right-radius: 5px;
+	border-top-left-radius: 5px;
+	padding: 5px 9px 5px 9px;
+}
+div.tabs > ul > li > a:hover {
+	background: #faf4f2;
+	text-decoration: none;
+}
+div.tabs > ul > li > a.active {
+	background: #fff;
+	font-weight: bold;
+}
 /*- Flex ------------------------------------------------------------------ */
 div.flex_row{
 	display: flex;

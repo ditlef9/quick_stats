@@ -1,9 +1,9 @@
 <?php
 /**
 *
-* File: _admin/_inc/user_agents.php
+* File: _admin/_inc/user_agents_mobile.php
 * Version 2
-* Date 20:54 27.04.2019
+* Date 12:12 30.10.2021
 * Copyright (c) 2021 Sindre Andre Ditlefsen
 * License: http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -17,18 +17,10 @@ if(!(isset($define_access_to_control_panel))){
 /*- Tables ------------------------------------------------------------------------ */
 $t_stats_user_agents_index = $dbPrefixSav . "stats_user_agents_index";
 
-/*- Variables -------------------------------------------------------------------------- */
-if(isset($_GET['user_agent_id'])) {
-	$user_agent_id = $_GET['user_agent_id'];
-	$user_agent_id = strip_tags(stripslashes($user_agent_id));
-}
-else{
-	$user_agent_id = "";
-}
 
-/*- Variables -------------------------------------------------------------------------- */
-if($action == ""){
-	echo"
+/*- Start -------------------------------------------------------------------------- */
+
+echo"
 
 	<h1>User Agents</h1>
 	
@@ -36,7 +28,7 @@ if($action == ""){
 		";
 		if($ft != ""){
 			if($fm == "changes_saved"){
-				$fm = "$l_changes_saved";
+				$fm = "Changes saved";
 			}
 			else{
 				$fm = ucfirst($fm);
@@ -49,22 +41,36 @@ if($action == ""){
 	<!-- Buttons -->
 		<div class=\"tabs\">
 			<ul>
-				<li><a href=\"index.php?open=stats&amp;page=user_agents&amp;editor_language=$editor_language\" class=\"active\">Unknown user agents</a></li>
+				<li><a href=\"index.php?open=stats&amp;page=user_agents&amp;editor_language=$editor_language\">Unknown user agents</a></li>
 				<li><a href=\"index.php?open=stats&amp;page=user_agents_desktop&amp;editor_language=$editor_language\">Desktop</a></li>
-				<li><a href=\"index.php?open=stats&amp;page=user_agents_mobile&amp;editor_language=$editor_language\">Mobile</a></li>
+				<li><a href=\"index.php?open=stats&amp;page=user_agents_mobile&amp;editor_language=$editor_language\" class=\"active\">Mobile</a></li>
 				<li><a href=\"index.php?open=stats&amp;page=user_agents_bots&amp;editor_language=$editor_language\">Bots</a></li>
 				<li><a href=\"index.php?open=stats&amp;page=user_agents_export&amp;editor_language=$editor_language\">Export</a></li>
 			</ul>
 		</div>
+		<div class=\"clear\" style=\"height:10px;\"></div>
 	<!-- //Buttons -->
 
-	<!-- Unknown user agents -->
+	<!-- User agents desktop -->
 
-		";
-
-		// Finnd user agent where 
-
-		$query = "SELECT stats_user_agent_id, stats_user_agent_string, stats_user_agent_type, stats_user_agent_browser, stats_user_agent_browser_version, stats_user_agent_browser_icon, stats_user_agent_os, stats_user_agent_os_version, stats_user_agent_os_icon, stats_user_agent_bot, stats_user_agent_bot_icon, stats_user_agent_bot_website, stats_user_agent_banned FROM $t_stats_user_agents_index ORDER BY stats_user_agent_string ASC";
+		<table class=\"hor-zebra\">
+		 <thead>
+		  <tr>
+		   <th scope=\"col\">
+			<span><b>Agent</b></span>
+		   </td>
+		   <th scope=\"col\" colspan=\"2\" style=\"text-align: center;\">
+			<span><b>Browser</b></span>
+		   </td>
+		   <th scope=\"col\" colspan=\"2\" style=\"text-align: center;\">
+			<span><b>OS</b></span>
+		   </td>
+		   <th scope=\"col\">
+			<span><b>Action</b></span>
+		   </td>
+		  </tr>
+		 </thead>";
+		$query = "SELECT stats_user_agent_id, stats_user_agent_string, stats_user_agent_type, stats_user_agent_browser, stats_user_agent_browser_version, stats_user_agent_browser_icon, stats_user_agent_os, stats_user_agent_os_version, stats_user_agent_os_icon, stats_user_agent_bot, stats_user_agent_bot_icon, stats_user_agent_bot_website, stats_user_agent_banned FROM $t_stats_user_agents_index WHERE stats_user_agent_type='mobile' ORDER BY stats_user_agent_string ASC";
 		$result = mysqli_query($link, $query);
 		while($row = mysqli_fetch_row($result)) {
 			list($get_stats_user_agent_id, $get_stats_user_agent_string, $get_stats_user_agent_type, $get_stats_user_agent_browser, $get_stats_user_agent_browser_version, $get_stats_user_agent_browser_icon, $get_stats_user_agent_os, $get_stats_user_agent_os_version, $get_stats_user_agent_os_icon, $get_stats_user_agent_bot, $get_stats_user_agent_bot_icon, $get_stats_user_agent_bot_website, $get_stats_user_agent_banned) = $row;
@@ -92,17 +98,20 @@ if($action == ""){
 				<span>$get_stats_user_agent_string</span>
 			  </td>
 			  <td class=\"$style\">
-				<span>$get_stats_user_agent_browser $get_stats_user_agent_browser_version</span>
+				<span>$get_stats_user_agent_browser</span>
 			  </td>
 			  <td class=\"$style\">
-				<span>$get_stats_user_agent_os $get_stats_user_agent_os_version</span>
+				<span>$get_stats_user_agent_browser_version</span>
 			  </td>
 			  <td class=\"$style\">
-				<span>$get_stats_user_agent_bot</span>
+				<span>$get_stats_user_agent_os</span>
+			  </td>
+			  <td class=\"$style\">
+				<span>$get_stats_user_agent_os_version</span>
 			  </td>
 			  <td class=\"$style\">
 				<span>
-				<a href=\"index.php?open=$open&amp;page=$page&amp;action=edit_user_agent&amp;user_agent_id=$get_stats_user_agent_id&amp;l=$l&amp;editor_language=$editor_language\">Edit</a>
+				<a href=\"index.php?open=$open&amp;page=user_agent_edit&amp;user_agent_id=$get_stats_user_agent_id&amp;referer_page=$page&amp;editor_language=$editor_language\">Edit</a>
 				</span>
 			  </td>
 			 </tr>";
@@ -116,8 +125,5 @@ if($action == ""){
 		</table>
 	<!-- //IPs -->
 	";
-}
-elseif($action == "edit_user_agent"){
 
-} // edit_user_agent
 ?>

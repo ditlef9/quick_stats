@@ -14,9 +14,6 @@ if(!(isset($define_access_to_control_panel))){
 	die;
 }
 
-/*- Language -------------------------------------------------------------------------- */
-include("_translations/admin/$l/dashboard/t_unknown_agents.php");
-
 
 /*- Tables ------------------------------------------------------------------------ */
 $t_stats_user_agents_index = $dbPrefixSav . "stats_user_agents_index";
@@ -58,13 +55,19 @@ echo"
 <h1>User Agents Export</h1>
 	
 
-<!-- Where am I ? -->
-	<p><b>You are here:</b><br />
-	<a href=\"index.php?open=dashboard&amp;page=user_agents&amp;editor_language=$editor_language&amp;l=$l\">User Agents</a>
-	&gt;
-	<a href=\"index.php?open=dashboard&amp;page=user_agents_export&amp;editor_language=$editor_language&amp;l=$l\">Export</a>
-	</p>
-<!-- //Where am I ? -->
+	<!-- Buttons -->
+		<div class=\"tabs\">
+			<ul>
+				<li><a href=\"index.php?open=stats&amp;page=user_agents&amp;editor_language=$editor_language\">Unknown user agents</a></li>
+				<li><a href=\"index.php?open=stats&amp;page=user_agents_desktop&amp;editor_language=$editor_language\">Desktop</a></li>
+				<li><a href=\"index.php?open=stats&amp;page=user_agents_mobile&amp;editor_language=$editor_language\">Mobile</a></li>
+				<li><a href=\"index.php?open=stats&amp;page=user_agents_bots&amp;editor_language=$editor_language\">Bots</a></li>
+				<li><a href=\"index.php?open=stats&amp;page=user_agents_export&amp;editor_language=$editor_language\" class=\"active\">Export</a></li>
+			</ul>
+		</div>
+		<div class=\"clear\" style=\"height:10px;\"></div>
+	<!-- //Buttons -->
+
 
 <!-- Feedback -->
 	";
@@ -88,14 +91,14 @@ echo"
 ";
 
 // Make dir
-if(!(is_dir("_liquidbase/db_scripts/stats/user_agents"))){
-	mkdir("_liquidbase/db_scripts/stats/user_agents");
+if(!(is_dir("liquidbase/db_scripts/stats/user_agents"))){
+	mkdir("liquidbase/db_scripts/stats/user_agents");
 }
 
 // Truncate dir
-delete_directory("_liquidbase/db_scripts/stats/user_agents");
-if(!(is_dir("_liquidbase/db_scripts/stats/user_agents"))){
-	mkdir("_liquidbase/db_scripts/stats/user_agents");
+delete_directory("liquidbase/db_scripts/stats/user_agents");
+if(!(is_dir("liquidbase/db_scripts/stats/user_agents"))){
+	mkdir("liquidbase/db_scripts/stats/user_agents");
 }
 
 $files_counter = 0;
@@ -134,9 +137,9 @@ while($row = mysqli_fetch_row($result)) {
 	// Write
 	if($rows_in_file_counter == "1000"){
 		echo"
-		<li><a href=\"_liquidbase/db_scripts/stats/user_agents/$files_counter.txt\">_liquidbase/db_scripts/stats/user_agents/$files_counter.txt</a></li>
+		<li><a href=\"liquidbase/db_scripts/stats/user_agents/$files_counter.txt\">_liquidbase/db_scripts/stats/user_agents/$files_counter.txt</a></li>
 		";
-		$fh = fopen("_liquidbase/db_scripts/stats/user_agents/$files_counter.txt", "w+") or die("can not open file");
+		$fh = fopen("liquidbase/db_scripts/stats/user_agents/$files_counter.txt", "w+") or die("can not open file");
 		fwrite($fh, $input);
 		fclose($fh);
 
@@ -172,9 +175,9 @@ $input = $input . "
 
 // Write last
 echo"
-	<li><a href=\"_liquidbase/db_scripts/stats/user_agents/$files_counter.php\">_liquidbase/db_scripts/stats/user_agents/$files_counter.php</a></li>
+	<li><a href=\"liquidbase/db_scripts/stats/user_agents/$files_counter.php\">_liquidbase/db_scripts/stats/user_agents/$files_counter.php</a></li>
 ";
-$fh = fopen("_liquidbase/db_scripts/stats/user_agents/$files_counter.php", "w+") or die("can not open file");
+$fh = fopen("liquidbase/db_scripts/stats/user_agents/$files_counter.php", "w+") or die("can not open file");
 fwrite($fh, $input);
 fclose($fh);
 

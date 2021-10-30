@@ -54,7 +54,7 @@ $query = "SELECT stats_language_id, stats_language_year, stats_language_name, st
 $result = mysqli_query($link, $query);
 while($row = mysqli_fetch_row($result)) {
 	list($get_stats_language_id, $get_stats_language_year, $get_stats_language_name, $get_stats_language_iso_two, $get_stats_language_flag_path_16x16, $get_stats_language_flag_16x16, $get_stats_language_unique, $get_stats_language_hits) = $row;
-						
+
 	$inp_data = $inp_data  . "{ value: $get_stats_language_unique, category: \"$get_stats_language_name\" },
 ";
 

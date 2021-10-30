@@ -204,149 +204,75 @@ else{
 	<!-- //Accepted languages + Languages used -->
 
 
-	<!-- Os -->
-		<div class=\"left_right_left\">
-			<h2 style=\"margin-top: 20px;\">$l_os</h2>
+	<!-- Os + Mobile vs desktop -->
+		<div class=\"flex_row\">
+			<!-- Os -->
+				<div class=\"flex_col_50\">
+					<h2 style=\"margin-top: 20px;\">OS</h2>
 
-			<script>
-			am4core.ready(function() {
-				var chart = am4core.create(\"chartdiv_os_year\", am4charts.PieChart);
-				chart.data = [";
-				$x = 0;
-				$query = "SELECT stats_os_id, stats_os_year, stats_os_name, stats_os_type, stats_os_unique, stats_os_hits FROM $t_stats_os_per_month WHERE stats_os_month=$get_current_stats_visit_per_month_month AND stats_os_year=$get_current_stats_visit_per_month_year";
-				$result = mysqli_query($link, $query);
-				while($row = mysqli_fetch_row($result)) {
-					list($get_stats_os_id, $get_stats_os_year, $get_stats_os_name, $get_stats_os_type, $get_stats_os_unique, $get_stats_os_hits) = $row;
-
-					if($x > 0){
-						echo",";
-					}
+       					<div id=\"chartdiv_os_per_month\" style=\"height: 250px;margin-top:10px;\"></div>
+					";
+					$cache_file = "os_per_month_" . $stats_year . "_" . $stats_month . "_" . $configSecurityCodeSav . ".js";
+					include("_pages/stats/statistics_month_generate/os_per_month.php");
 					echo"
-					{
-					\"x\": \"$get_stats_os_name\",
-					\"value\": $get_stats_os_unique
-					}";
+					<script src=\"_cache/month/$cache_file?rand=$rand\"></script>
 
-					// x++
-					$x++;
-				} // while
-				echo"
-            			];
-				var series = chart.series.push(new am4charts.PieSeries());
-				series.dataFields.value = \"value\";
-				series.dataFields.category = \"x\";
-			}); // end am4core.ready()
-       			</script>
-       			<div id=\"chartdiv_os_year\" style=\"max-height: 250px;margin-top:10px;\"></div>
+				</div>
+			<!-- //Os --> 
 
-		</div>
-	<!-- //Os -->
+			<!-- Mobile vs desktop -->
+				<div class=\"flex_col_50\">
+					<h2 style=\"margin-top: 20px;\">Mobile vs desktop</h2>
 
-
-	<!-- Mobile vs desktop -->
-		<div class=\"left_right_right\">
-			<h2 style=\"margin-top: 20px;\">Mobile vs desktop</h2>
-
-			<script>
-			am4core.ready(function() {
-				var chart = am4core.create(\"chartdiv_mobile_vs_desktop\", am4charts.PieChart);
-				chart.data = [
-					{
-					\"x\": \"Desktop\",
-					\"value\": $get_current_stats_visit_per_month_unique_desktop
-					},
-					{
-					\"x\": \"Mobile\",
-					\"value\": $get_current_stats_visit_per_month_unique_mobile
-					}
-
-            			];
-				var series = chart.series.push(new am4charts.PieSeries());
-				series.dataFields.value = \"value\";
-				series.dataFields.category = \"x\";
-			}); // end am4core.ready()
-       			</script>
-       			<div id=\"chartdiv_mobile_vs_desktop\" style=\"max-height: 250px;margin-top:10px;\"></div>
-		</div>
-		<div class=\"clear\"></div>
-	<!-- //Mobile vs desktop -->
-
-
-
-
-	<!-- Browsers -->
-		<div class=\"left_right_left\">
-			<h2 style=\"margin-top: 20px;\">$l_browsers</h2>
-
-			<script>
-			am4core.ready(function() {
-				var chart = am4core.create(\"chartdiv_browsers_year\", am4charts.PieChart);
-				chart.data = [";
-				$x = 0;
-				$query = "SELECT stats_browser_id, stats_browser_year, stats_browser_name, stats_browser_unique, stats_browser_hits FROM $t_stats_browsers_per_month WHERE stats_browser_month=$get_current_stats_visit_per_month_month AND stats_browser_year=$get_current_stats_visit_per_month_year";
-				$result = mysqli_query($link, $query);
-				while($row = mysqli_fetch_row($result)) {
-					list($get_stats_browser_id, $get_stats_browser_year, $get_stats_browser_name, $get_stats_browser_unique, $get_stats_browser_hits) = $row;
-
-					if($x > 0){
-						echo",";
-					}
+       					<div id=\"chartdiv_mobile_vs_desktop_per_month\" style=\"height: 250px;margin-top:10px;\"></div>
+					";
+					$cache_file = "mobile_vs_desktop_per_month_" . $stats_year . "_" . $stats_month . "_" . $configSecurityCodeSav . ".js";
+					include("_pages/stats/statistics_month_generate/mobile_vs_desktop_per_month.php");
 					echo"
-					{
-					\"x\": \"$get_stats_browser_name\",
-					\"value\": $get_stats_browser_unique
-					}";
-
-					// x++
-					$x++;
-				} // while
-				echo"
-            			];
-				var series = chart.series.push(new am4charts.PieSeries());
-				series.dataFields.value = \"value\";
-				series.dataFields.category = \"x\";
-			}); // end am4core.ready()
-       			</script>
-       			<div id=\"chartdiv_browsers_year\" style=\"max-height: 250px;margin-top:10px;\"></div>
-
+					<script src=\"_cache/month/$cache_file?rand=$rand\"></script>
+				</div>
+			<!-- //Mobile vs desktop -->
 		</div>
-	<!-- //Browsers -->
+	<!-- //Os + Mobile vs desktop -->
+
+
+	<!-- Browser + Human vs bots unique -->
+		<div class=\"flex_row\">
+
+			<!-- Browsers -->
+				<div class=\"flex_col_50\">
+					<h2 style=\"margin-top: 20px;\">Browsers</h2>
+       					<div id=\"chartdiv_browsers_per_month\" style=\"height: 250px;margin-top:10px;\"></div>
+					";
+					$cache_file = "browsers_per_month_" . $stats_year . "_" . $stats_month . "_" . $configSecurityCodeSav . ".js";
+					include("_pages/stats/statistics_month_generate/browsers_per_month.php");
+					echo"
+					<script src=\"_cache/month/$cache_file?rand=$rand\"></script>
+				</div>
+			<!-- //Browsers -->
 
 
 
 
-	<!-- Humans vs bots unique -->
-		<div class=\"left_right_right\">
-			<h2 style=\"margin-top: 20px;\">Human vs bots unique</h2>
+			<!-- Humans vs bots unique -->
+				<div class=\"flex_col_50\">
+					<h2 style=\"margin-top: 20px;\">Human vs bots unique</h2>
 
-			<script>
-			am4core.ready(function() {
-				var chart = am4core.create(\"chartdiv_humans_vs_bots_unique\", am4charts.PieChart);
-				chart.data = [
-					{
-					\"x\": \"Humans\",
-					\"value\": $get_current_stats_visit_per_month_human_unique
-					},
-					{
-					\"x\": \"Bots\",
-					\"value\": $get_current_stats_visit_per_month_unique_bots
-					}
-
-            			];
-				var series = chart.series.push(new am4charts.PieSeries());
-				series.dataFields.value = \"value\";
-				series.dataFields.category = \"x\";
-			}); // end am4core.ready()
-       			</script>
-       			<div id=\"chartdiv_humans_vs_bots_unique\" style=\"max-height: 250px;margin-top:10px;\"></div>
+       					<div id=\"chartdiv_humans_vs_bots_unique_per_month\" style=\"height: 250px;margin-top:10px;\"></div>
+					";
+					$cache_file = "humans_vs_bots_unique_per_month_" . $stats_year . "_" . $stats_month . "_" . $configSecurityCodeSav . ".js";
+					include("_pages/stats/statistics_month_generate/humans_vs_bots_unique_per_month.php");
+					echo"
+					<script src=\"_cache/month/$cache_file?rand=$rand\"></script>
+				</div>
+			<!-- //Humans vs bots unique -->
 		</div>
-		<div class=\"clear\"></div>
-	<!-- //Humans vs bots unique -->
+	<!-- //Browser + Human vs bots unique -->
 
 		
 	<!-- Comments this month -->
 		<a id=\"comments_this_month\"></a>
-		<h2 style=\"margin-top: 20px;\">Comments per week <a href=\"#comments_this_month\" class=\"toggle\" data-divid=\"comments_per_month_information\"><img src=\"_design/gfx/icons/16x16/information.png\" alt=\"information.png\" /></a></h2>
+		<h2 style=\"margin-top: 20px;\">Comments per week <a href=\"#comments_this_month\" class=\"toggle\" data-divid=\"comments_per_month_information\"><img src=\"_pages/stats/_gfx/information_16x16.png\" alt=\"information.png\" /></a></h2>
 		<div class=\"comments_per_month_information\">
 			<p>
 			Comments are from the following modules: blog, courses, downloads, exercises, food, recipes and references
@@ -354,68 +280,28 @@ else{
 		</div>
 
 
-		<script>
-		am4core.ready(function() {
-			var chart = am4core.create(\"chartdiv_comments_this_month\", am4charts.XYChart);
-			chart.data = [";
-
-			$x = 0;
-			$query = "SELECT stats_comments_id, stats_comments_week, stats_comments_month, stats_comments_comments_written, stats_comments_comments_written_diff_from_last_week FROM $t_stats_comments_per_week WHERE stats_comments_year=$get_current_stats_visit_per_month_year ORDER BY stats_comments_id LIMIT 0,30";
-			$result = mysqli_query($link, $query);
-			while($row = mysqli_fetch_row($result)) {
-				list($get_stats_comments_id, $get_stats_comments_week, $get_stats_comments_month, $get_stats_comments_comments_written, $get_stats_comments_comments_written_diff_from_last_week) = $row;
-						
-				if($x > 0){
-					echo",";
-				}
-				echo"
-				{
-					\"x\": \"$get_stats_comments_week\",
-					\"value\": $get_stats_comments_comments_written
-				}";
-				$x++;
-			} // while
-
-			echo"
-			];
-			// Create axes
-			var categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
-			categoryAxis.dataFields.category = \"x\";
-			var valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
-							
-			// Create series
-			var series1 = chart.series.push(new am4charts.LineSeries());
-			series1.dataFields.valueY = \"value\";
-			series1.dataFields.categoryX = \"x\";
-			series1.name = \"Comments\";
-			series1.tooltipText = \"Comments: {valueY}\";
-			series1.fill = am4core.color(\"#99e4dc\");
-			series1.stroke = am4core.color(\"#66d5c9\");
-			series1.strokeWidth = 1;
-
-			// Tooltips
-			chart.cursor = new am4charts.XYCursor();
-			chart.cursor.snapToSeries = series;
-			chart.cursor.xAxis = valueAxis;
-		}); // end am4core.ready()
-		</script>
-		<div id=\"chartdiv_comments_this_month\" style=\"height: 400px;\"></div>
+		<div id=\"chartdiv_comments_per_week\" style=\"height: 400px;\"></div>
+		";
+		$cache_file = "comments_per_week_" . $stats_year . "_" . $stats_month . "_" . $configSecurityCodeSav . ".js";
+		include("_pages/stats/statistics_month_generate/comments_per_week.php");
+		echo"
+		<script src=\"_cache/month/$cache_file?rand=$rand\"></script>
 	<!-- //Comments this month -->
 
 
 	<!-- Bots -->
-		<h2>$l_bots</h2>
+		<h2>Bots</h2>
 		<table class=\"hor-zebra\">
 		 <thead>
 		  <tr>
 		   <th scope=\"col\" style=\"width: 40%;\">
-			<span>$l_bot</span>
+			<span>Bot</span>
 		   </th>
 		   <th scope=\"col\" style=\"width: 30%;\">
-			<span>$l_unique</span>
+			<span>Unique</span>
 		   </th>
 		   <th scope=\"col\" style=\"width: 30%;\">
-			<span>$l_hits</span>
+			<span>Hits</span>
 		   </th>
 		  </tr>
 		 </thead>
@@ -472,7 +358,7 @@ else{
 		 <thead>
 		  <tr>
 		   <th scope=\"col\" style=\"width: 40%;\">
-			<span>$l_bot</span>
+			<span>Page</span>
 		   </th>
 		   <th scope=\"col\" style=\"width: 30%;\">
 			<span>Human unique</span>
@@ -695,7 +581,7 @@ else{
 			</script>
 
 			<select id=\"inp_l\">
-				<option value=\"index.php?open=dashboard&amp;page=statistics_month&amp;stats_year=$stats_year&amp;stats_month=$stats_month&amp;editor_language=$editor_language\">$l_editor_language</option>
+				<option value=\"index.php?open=dashboard&amp;page=statistics_month&amp;stats_year=$stats_year&amp;stats_month=$stats_month&amp;editor_language=$editor_language\">Editor language</option>
 				<option value=\"index.php?open=dashboard&amp;page=statistics_month&amp;stats_year=$stats_year&amp;stats_month=$stats_month&amp;editor_language=$editor_language\">-</option>\n";
 
 				$query = "SELECT language_active_id, language_active_name, language_active_iso_two, language_active_default FROM $t_languages_active";

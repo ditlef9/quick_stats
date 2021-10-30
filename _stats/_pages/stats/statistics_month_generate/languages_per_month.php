@@ -1,7 +1,7 @@
 <?php
 /**
 *
-* File: _stats/_pages/stats/statistics_year_generate/languages_per_month.php
+* File: _stats/_pages/stats/statistics_month_generate/languages_per_month.php
 * Version 1
 * Date 12:04 18.10.2021
 * Copyright (c) 2021 Sindre Andre Ditlefsen
@@ -49,11 +49,11 @@ $inp_data = "// Set data
 series.data.setAll([";
 
 $x = 0;
-$query = "SELECT stats_language_id, stats_language_name, stats_language_iso_two, stats_language_flag_path_16x16, stats_language_flag_16x16, stats_language_unique, stats_language_hits FROM $t_stats_languages_per_month WHERE stats_language_month=$get_current_stats_visit_per_month_month AND stats_language_year=$get_current_stats_visit_per_month_year ORDER BY stats_language_unique ASC LIMIT 0,12";
+$query = "SELECT stats_language_id, stats_language_year, stats_language_name, stats_language_iso_two, stats_language_flag_path_16x16, stats_language_flag_16x16, stats_language_unique, stats_language_hits FROM $t_stats_languages_per_month WHERE stats_language_month=$get_current_stats_visit_per_month_month AND stats_language_year=$get_current_stats_visit_per_month_year ORDER BY stats_language_unique ASC LIMIT 0,12";
 $result = mysqli_query($link, $query);
 while($row = mysqli_fetch_row($result)) {
-	list($get_stats_language_id, $get_stats_language_name, $get_stats_language_iso_two, $get_stats_language_flag_path_16x16, $get_stats_language_flag_16x16, $get_stats_language_unique, $get_stats_language_hits) = $row;
-									
+	list($get_stats_language_id, $get_stats_language_year, $get_stats_language_name, $get_stats_language_iso_two, $get_stats_language_flag_path_16x16, $get_stats_language_flag_16x16, $get_stats_language_unique, $get_stats_language_hits) = $row;
+
 	$inp_data = $inp_data  . "{ value: $get_stats_language_unique, category: \"$get_stats_language_name\" },
 ";
 
@@ -102,7 +102,7 @@ $inp_test="<!DOCTYPE html>
 <html>
   <head>
     <meta charset=\"UTF-8\" />
-    <title>languages_per_year</title>
+    <title>languages_per_month</title>
     <link rel=\"stylesheet\" href=\"index.css\" />
 </head>
 <body>
