@@ -30,6 +30,7 @@ if($page == "menu"){
 echo"
 			<li><a href=\"index.php?open=settings&amp;page=default\"";if($page == "settings"){echo" class=\"selected\"";}echo">Settings</a></li>
 			<li><a href=\"index.php?open=settings&amp;page=users\"";if($page == "users"){echo" class=\"selected\"";}echo">Users</a></li>
+			<li><a href=\"index.php?open=settings&amp;page=languages\"";if($page == "languages"){echo" class=\"selected\"";}echo">Languages</a></li>
 			<li><a href=\"index.php?open=settings&amp;page=liquidbase\"";if($page == "liquidbase"){echo" class=\"selected\"";}echo">Liquidbase</a></li>
 
 ";
