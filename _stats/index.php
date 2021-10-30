@@ -93,6 +93,7 @@ else{
 }
 
 include("_data/meta.php");
+include("global_variables.php");
 
 /*- Include user ---------------------------------------------------------------------- */
 $my_user_id = $_SESSION['adm_user_id'];
@@ -199,6 +200,8 @@ echo"<!DOCTYPE html>
 			</nav>
 
 		<!-- //Header navigation -->
+
+
 	</header>
 
 
@@ -273,13 +276,22 @@ echo"<!DOCTYPE html>
 				} // end elseif
 
 			} // end else
-			if($process != ""){
+			if($process != "1"){
 			echo"
 			<!-- //Includes -->
 		</div>
 	</main>
 <!-- //Main -->
 
+<!-- Footer -->
+	<footer>
+		<p>
+		<a href=\"$cmsWebsiteSav\">$cmsNameSav $cmsVersionSav</a>
+		&middot;
+		$cmsCopySav 
+		</p>
+	</footer>
+<!-- //Footer -->
 
 </body>
 </html>";

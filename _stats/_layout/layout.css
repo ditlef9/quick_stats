@@ -565,3 +565,26 @@ div.left{
 div.right{
 	float: right;
 }
+
+
+/*- Footer ----------------------------------------------------------------------- */
+footer{
+	float: left;
+	margin: 12px 0px 0px 14%;
+	width: 86%;
+	border-top: #ccc 1px solid;
+	text-align: center;
+	background: #263544;
+}
+footer > p{
+	color: #b7c0cb;
+	font: normal 14px 'Open Sans',sans-serif;
+}
+
+footer > p > a{
+	color: #b7c0cb;
+	font: normal 14px 'Open Sans',sans-serif;
+}
+footer > p > a:hover{
+	color: #fff;
+}

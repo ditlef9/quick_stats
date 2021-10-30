@@ -180,9 +180,9 @@ echo"
 		  </td>
 		  <td>
 			<span>
-			<span><a href=\"index.php?open=$open&amp;page=users_edit&amp;user_id=$get_user_id\">Edit</a>
+			<a href=\"index.php?open=$open&amp;page=users_edit&amp;user_id=$get_user_id\">Edit</a>
 			| 
-			<span><a href=\"index.php?open=$open&amp;page=users_delete&amp;user_id=$get_user_id\">Delete</a>
+			<a href=\"index.php?open=$open&amp;page=users_delete&amp;user_id=$get_user_id\">Delete</a>
 			</span>
 		  </td>
 		 </tr>
