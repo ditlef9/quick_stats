@@ -58,6 +58,7 @@ $input_meta="<?php
 
 \$configMailSendActiveSav	= \"$configMailSendActiveSav\";
 \$configSecurityCodeSav		= \"$configSecurityCodeSav\";
+\$configDemoModeSav 		= \"0\";
 
 // URLs
 \$configStatsURLSav 		= \"$configStatsURLSav\";
@@ -68,8 +69,9 @@ $input_meta="<?php
 \$configStatsURLPathSav		= \"$configStatsURLPathSav\";
 
 // Statisics
-\$configStatsUseGethostbyaddrSav = \"$configStatsUseGethostbyaddrSav\";
-\$configStatsDaysToKeepPageVisitsSav = \"$configStatsDaysToKeepPageVisitsSav\";
+\$configStatsUseGethostbyaddrSav 	= \"$configStatsUseGethostbyaddrSav\";
+\$configStatsDaysToKeepPageVisitsSav 	= \"$configStatsDaysToKeepPageVisitsSav\";
+\$configStatsHideIPsSav 		= \"md5\";
 
 // Test
 \$configGenerateTestDataSav = \"$configGenerateTestDataSav\";

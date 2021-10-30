@@ -41,6 +41,9 @@ if($mode == "save"){
 	$inp_mail_send_active = $_POST['inp_mail_send_active'];
 	$inp_mail_send_active = output_html($inp_mail_send_active);
 
+	$inp_demo_mode = $_POST['inp_demo_mode'];
+	$inp_demo_mode = output_html($inp_demo_mode);
+
 
 
 	// Control panel URL
@@ -72,6 +75,9 @@ if($mode == "save"){
 		die;
 	}
 
+	$inp_hide_ips = $_POST['inp_hide_ips'];
+	$inp_hide_ips = output_html($inp_hide_ips);
+
 	// Security
 	$characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
 	$charactersLength = strlen($characters);
@@ -90,6 +96,7 @@ if($mode == "save"){
  
 \$configMailSendActiveSav	= \"$inp_mail_send_active\";
 \$configSecurityCodeSav		= \"$inp_security_code\";
+\$configDemoModeSav 		= \"$inp_demo_mode\";
 
 // URLs
 \$configStatsURLSav 		= \"$inp_url\";
@@ -102,6 +109,7 @@ if($mode == "save"){
 // Statisics
 \$configStatsUseGethostbyaddrSav = \"$inp_use_gethostbyaddr\";
 \$configStatsDaysToKeepPageVisitsSav = \"$inp_days_to_keep_page_visits\";
+\$configStatsHideIPsSav 		= \"$inp_hide_ips\";
 
 ?>";
 
@@ -162,6 +170,15 @@ if($mode == ""){
 	<input type=\"radio\" name=\"inp_mail_send_active\" value=\"0\""; if($configMailSendActiveSav == "0"){ echo" checked=\"checked\""; } echo" tabindex=\"";$tabindex=$tabindex+1;echo"$tabindex\" /> No
 	</p>
 
+	<p>Demo mode<br />
+	<span class=\"smal\">When turned on everyone can access the statistics, but they cannot edit or delete</span><br />
+	<input type=\"radio\" name=\"inp_demo_mode\" value=\"1\""; if($configDemoModeSav == "1"){ echo" checked=\"checked\""; } echo" tabindex=\"";$tabindex=$tabindex+1;echo"$tabindex\" /> 
+	On 
+	&nbsp;
+	<input type=\"radio\" name=\"inp_demo_mode\" value=\"0\""; if($configDemoModeSav == "0"){ echo" checked=\"checked\""; } echo" tabindex=\"";$tabindex=$tabindex+1;echo"$tabindex\" />
+	Off
+	</p>
+
 	<h2>URLs</h2>
 
 	<p>Url:<br />
@@ -180,6 +197,13 @@ if($mode == ""){
 	How many days do you want to store at the most?<br />
 	Set to 0 to deactivate logging.<br />
 	<input type=\"text\" name=\"inp_days_to_keep_page_visits\" value=\"$configStatsDaysToKeepPageVisitsSav\" size=\"5\" tabindex=\"";$tabindex=$tabindex+1;echo"$tabindex\" /><br />
+	</p>
+
+	<p>Hide IPs:<br />
+	<select name=\"inp_hide_ips\" tabindex=\"";$tabindex=$tabindex+1;echo"$tabindex\">
+		<option value=\"0\""; if($configStatsHideIPsSav == "0"){ echo" selected=\"selected\""; } echo">No</option>
+		<option value=\"md5\""; if($configStatsHideIPsSav == "md5"){ echo" selected=\"selected\""; } echo">Yes, as md5</option>
+	</select>
 	</p>
 
 

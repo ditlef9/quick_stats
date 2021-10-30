@@ -136,13 +136,13 @@ else{
 	echo"
 	<h1>$get_current_stats_user_agent_string</h1>
 
-	<!-- Focus -->
-		<script>
-		\$(document).ready(function(){
-			\$('[name=\"inp_browser\"]').focus();
-		});
-		</script>
-	<!-- //Focus -->
+			<!-- Focus -->
+				<script>
+				window.onload = function() {
+					document.getElementById(\"inp_browser\").focus();
+				}
+				</script>
+			<!-- //Focus -->
 	
 	<form method=\"post\" action=\"index.php?open=$open&amp;page=$page&amp;referer_page=$referer_page&amp;editor_language=$editor_language&amp;user_agent_id=$get_current_stats_user_agent_id&amp;process=1\" enctype=\"multipart/form-data\">
 

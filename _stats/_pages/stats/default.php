@@ -119,7 +119,7 @@ echo"
 	";
 	if(file_exists("setup/index.php")){
 		echo"
-		<div class=\"white_bg_box\"><span><b>Security issue:</b> The setup folder exists. Do you want to <a href=\"index.php?open=dashboard&amp;page=delete_setup_folder\">delete the setup folder</a>?</span></div> 
+		<div class=\"white_bg_box\"><span><b>Security issue:</b> The setup folder exists. Do you want to <a href=\"index.php?open=$open&amp;page=delete_setup_folder\">delete the setup folder</a>?</span></div> 
 		";
 	}
 	echo"
@@ -495,9 +495,6 @@ echo"
 	</div> <!-- //White bg -->
 <!-- //Periode selection -->
 
-
-
-Every month overview click
 
 ";
 
