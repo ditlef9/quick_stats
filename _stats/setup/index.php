@@ -36,6 +36,8 @@ else{
 }
 
 /*- Variables ------------------------------------------------------------------------ */
+include("../global_variables.php");
+
 if(isset($_GET['page'])) {
 	$page = $_GET['page'];
 	$page = strip_tags(stripslashes($page));
@@ -95,21 +97,16 @@ echo"<!DOCTYPE html>
 <!-- Wrapper -->
 <div id=\"wrapper\">
 	
-	<!-- Wrapper -->
-	<div id=\"wrapper\">
-	
+	<!-- Header -->
+		<header>
+			<p>
+			$cmsNameSav <span>$cmsVersionSav</span> 
+			</p>
+		</header>
+	<!-- //Header -->
 
-		<!-- Header -->
-			<header>
-				<p>
-				Quick <span>Stats</span> 
-				</p>
-			</header>
-		<!-- //Header -->
-
-
-		<!-- Main -->
-			<div id=\"main\">
+	<!-- Main -->
+		<main>
 
 			<!-- Navigation -->
 				<div id=\"navigation\">
@@ -150,9 +147,16 @@ if($process != "1"){
 					<!-- //Page -->
 				</div>
 			<!-- //Content -->
-		</div>
-		<!-- //Main -->
+		</main>
+	<!-- Main -->
 
+	<!-- Footer -->
+		<footer>
+			<p>
+			<a href=\"$cmsWebsiteSav\">$cmsCopySav</a>
+			</p>
+		</footer>
+	<!-- //Footer -->
 </div> <!--// Wrapper -->
 </body>
 </html>";

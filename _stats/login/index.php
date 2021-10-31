@@ -56,6 +56,7 @@ else{
 }
 
 /*- Variables ------------------------------------------------------------------------ */
+include("../global_variables.php");
 if(isset($_GET['page'])) {
 	$page = $_GET['page'];
 	$page = strip_tags(stripslashes($page));
@@ -161,7 +162,7 @@ echo"<!DOCTYPE html>
 	<div class=\"wrapper\">
 		<!-- Header -->
 			<header>
-				<p>Quick <span>Stats</span></p>
+				<p>$cmsNameSav <span>$cmsVersionSav</span></p>
 			</header>
 		<!-- //Header -->
 
@@ -196,7 +197,7 @@ if($process != "1"){
 		<!-- Footer -->
 			<footer>
 				<p>
-				&copy; 2021 Ditlefsen
+				<a href=\"$cmsWebsiteSav\">$cmsCopySav</a>
 				</p>
 			</footer>
 		<!-- //Footer -->

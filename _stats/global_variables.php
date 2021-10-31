@@ -1,7 +1,7 @@
 <?php
 $cmsNameSav = "Quick Stats";
-$cmsWebsiteSav = "https://frindex.net";
+$cmsWebsiteSav = "https://ditlef.net";
 $cmsVersionSav = "1.0.0";
-$cmsCopySav = "&copy; Ditlefsen 2021";
+$cmsCopySav = "Quick Stats Copyright &copy; 2021 Ditlefsen";
 
 ?>

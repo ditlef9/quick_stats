@@ -12,6 +12,9 @@ $fh = fopen($file, "r");
 $read_licence = fread($fh, filesize($file));
 fclose($fh); 
 
+$read_licence = str_replace("<", "&lt;", $read_licence);
+$read_licence = str_replace(">", "&gt;", $read_licence);
+
 
 echo"
 <h1>Licence</h1>

@@ -236,7 +236,7 @@ header span{
 }
 
 /*- Main --------------------------------------------------------------- */
-#main{
+main{
 	display: flex; /* equal height of the children */
 }
 
@@ -245,7 +245,6 @@ header span{
 	background: #f4f6f9;
 	float: left;
 	width: 150px;
-	border-bottom-left-radius: 5px;
 }
 
 #navigation > ul{
@@ -281,9 +280,30 @@ header span{
 	width: auto;
 	padding: 0px 40px 20px 40px;
 	overflow: auto;
-	border-bottom-right-radius: 5px;
 }
 
+/*- Footer --------------------------------------------------------------- */
+footer{
+	border-bottom-right-radius: 5px;
+	border-bottom-left-radius: 5px;
+	background: #f4f6f9;
+	padding: 0px 0px 6px 0px;	
+	border-top: #e0e2e5 1px solid;
+	text-align: center;
+}
+footer > p{
+	color: #000000;
+	padding: 0px 0px 0px 0px;
+	margin: 0;
+	font: normal 26px 'Open Sans',sans-serif;
+}
+footer > a{
+	color: #6c757d;
+	font: normal 18px 'Open Sans',sans-serif;
+	text-decoration: none;
+	vertical-align: super;
+	text-transform: uppercase;
+}
 
 
 

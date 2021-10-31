@@ -219,7 +219,7 @@ echo"
 
 						include("_pages/stats/statistics_default_generate/visits_per_month_last_2_years.php");
 						echo"
-						<script src=\"_cache/visits_per_month_last_2_years_$configSecurityCodeSav.js?rand=$rand\"></script>
+						<script src=\"_cache/default/visits_per_month_last_2_years_$configSecurityCodeSav.js?rand=$rand\"></script>
 					<!-- //Javascript years visitor -->
 				</div>
 			</div>
@@ -302,7 +302,7 @@ echo"
 
 						include("_pages/stats/statistics_default_generate/visits_per_day_last_2_months.php");
 						echo"
-						<script src=\"_cache/visits_per_day_last_2_months_$configSecurityCodeSav.js?rand=$rand\"></script>
+						<script src=\"_cache/default/visits_per_day_last_2_months_$configSecurityCodeSav.js?rand=$rand\"></script>
 					<!-- //Javascript month visitor -->
 				</div>
 			</div>
