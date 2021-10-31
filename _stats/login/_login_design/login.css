@@ -56,6 +56,12 @@ h1 {
 	padding: 12px 0px 12px 0px;
 	margin: 0;
 }
+h2 {
+	font: normal 18px 'Open Sans',sans-serif;
+    	color: #292625;
+	padding: 12px 0px 6px 0px;
+	margin: 0;
+}
 
 /*- Paragrafer og span ----------------------------------------------------------- */
 p{
@@ -63,6 +69,7 @@ p{
         color: #000;
 	padding: 12px 0px 12px 0px;
 	margin: 0;
+	line-height:1.5;
 }
 span{
         color: #000;
@@ -123,11 +130,13 @@ td{
 
 
 /*- Lists ------------------------------------------------------------------------------ */
-ul {
-	padding: 10px 0px 10px 0px;
+ul, ol{
+	margin: 0;
+	padding: 0px 0px 0px 30px;
 }
-ol {
-	padding: 10px 0px 10px 0px;
+li{
+	padding: 0px 0px 0px 0px;
+	margin: 0px 0px 0px 0px;
 }
 
 /*- Line ------------------------------------------------------------------------------- */
