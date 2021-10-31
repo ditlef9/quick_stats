@@ -88,32 +88,32 @@ if($process == ""){
 	}
 
 	echo"
-	<h1>$l_forgot_password</h1>
+	<h1>Forgot password</h1>
 
 
 	";
 
 	if($ft != ""){
 		if($fm == "please_enter_your_email"){
-			$fm = "$l_please_enter_your_email";
+			$fm = "Please enter your email";
 		}
 		elseif($fm == "invalid_email_format"){
-			$fm = "$l_invalid_email_format";
+			$fm = "Invalid email format";
 		}
 		elseif($fm == "unknown_email_address"){
-			$fm = "$l_unknown_email_address";
+			$fm = "Unknown email address";
 		}
 		elseif($fm == "please_check_your_inbox_to_complete_the_password_change"){
-			$fm = "$l_please_check_your_inbox_to_complete_the_password_change";
+			$fm = "Please check your inbox to complete the password change";
 		}
 		elseif($fm == "mail_command_failed"){
 			$fm = "Mail command failed.";
 		}
 		elseif($fm == "access_denied_this_site_is_only_for_administrator_and_editors"){
-			$fm = "$l_access_denied<br />$l_this_form_is_for_adminstrator_and_moderator_only";
+			$fm = "Access_denied<br />this form is for adminstrator and moderator only";
 		}
 		elseif($fm == "email_not_found"){
-			$fm = "$l_email_not_found";
+			$fm = "Email not found";
 		}
 		else{
 			$fm = ucfirst($ft);
@@ -133,18 +133,18 @@ if($process == ""){
 
 		<form method=\"post\" action=\"index.php?page=forgot_password&amp;process=1\" enctype=\"multipart/form-data\">
 
-		<p>$l_email:<br />
+		<p>Email:<br />
 		<input type=\"text\" name=\"inp_user_email\" value=\"$inp_user_email\" size=\"30\" tabindex=\"1\" class=\"inp_email\" />
 		</p>
 
 		<p>
-		<input type=\"submit\" value=\"$l_send\" class=\"inp_submit\" tabindex=\"2\" />
+		<input type=\"submit\" value=\"Send\" class=\"inp_submit\" tabindex=\"2\" />
 		</p>
 		
 		</form>
 
 		<p>
-		<a href=\"index.php\">$l_back</a>
+		<a href=\"index.php\">Back</a>
 		</p>
 		";
 	}

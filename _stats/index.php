@@ -176,9 +176,35 @@ echo"<!DOCTYPE html>
 			</div>
 		<!-- //Logo -->
 
+		<!-- Mobile icons -->
+			<div id=\"header_user_icons\">
+
+				<!-- Hide show search, Header hamburger -->
+					<script>
+					function toggleNav() {
+						var element = document.getElementById(\"nav\");
+						var checkDisplay = document.getElementById(\"nav\").style.display;
+						if(checkDisplay == \"\" || checkDisplay == \"none\"){
+							element.style.display = 'block';
+							document.getElementById(\"main_navigation_menu_icon\").src = \"_layout/gfx/mobile_nav/menu_clear_white_24x24.png\"; 
+						}
+						else{
+							element.style.display = 'none';
+							document.getElementById(\"main_navigation_menu_icon\").src = \"_layout/gfx/mobile_nav/menu_open_white_24x24.png\"; 
+						}
+					}
+					</script>
+				<!-- //Hide show nav + change hamburger icon -->
+				<ul>
+					<li><a href=\"#\" onclick=\"toggleNav()\"><img src=\"_layout/gfx/mobile_nav/menu_open_white_24x24.png\" alt=\"menu_open_white_24x24.png\" id=\"main_navigation_menu_icon\" /></a></li>
+					<li><a href=\"index.php?open=settings&amp;page=users_edit&amp;user_id=$get_my_user_id\" class=\"open_admin_user_menu\"><img src=\"_layout/gfx/mobile_nav/user_white_24x24.png\" alt=\"user_white_24x24.png\" /></a></li>
+				</ul>
+			</div> <!-- //Header user icons -->
+		<!-- //Mobile icons -->
+
 	
 		<!-- Header navigation -->
-			<nav>
+			<nav id=\"nav\">
 				<ul>
 
 					<li";if($open == "stats"){echo" class=\"main_navigation_has_sub_li_active\"";}echo">
@@ -195,6 +221,9 @@ echo"<!DOCTYPE html>
 							include("_pages/settings/menu.php");
 							echo"
 						</ul>
+					</li>
+
+					<li><a href=\"index.php?open=logout&amp;page=default&amp;process=1\"><img src=\"_pages/logout/_gfx/icons/logout_white_18.png\" alt=\"logout_white_18.png\" /> Logout</a>
 					</li>
 				</ul>
 			</nav>

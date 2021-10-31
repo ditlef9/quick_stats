@@ -138,7 +138,7 @@ if($mode == ""){
 	";
 	if($ft != ""){
 		$fm = str_replace("_", " ", $fm);
-		$fm = ucfirst($ft);
+		$fm = ucfirst($fm);
 		echo"<div class=\"$ft\"><span>$fm</span></div>";
 	}
 	echo"	
@@ -171,7 +171,8 @@ if($mode == ""){
 	</p>
 
 	<p>Demo mode<br />
-	<span class=\"smal\">When turned on everyone can access the statistics, but they cannot edit or delete</span><br />
+	<span class=\"smal\">When turned on everyone can access the statistics, but they cannot edit or delete. <br />
+	The login is username=admin, password=demo</span><br />
 	<input type=\"radio\" name=\"inp_demo_mode\" value=\"1\""; if($configDemoModeSav == "1"){ echo" checked=\"checked\""; } echo" tabindex=\"";$tabindex=$tabindex+1;echo"$tabindex\" /> 
 	On 
 	&nbsp;

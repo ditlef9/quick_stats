@@ -576,6 +576,17 @@ footer{
 	text-align: center;
 	background: #263544;
 }
+@media screen and (max-width: 52.375em) {
+	footer{
+		clear: both;
+		float: none;
+		margin: 12px 0px 0px 0px;
+		width: 100%;
+		border-top: #ccc 1px solid;
+		text-align: center;
+		background: #263544;
+	}
+}
 footer > p{
 	color: #b7c0cb;
 	font: normal 14px 'Open Sans',sans-serif;
