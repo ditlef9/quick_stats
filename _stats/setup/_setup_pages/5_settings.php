@@ -24,14 +24,6 @@ if($action == "check"){
 
 	// Write file
 	$update_file="<?php
-// Database
-\$dbHostSav   		= \"$dbHostSav\";
-\$dbUserNameSav   	= \"$dbUserNameSav\";
-\$dbPasswordSav		= \"$dbPasswordSav\";
-\$dbDatabaseNameSav 	= \"$dbDatabaseNameSav\";
-\$dbPrefixSav 		= \"$dbPrefixSav\";
-
-
 // General
 \$configStatsTitleSav		 = \"$configStatsTitleSav\";
 \$configStatsTitleCleanSav	 = \"$configStatsTitleCleanSav\";
@@ -40,7 +32,8 @@ if($action == "check"){
 
 \$configMailSendActiveSav	= \"$configMailSendActiveSav\";
 
-\$configSecurityCodeSav	= \"$configSecurityCodeSav\";
+\$configSecurityCodeSav		= \"$configSecurityCodeSav\";
+\$configDemoModeSav 		= \"$configDemoModeSav\";
 
 // URLs
 \$configStatsURLSav 		= \"$configStatsURLSav\";
@@ -51,18 +44,15 @@ if($action == "check"){
 \$configStatsURLPathSav		= \"$configStatsURLPathSav\";
 
 // Statisics
-\$configStatsUseGethostbyaddrSav = \"$configStatsUseGethostbyaddrSav\";
-\$configStatsDaysToKeepPageVisitsSav = \"$configStatsDaysToKeepPageVisitsSav\";
-
-// Admin
-\$adminEmailSav = \"$adminEmailSav\";
-\$adminPasswordSav = \"$adminPasswordSav\";
+\$configStatsUseGethostbyaddrSav 	= \"$configStatsUseGethostbyaddrSav\";
+\$configStatsDaysToKeepPageVisitsSav 	= \"$configStatsDaysToKeepPageVisitsSav\";
+\$configStatsHideIPsSav 		= \"$configStatsHideIPsSav\";
 
 // Test
 \$configGenerateTestDataSav = \"$inp_generate_test_data\";
 
 ?>";
-	$fh = fopen("../_data/setup_data.php", "w+") or die("can not open file");
+	$fh = fopen("../_data/meta.php", "w+") or die("can not open file");
 	fwrite($fh, $update_file);
 	fclose($fh);
 

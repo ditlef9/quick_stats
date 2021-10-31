@@ -43,11 +43,17 @@ if($action == "test_connection"){
 		$error = mysqli_connect_error();
 		$error_no = mysqli_connect_error() . PHP_EOL;
 		$error_or = mysqli_connect_error() . PHP_EOL;
-		$url = "index.php?page=3_database&inp_mysql_host=$inp_mysql_host&inp_mysql_user_name=$inp_mysql_user_name&inp_mysql_database_name=$inp_mysql_database_name&inp_mysql_prefix=$inp_mysql_prefix&ft=error&fm=$error&error_no=$error_no&error_or=$error_or";
-		echo"
-		<h1>MySQL Connection failed</h1>
-		<meta http-equiv=refresh content=\"1; url=$url\">";
-		exit;
+
+		$ft = "error";
+		$fm = "$error_or";
+		$action = "";
+
+		// Parameter transfer
+		$dbHostSav		= "$inp_mysql_host";
+		$dbUserNameSav   	= "$inp_mysql_user_name";
+		$dbPasswordSav		= "$inp_mysql_password";
+		$dbDatabaseNameSav 	= "$inp_mysql_database_name";
+		$dbPrefixSav 		= "$inp_mysql_prefix";
 	}
 	else{
 		// Write DB file
@@ -58,58 +64,41 @@ if($action == "test_connection"){
 \$dbPasswordSav		= \"$inp_mysql_password\";
 \$dbDatabaseNameSav 	= \"$inp_mysql_database_name\";
 \$dbPrefixSav 		= \"$inp_mysql_prefix\";
-
-// General
-\$configStatsTitleSav		 = \"$configStatsTitleSav\";
-\$configStatsTitleCleanSav	 = \"$configStatsTitleCleanSav\";
-\$configFromEmailSav 		 = \"$configFromEmailSav\";
-\$configFromNameSav 		 = \"$configFromNameSav\";
-
-\$configMailSendActiveSav	= \"$configMailSendActiveSav\";
-
-\$configSecurityCodeSav	= \"$configSecurityCodeSav\";
-
-// URLs
-\$configStatsURLSav 		= \"$configStatsURLSav\";
-\$configStatsRLLenSav 		= \"$configStatsRLLenSav\";
-\$configStatsURLSchemeSav	= \"$configStatsURLSchemeSav\";
-\$configStatsURLHostSav		= \"$configStatsURLHostSav\";
-\$configStatsURLPortSav		= \"$configStatsURLPortSav\";
-\$configStatsURLPathSav		= \"$configStatsURLPathSav\";
-
-// Statisics
-\$configStatsUseGethostbyaddrSav = \"$configStatsUseGethostbyaddrSav\";
-\$configStatsDaysToKeepPageVisitsSav = \"$configStatsDaysToKeepPageVisitsSav\";
-
-// Admin
-\$adminEmailSav = \"$adminEmailSav\";
-\$adminPasswordSav = \"$adminPasswordSav\";
-
-// Test
-\$configGenerateTestDataSav = \"$configGenerateTestDataSav\";
-
 ?>";
-		$fh = fopen("../_data/setup_data.php", "w+") or die("can not open file");
+		$fh = fopen("../_data/db.php", "w+") or die("can not open file");
 		fwrite($fh, $update_file);
 		fclose($fh);
 	
-		$url = "index.php?page=4_administrator";
-		header("Location: $url");
-		exit;
+
+		// Move to admin-panel
+		// We need to use refresh because header is to fast...
+		echo"
+		<h1>Database</h1>
+		<table>
+		 <tr>
+		  <td>
+			<img src=\"../_layout/gfx/loading_22.gif\" alt=\"loading_22.gif\" />
+		  </td>
+		  <td>
+			<p>Loading...</p>
+		  </td>
+		 </tr>
+		</table>
+	
+		<p>Waiting on local disk.</p>
+	
+		<meta http-equiv=\"refresh\" content=\"0;url=index.php?page=4_administrator\" />
+		";
 	}
-}
-
-echo"
-<h1>Database</h1>
-
-
-
-<!-- Database form -->
-";
+} // test_connection
 if($action == ""){
-	// Check file 
 	echo"
-	<form method=\"post\" action=\"index.php?page=3_database&amp;action=test_connection&amp;process=1\" enctype=\"multipart/form-data\">
+	<h1>Database</h1>
+
+
+
+	<!-- Database form -->
+	<form method=\"post\" action=\"index.php?page=3_database&amp;action=test_connection\" enctype=\"multipart/form-data\">
 
 	<!-- Error -->
 		";
@@ -159,12 +148,10 @@ if($action == ""){
 	</p>
 
 	</form>
+	<!-- //Database form -->
 
 	";
 }
 
-echo"
-<!-- //Database form -->
-";
 ?>
 

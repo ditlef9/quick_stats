@@ -75,17 +75,11 @@ for ($i = 0; $i < 20; $i++) {
 }
 
 
-// Write to file
-$update_file="<?php
+
+// 1. Create meta
+$input_meta="<?php
 /* Updated by: 0_start.php
 *  Date: $datetime */
-// Database
-\$dbHostSav   		= \"$inp_mysql_host\";
-\$dbUserNameSav   	= \"$inp_mysql_user_name\";
-\$dbPasswordSav		= \"$inp_mysql_password\";
-\$dbDatabaseNameSav 	= \"$inp_mysql_database_name\";
-\$dbPrefixSav 		= \"$inp_mysql_prefix\";
-
 
 // General
 \$configStatsTitleSav		 = \"$inp_site_title\";
@@ -94,8 +88,8 @@ $update_file="<?php
 \$configFromNameSav 		 = \"$inp_site_title\";
 
 \$configMailSendActiveSav	= \"1\";
-
-\$configSecurityCodeSav	= \"$inp_security_code\";
+\$configSecurityCodeSav		= \"$inp_security_code\";
+\$configDemoModeSav 		= \"0\";
 
 // URLs
 \$configStatsURLSav 		= \"$inp_stats_url\";
@@ -106,20 +100,51 @@ $update_file="<?php
 \$configStatsURLPathSav		= \"$inp_stats_url_path\";
 
 // Statisics
-\$configStatsUseGethostbyaddrSav = \"1\";
-\$configStatsDaysToKeepPageVisitsSav = \"730\";
-
-// Admin
-\$adminEmailSav = \"\";
-\$adminPasswordSav = \"\";
+\$configStatsUseGethostbyaddrSav 	= \"1\";
+\$configStatsDaysToKeepPageVisitsSav 	= \"730\";
+\$configStatsHideIPsSav 		= \"md5\";
 
 // Test
 \$configGenerateTestDataSav = \"0\";
-
 ?>";
-$fh = fopen("../_data/setup_data.php", "w+") or die("can not open file");
+
+$fh = fopen("../_data/meta.php", "w+") or die("can not open file");
+fwrite($fh, $input_meta);
+fclose($fh);
+
+// 2. DB
+$mysql_config_file = "../_data/db.php";
+
+$update_file="<?php
+/* Updated by: 0_start.php
+*  Date: $datetime */
+
+\$dbHostSav   		= \"$inp_mysql_host\";
+\$dbUserNameSav   	= \"$inp_mysql_user_name\";
+\$dbPasswordSav		= \"$inp_mysql_password\";
+\$dbDatabaseNameSav 	= \"$inp_mysql_database_name\";
+\$dbPrefixSav 		= \"$inp_mysql_prefix\";
+?>";
+
+$fh = fopen("$mysql_config_file", "w+") or die("can not open file");
 fwrite($fh, $update_file);
 fclose($fh);
+
+
+// 3. Admin
+$update_file="<?php
+/* Updated by: 0_start.php
+*  Date: $datetime */
+\$adminEmailSav = \"\";
+\$adminPasswordSav = \"\";
+\$adminPasswordIsEncryptedSav = \"0\";
+?>";
+
+$fh = fopen("../_data/admin.php", "w+") or die("can not open file");
+fwrite($fh, $update_file);
+fclose($fh);
+
+
 
 
 // Header

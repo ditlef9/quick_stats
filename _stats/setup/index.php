@@ -27,14 +27,17 @@ if(file_exists("../_data/setup_finished.php")){
 
 // Config file ------------------------------------------------------------------------ */
 // (temporary)
-if(file_exists("../_data/setup_data.php")){
-	include("../_data/setup_data.php");
+if(file_exists("../_data/meta.php")){
+	include("../_data/meta.php");
 }
 else{
 	include("_setup_pages/0_start.php");
 	exit;
 }
-
+include("../_data/db.php");
+if(file_exists("../_data/admin.php")){
+	include("../_data/admin.php");
+}
 /*- Variables ------------------------------------------------------------------------ */
 include("../global_variables.php");
 

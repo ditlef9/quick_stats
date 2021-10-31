@@ -16,23 +16,7 @@ else{
 }
 
 
-// 1. Write to MySQL
-$mysql_config_file = "../_data/db.php";
-
-$update_file="<?php
-// Database
-\$dbHostSav   		= \"$dbHostSav\";
-\$dbUserNameSav   	= \"$dbUserNameSav\";
-\$dbPasswordSav		= \"$dbPasswordSav\";
-\$dbDatabaseNameSav 	= \"$dbDatabaseNameSav\";
-\$dbPrefixSav 		= \"$dbPrefixSav\";
-?>";
-
-$fh = fopen("$mysql_config_file", "w+") or die("can not open file");
-fwrite($fh, $update_file);
-fclose($fh);
-
-// 2. Connect to MySQL
+// 1. Connect to MySQL
 $link = mysqli_connect($dbHostSav, $dbUserNameSav, $dbPasswordSav, $dbDatabaseNameSav);
 if (!$link) {
 	echo "
@@ -45,45 +29,12 @@ if (!$link) {
 	";
 }
 
-// 3. Create tables
+// 2. Create tables
 include("_setup_pages/6_write_to_file_include_database_setup_tables.php");
 
-// 4. Create meta
-$input_meta="<?php
-// General
-\$configStatsTitleSav		 = \"$configStatsTitleSav\";
-\$configStatsTitleCleanSav	 = \"$configStatsTitleCleanSav\";
-\$configFromEmailSav 		 = \"$configFromEmailSav\";
-\$configFromNameSav 		 = \"$configFromNameSav\";
 
-\$configMailSendActiveSav	= \"$configMailSendActiveSav\";
-\$configSecurityCodeSav		= \"$configSecurityCodeSav\";
-\$configDemoModeSav 		= \"0\";
-
-// URLs
-\$configStatsURLSav 		= \"$configStatsURLSav\";
-\$configStatsRLLenSav 		= \"$configStatsRLLenSav\";
-\$configStatsURLSchemeSav	= \"$configStatsURLSchemeSav\";
-\$configStatsURLHostSav		= \"$configStatsURLHostSav\";
-\$configStatsURLPortSav		= \"$configStatsURLPortSav\";
-\$configStatsURLPathSav		= \"$configStatsURLPathSav\";
-
-// Statisics
-\$configStatsUseGethostbyaddrSav 	= \"$configStatsUseGethostbyaddrSav\";
-\$configStatsDaysToKeepPageVisitsSav 	= \"$configStatsDaysToKeepPageVisitsSav\";
-\$configStatsHideIPsSav 		= \"md5\";
-
-// Test
-\$configGenerateTestDataSav = \"$configGenerateTestDataSav\";
-?>";
-
-$fh = fopen("../_data/meta.php", "w+") or die("can not open file");
-fwrite($fh, $input_meta);
-fclose($fh);
-
-
-// 5. Insert user
-// 5.1 Salt
+// 3. Insert user
+// 3.1 Salt
 $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
 $charactersLength = strlen($characters);
 $salt = '';
@@ -92,7 +43,7 @@ for ($i = 0; $i < 6; $i++) {
 }
 $inp_user_salt_mysql = quote_smart($link, $salt);
 
-// 5.2 user and assword
+// 3.2 user and assword
 $inp_user_email_mysql = quote_smart($link, $adminEmailSav);
 $inp_user_password_mysql = quote_smart($link, $adminPasswordSav);
 if($adminEmailSav == ""){
@@ -101,19 +52,19 @@ if($adminEmailSav == ""){
 	die;
 }
 
-// 5.3 Security
+// 3.3 Security
 $year = date("Y");
 $pin = rand(0,9999);
 $inp_user_security = $year . $pin;
 
-// 5.4 Registered
+// 3.4 Registered
 $datetime = date("Y-m-d H:i:s");
 $time = time();
 $date = date("Y-m-d");
 $date_saying = date("j M Y");
 
 
-// 5.5 Insert user
+// 3.5 Insert user
 mysqli_query($link, "TRUNCATE $t_users") or die(mysqli_error($link));
 
 mysqli_query($link, "INSERT INTO $t_users
@@ -129,29 +80,27 @@ VALUES
 or die(mysqli_error($link));
 
 
-// 5.6 Get user id
+// 3.6 Get user id
 $query = "SELECT user_id FROM $t_users WHERE user_email=$inp_user_email_mysql";
 $result = mysqli_query($link, $query);
 $row = mysqli_fetch_row($result);
 list($get_my_user_id) = $row;
 
-// 6. Login user
+// 4. Login user
 $_SESSION['adm_user_id']  = "$get_my_user_id";
 $_SESSION['adm_security'] = "$inp_user_security";
 //echo"Adm_user_id = $get_my_user_id<br />
 //adm_security=$inp_user_security";
 //die;
 
-// 7. Write setup finished
+// 5. Write setup finished
 $fh = fopen("../_data/setup_finished.php", "w+") or die("can not open file");
 fwrite($fh, "$datetime");
 fclose($fh);
 
-// Unlink temp files
-unlink("../data/setup_data.php");
 
 
-// 8. Move to liquidbase
+// 6. Move to liquidbase
 header("Location: ../liquidbase/liquidbase.php");
 exit;
 ?>

@@ -44,45 +44,12 @@ if($action == "check"){
 
 	// Write file
 	$update_file="<?php
-// Database
-\$dbHostSav   		= \"$dbHostSav\";
-\$dbUserNameSav   	= \"$dbUserNameSav\";
-\$dbPasswordSav		= \"$dbPasswordSav\";
-\$dbDatabaseNameSav 	= \"$dbDatabaseNameSav\";
-\$dbPrefixSav 		= \"$dbPrefixSav\";
-
-
-// General
-\$configStatsTitleSav		 = \"$configStatsTitleSav\";
-\$configStatsTitleCleanSav	 = \"$configStatsTitleCleanSav\";
-\$configFromEmailSav 		 = \"$configFromEmailSav\";
-\$configFromNameSav 		 = \"$configFromNameSav\";
-
-\$configMailSendActiveSav	= \"$configMailSendActiveSav\";
-
-\$configSecurityCodeSav	= \"$configSecurityCodeSav\";
-
-// URLs
-\$configStatsURLSav 		= \"$configStatsURLSav\";
-\$configStatsRLLenSav 		= \"$configStatsRLLenSav\";
-\$configStatsURLSchemeSav	= \"$configStatsURLSchemeSav\";
-\$configStatsURLHostSav		= \"$configStatsURLHostSav\";
-\$configStatsURLPortSav		= \"$configStatsURLPortSav\";
-\$configStatsURLPathSav		= \"$configStatsURLPathSav\";
-
-// Statisics
-\$configStatsUseGethostbyaddrSav = \"$configStatsUseGethostbyaddrSav\";
-\$configStatsDaysToKeepPageVisitsSav = \"$configStatsDaysToKeepPageVisitsSav\";
-
 // Admin
 \$adminEmailSav = \"$inp_user_email\";
 \$adminPasswordSav = \"$inp_user_password\";
-
-// Test
-\$configGenerateTestDataSav = \"$configGenerateTestDataSav\";
-
+\$adminPasswordIsEncryptedSav = \"1\";
 ?>";
-	$fh = fopen("../_data/setup_data.php", "w+") or die("can not open file");
+	$fh = fopen("../_data/admin.php", "w+") or die("can not open file");
 	fwrite($fh, $update_file);
 	fclose($fh);
 
@@ -140,10 +107,10 @@ if($action == ""){
 	<!-- //Focus -->
 
 	<p><b>Email:</b><br />
-	<input type=\"text\" name=\"inp_user_email\" id=\"inp_user_email\" value=\""; if(isset($inp_user_email)){ echo"$inp_user_email"; } echo"\" size=\"35\" tabindex=\"1\" /></p>
+	<input type=\"text\" name=\"inp_user_email\" id=\"inp_user_email\" value=\"$adminEmailSav\" size=\"35\" tabindex=\"1\" /></p>
 
 	<p><b>Password:</b><br />
-	<input type=\"password\" name=\"inp_user_password\" value=\""; if(isset($inp_user_password)){ echo"$inp_user_password"; } echo"\" size=\"35\" tabindex=\"3\" /></p>
+	<input type=\"password\" name=\"inp_user_password\" value=\"$adminPasswordSav\" size=\"35\" tabindex=\"3\" /></p>
 
 	<p>
 	<input type=\"submit\" value=\"Next\" class=\"submit\" />
