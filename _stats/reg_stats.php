@@ -971,24 +971,25 @@ elseif($get_stats_user_agent_type == "desktop" OR $get_stats_user_agent_type == 
 	$get_ip_id = "";
 	if (ip2long($my_ip) !== false) {
 		$ip_type = "ipv4";
+
 		$in_addr = inet_pton($my_ip);
 		$in_addr_mysql = quote_smart($link, $in_addr);
-
 
 		$query = "select * from $t_stats_ip_to_country_lookup_ipv4 where addr_type = '$ip_type' and ip_start <= $in_addr_mysql order by ip_start desc limit 1";
 		$result = mysqli_query($link, $query);
 		$row = mysqli_fetch_row($result);
-		list($get_ip_id, $get_ip_start, $get_ip_end, $get_country) = $row;
+		list($get_ip_id, $get_addr_type, $get_ip_start, $get_ip_end, $get_country) = $row;
+
 	} else if (preg_match('/^[0-9a-fA-F:]+$/', $my_ip) && @inet_pton($my_ip)) {
 		$ip_type = "ipv6";
+
 		$in_addr = inet_pton($my_ip);
 		$in_addr_mysql = quote_smart($link, $in_addr);
-
 
 		$query = "select * from $t_stats_ip_to_country_lookup_ipv6 where addr_type = '$ip_type' and ip_start <= $in_addr_mysql order by ip_start desc limit 1";
 		$result = mysqli_query($link, $query);
 		$row = mysqli_fetch_row($result);
-		list($get_ip_id, $get_ip_start, $get_ip_end, $get_country) = $row;
+		list($get_ip_id, $get_addr_type, $get_ip_start, $get_ip_end, $get_country) = $row;
 	}
 	// echo"Type=$ip_type<br />";
 	// echo"in_addr=$in_addr<br />";
