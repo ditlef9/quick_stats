@@ -43,8 +43,8 @@ function delete_directory($dirname) {
         	}
      	}
 	closedir($dir_handle);
-    	rmdir($dirname);
-    	return true;
+	rmdir($dirname);
+	return true;
 }
 
 
