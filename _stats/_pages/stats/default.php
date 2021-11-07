@@ -321,19 +321,19 @@ echo"
 		  <tr>
 		   <th scope=\"col\">
 			<span><b>Year</b></span>
-		   </td>
+		   </th>
 		   <th scope=\"col\">
 			<span><b>Unique</b></span>
-		   </td>
+		   </th>
 		   <th scope=\"col\">
 			<span><b>Unique desktop</b></span>
-		   </td>
+		   </th>
 		   <th scope=\"col\">
 			<span><b>Unique mobile</b></span>
-		   </td>
+		   </th>
 		   <th scope=\"col\">
 			<span><b>Unique bots</b></span>
-		   </td>
+		   </th>
 		  </tr>
 		 </thead>";
 

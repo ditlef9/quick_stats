@@ -116,57 +116,82 @@ var data = [";
 
 
 
-$datetime_class = new DateTime();
-$datetime_class->modify('-1 month'); // 31 days ago
-// echo $datetime_class->format('Y-m-d'); // 2021-10-19
 
+$loop_end = new DateTime();
 
-for($x=0;$x<31;$x++){
+$loop_begin = new DateTime();
+$loop_begin->modify('-1 month'); // 31 days ago
+
+$datetime_last = new DateTime();
+$datetime_last->modify('-2 month'); // 31 days ago
+
+$comma_count = 0;
+for($i = $loop_begin; $i <= $loop_end; $i->modify('+1 day')){
+
 	// This day
-	$this_year_lookup  = $datetime_class->format('Y');
-	$this_month_lookup = $datetime_class->format('n');
-	$this_day_lookup   = $datetime_class->format('j');
+	$this_year  = $i->format("Y");
+	$this_month = $i->format("n"); // Numeric representation of a month, without leading zeros
+	$this_day   = $i->format("j");
 
-	// 30 days ago
-	$datetime_class->modify('-1 month');
-	$last_year_lookup  = $datetime_class->format('Y');
-	$last_month_lookup = $datetime_class->format('m');
-	$this_month_lookup_new_date = $datetime_class->format('n');
-	$last_day_lookup   = $datetime_class->format('d');
+	// Last (30 days ago)
+	$last_year    = $datetime_last->format('Y');
+	$last_month   = $datetime_last->format('m');
+	$last_day     = $datetime_last->format('d');
+	$datetime_last->modify('+1 day'); // next day
 
-	// Next day
-	$datetime_class->modify('+1 month'); // reset month
-	$datetime_class->modify('+1 day'); // next day
-	
+	// Echo
+	/*
+	echo"
+	<p>
+	$this_year $this_month $this_day<br />
+	$last_year $last_month $last_day<br />
+	</p>
+	";
+	*/
+
 	// Fetch day this month
-	$query = "SELECT stats_visit_per_day_id, stats_visit_per_day_day, stats_visit_per_day_day_single, stats_visit_per_day_month_short, stats_visit_per_day_human_unique FROM $t_stats_visists_per_day WHERE stats_visit_per_day_day=$this_day_lookup AND stats_visit_per_day_month=$this_month_lookup AND stats_visit_per_day_year=$this_year_lookup";
+	$query = "SELECT stats_visit_per_day_id, stats_visit_per_day_day, stats_visit_per_day_day_three, stats_visit_per_day_day_single, stats_visit_per_day_month, stats_visit_per_day_month_short, stats_visit_per_day_human_unique FROM $t_stats_visists_per_day WHERE stats_visit_per_day_day=$this_day AND stats_visit_per_day_month=$this_month AND stats_visit_per_day_year=$this_year";
 	$result = mysqli_query($link, $query);
 	$row = mysqli_fetch_row($result);
-	list($get_this_stats_visit_per_day_id, $get_this_stats_visit_per_day_day, $get_this_stats_visit_per_day_day_single, $get_this_stats_visit_per_day_month_short, $get_this_stats_visit_per_day_human_unique) = $row;
+	list($get_this_stats_visit_per_day_id, $get_this_stats_visit_per_day_day, $get_this_stats_visit_per_day_day_three, $get_this_stats_visit_per_day_day_single, $get_this_stats_visit_per_day_month, $get_this_stats_visit_per_day_month_short, $get_this_stats_visit_per_day_human_unique) = $row;
 	if($get_this_stats_visit_per_day_id == ""){
 		$get_this_stats_visit_per_day_human_unique = 0;
 	}
 
 	// Fetch day last month
-	$query = "SELECT stats_visit_per_day_id, stats_visit_per_day_day, stats_visit_per_day_day_single, stats_visit_per_day_month_short, stats_visit_per_day_human_unique FROM $t_stats_visists_per_day WHERE stats_visit_per_day_day=$last_day_lookup AND stats_visit_per_day_month=$last_month_lookup AND stats_visit_per_day_year=$last_year_lookup";
+	$query = "SELECT stats_visit_per_day_id, stats_visit_per_day_day, stats_visit_per_day_day_three, stats_visit_per_day_day_single, stats_visit_per_day_month, stats_visit_per_day_month_short, stats_visit_per_day_human_unique FROM $t_stats_visists_per_day WHERE stats_visit_per_day_day=$last_day AND stats_visit_per_day_month=$last_month AND stats_visit_per_day_year=$last_year";
 	$result = mysqli_query($link, $query);
 	$row = mysqli_fetch_row($result);
-	list($get_last_stats_visit_per_day_id, $get_last_stats_visit_per_day_day, $get_last_stats_visit_per_day_day_single, $get_last_stats_visit_per_day_month_short, $get_last_stats_visit_per_day_human_unique) = $row;
+	list($get_last_stats_visit_per_day_id, $get_last_stats_visit_per_day_day, $get_last_stats_visit_per_day_day_three, $get_last_stats_visit_per_day_day_single, $get_last_stats_visit_per_day_month, $get_last_stats_visit_per_day_month_short, $get_last_stats_visit_per_day_human_unique) = $row;
 	if($get_last_stats_visit_per_day_id == ""){
 		$get_last_stats_visit_per_day_human_unique = 0;
 	}
 
-	if($x > 0){
-		$inp_data = $inp_data . ",";
-	}
-	$inp_data = $inp_data . "{
-			  date: new Date($this_year_lookup, $this_month_lookup_new_date, $this_day_lookup).getTime(),
+	if($get_this_stats_visit_per_day_human_unique != ""){
+		if($comma_count > 0){
+			$inp_data = $inp_data . ",";
+		}
+		$inp_data = $inp_data . "{
+			  date: new Date($this_year, $this_month, $this_day).getTime(),
 			  value1: $get_this_stats_visit_per_day_human_unique,
 			  value2: $get_last_stats_visit_per_day_human_unique,
-			  text1: \"$get_this_stats_visit_per_day_day_single $get_this_stats_visit_per_day_day $get_this_stats_visit_per_day_month_short\",
-			  text2: \"$get_last_stats_visit_per_day_day_single $get_last_stats_visit_per_day_day $get_last_stats_visit_per_day_month_short\",
-			  previousDate: \"$last_year_lookup-$last_month_lookup-$last_day_lookup\"
+			  text1: \"$get_this_stats_visit_per_day_day_three $get_this_stats_visit_per_day_day $get_this_stats_visit_per_day_month_short\",";
+
+		if($get_last_stats_visit_per_day_day_three == ""){
+			$inp_data = $inp_data . "
+			  text2: \"30 days ago\",";
+		}
+		else{
+			$inp_data = $inp_data . "
+			  text2: \"$get_last_stats_visit_per_day_day_three $get_last_stats_visit_per_day_day $get_last_stats_visit_per_day_month_short\",";
+		}
+		
+		$inp_data = $inp_data . "
+			  previousDate: \"$last_year-$last_month-$last_day\"
 		}";
+		$comma_count++;
+	}
+
 } // for
 
 
