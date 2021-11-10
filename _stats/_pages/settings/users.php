@@ -63,7 +63,7 @@ echo"
 
 	<!-- Users list -->
 	<p>
-	<a href=\"index.php?open=$open&amp;page=users_new\" class=\"btn_default\">New user</a>
+	<a href=\"index.php?open=$open&amp;page=users_new&amp;editor_language=$editor_language\" class=\"btn_default\">New user</a>
 	</p>
 
 		<table class=\"hor-zebra\">
@@ -78,7 +78,7 @@ echo"
 			}
 
 			echo"
-			<span><a href=\"index.php?open=$open&amp;page=$page&amp;order_by=user_id&amp;order_method=$order_method_link\" style=\"color:black;\"><b>ID</b></a>";
+			<span><a href=\"index.php?open=$open&amp;page=$page&amp;order_by=user_id&amp;order_method=$order_method_link&amp;editor_language=$editor_language\" style=\"color:black;\"><b>ID</b></a>";
 			if($order_by == "user_id" && $order_method == "asc"){
 				echo"<img src=\"_layout/gfx/arrow_down.png\" alt=\"arrow_down.png\" />";
 			}
@@ -96,7 +96,7 @@ echo"
 			}
 
 			echo"
-			<span><a href=\"index.php?open=$open&amp;page=$page&amp;order_by=user_name&amp;order_method=$order_method_link\" style=\"color:black;\"><b>User name</b></a>";
+			<span><a href=\"index.php?open=$open&amp;page=$page&amp;order_by=user_name&amp;order_method=$order_method_link&amp;editor_language=$editor_language\" style=\"color:black;\"><b>User name</b></a>";
 			if($order_by == "user_name" && $order_method == "asc"){
 				echo"<img src=\"_layout/gfx/arrow_down.png\" alt=\"arrow_down.png\" />";
 			}
@@ -114,7 +114,7 @@ echo"
 			}
 
 			echo"
-			<span><a href=\"index.php?open=$open&amp;page=$page&amp;order_by=user_email&amp;order_method=$order_method_link\" style=\"color:black;\"><b>E-mail</b></a>";
+			<span><a href=\"index.php?open=$open&amp;page=$page&amp;order_by=user_email&amp;order_method=$order_method_link&amp;editor_language=$editor_language\" style=\"color:black;\"><b>E-mail</b></a>";
 			if($order_by == "user_email" && $order_method == "asc"){
 				echo"<img src=\"_layout/gfx/arrow_down.png\" alt=\"arrow_down.png\" />";
 			}
@@ -132,7 +132,7 @@ echo"
 			}
 
 			echo"
-			<span><a href=\"index.php?open=$open&amp;page=$page&amp;order_by=user_rank&amp;order_method=$order_method_link\" style=\"color:black;\"><b>Rank</b></a>";
+			<span><a href=\"index.php?open=$open&amp;page=$page&amp;order_by=user_rank&amp;order_method=$order_method_link&amp;editor_language=$editor_language\" style=\"color:black;\"><b>Rank</b></a>";
 			if($order_by == "user_rank" && $order_method == "asc"){
 				echo"<img src=\"_layout/gfx/arrow_down.png\" alt=\"arrow_down.png\" />";
 			}
@@ -167,10 +167,10 @@ echo"
 		echo"
 		 <tr>
 		  <td>
-			<span><a href=\"index.php?open=$open&amp;page=users_edit&amp;user_id=$get_user_id\">$get_user_id</a></span>
+			<span><a href=\"index.php?open=$open&amp;page=users_edit&amp;user_id=$get_user_id&amp;editor_language=$editor_language\">$get_user_id</a></span>
 		  </td>
 		  <td>
-			<span><a href=\"index.php?open=$open&amp;page=users_edit&amp;user_id=$get_user_id\">$get_user_name</a></span>
+			<span><a href=\"index.php?open=$open&amp;page=users_edit&amp;user_id=$get_user_id&amp;editor_language=$editor_language\">$get_user_name</a></span>
 		  </td>
 		  <td>
 			<span>$get_user_email</span>
@@ -180,9 +180,9 @@ echo"
 		  </td>
 		  <td>
 			<span>
-			<a href=\"index.php?open=$open&amp;page=users_edit&amp;user_id=$get_user_id\">Edit</a>
+			<a href=\"index.php?open=$open&amp;page=users_edit&amp;user_id=$get_user_id&amp;editor_language=$editor_language\">Edit</a>
 			| 
-			<a href=\"index.php?open=$open&amp;page=users_delete&amp;user_id=$get_user_id\">Delete</a>
+			<a href=\"index.php?open=$open&amp;page=users_delete&amp;user_id=$get_user_id&amp;editor_language=$editor_language\">Delete</a>
 			</span>
 		  </td>
 		 </tr>

@@ -85,7 +85,7 @@ if($action == ""){
 		  </td>
 		  <td class=\"$style\">
 			<span>
-			<a href=\"index.php?open=$open&amp;page=$page&amp;action=delete&amp;liquidbase_id=$get_liquidbase_id\">Delete</a></span>
+			<a href=\"index.php?open=$open&amp;page=$page&amp;action=delete&amp;liquidbase_id=$get_liquidbase_id&amp;editor_language=$editor_language\">Delete</a></span>
 		  </td>
 		 </tr>
 		";
@@ -133,7 +133,7 @@ elseif($action == "delete"){
 		</p>
 
 		<p>
-		<a href=\"index.php?open=$open&amp;page=$page&amp;action=delete&amp;liquidbase_id=$get_liquidbase_id&amp;process=1\" class=\"btn_warning\">Confirm delete</a>
+		<a href=\"index.php?open=$open&amp;page=$page&amp;action=delete&amp;liquidbase_id=$get_liquidbase_id&amp;editor_language=$editor_language&amp;process=1\" class=\"btn_warning\">Confirm delete</a>
 		</p>
 		";
 	}

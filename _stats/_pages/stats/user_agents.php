@@ -83,6 +83,10 @@ if($action == ""){
 		$inp_bot_version = output_html($inp_bot_version);
 		$inp_bot_version_mysql = quote_smart($link, $inp_bot_version);
 
+		$inp_bot_website = $_POST['inp_bot_website'];
+		$inp_bot_website = output_html($inp_bot_website);
+		$inp_bot_website_mysql = quote_smart($link, $inp_bot_website);
+
 		$inp_type = $_POST['inp_type'];
 		$inp_type = output_html($inp_type);
 		$inp_type_mysql = quote_smart($link, $inp_type);
@@ -105,8 +109,11 @@ if($action == ""){
 						stats_user_agent_os_version=$inp_os_version_mysql, 
 						stats_user_agent_bot=$inp_bot_mysql, 
 						stats_user_agent_bot_version=$inp_bot_version_mysql, 
-				stats_user_agent_browser_icon=$inp_browser_icon_mysql, stats_user_agent_os_icon=$inp_os_icon_mysql, 
-				stats_user_agent_bot_icon=$inp_bot_icon_mysql, stats_user_agent_type=$inp_type_mysql, stats_user_agent_banned=$inp_banned_mysql 
+						stats_user_agent_bot_website=$inp_bot_website_mysql, 
+						stats_user_agent_browser_icon=$inp_browser_icon_mysql, 
+						stats_user_agent_os_icon=$inp_os_icon_mysql, 
+						stats_user_agent_bot_icon=$inp_bot_icon_mysql, stats_user_agent_type=$inp_type_mysql, 
+						stats_user_agent_banned=$inp_banned_mysql 
 				WHERE stats_user_agent_id=$user_agent_id_mysql") or die(mysqli_error($link));
 
 		// echo"UPDATE $t_stats_user_agents SET stats_user_agent_browser=$inp_browser_mysql, stats_user_agent_os=$inp_os_mysql, stats_user_agent_bot=$inp_bot_mysql, 
@@ -213,8 +220,12 @@ if($action == ""){
 
 			<p><b>Bot</b><br />
 			<input type=\"text\" name=\"inp_bot\" size=\"20\" value=\"$get_current_stats_user_agent_bot\" /></p>
+
 			<p><b>Bot version</b><br />
 			<input type=\"text\" name=\"inp_bot_version\" size=\"20\" value=\"$get_current_stats_user_agent_bot_version\" /></p>
+
+			<p><b>Bot website</b><br />
+			<input type=\"text\" name=\"inp_bot_website\" size=\"20\" value=\"$get_current_stats_user_agent_bot_website\" /></p>
 		
 			<p><b>Type</b><br />
 			<select name=\"inp_type\">

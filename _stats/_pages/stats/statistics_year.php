@@ -63,10 +63,12 @@ $t_search_engine_searches = $dbPrefixSav . "search_engine_searches";
 $t_stats_tracker_index = $dbPrefixSav . "stats_tracker_index";
 $t_stats_tracker_urls  = $dbPrefixSav . "stats_tracker_urls";
 
+$t_languages 		= $dbPrefixSav . "languages";
+$t_languages_active 	= $dbPrefixSav . "languages_active";
 
 
 /*- Functions ----------------------------------------------------------------------- */
-function get_title($url) {
+function get_title($url, $cmsNameSav, $cmsVersionSav, $cmsWebsiteSav) {
 	$url = str_replace("&amp;", "&", $url);
 
 	$options = array(
@@ -74,7 +76,7 @@ function get_title($url) {
 	    'method'=>"GET",
 	    'header'=>"Accept-language: en\r\n" .
 	              "Cookie: foo=bar\r\n" .  // check function.stream-context-create on php.net
-	              "User-Agent:  Mozilla/5.0 (compatible; QuickCMS/1; +http://software.frindex.net)\r\n"
+	              "User-Agent:  Mozilla/5.0 (compatible; $cmsNameSav/$cmsVersionSav; +$cmsWebsiteSav)\r\n"
 	  )
 	);
 
@@ -112,9 +114,9 @@ else{
 	
 	<!-- Where am I? -->
 		<p><b>You are here:</b><br />
-		<a href=\"index.php?open=$open&amp;page=statistics\">Statistics</a>
+		<a href=\"index.php?open=$open&amp;page=statistics&amp;editor_language=$editor_language\">Statistics</a>
 		&gt;
-		<a href=\"index.php?open=$open&amp;page=$page&amp;stats_year=$get_current_stats_visit_per_year_year\">$get_current_stats_visit_per_year_year</a>
+		<a href=\"index.php?open=$open&amp;page=$page&amp;stats_year=$get_current_stats_visit_per_year_year&amp;editor_language=$editor_language\">$get_current_stats_visit_per_year_year</a>
 		</p>
 	<!-- //Where am I? -->
 
@@ -366,7 +368,7 @@ else{
 
 			// We need to visit the site in order to get the correct page title
 			if($get_stats_pages_per_year_title_fetched == "0"){
-				$get_stats_pages_per_year_title = get_title($get_stats_pages_per_year_url);
+				$get_stats_pages_per_year_title = get_title($get_stats_pages_per_year_url, $cmsNameSav, $cmsVersionSav, $cmsWebsiteSav);
 				$get_stats_pages_per_year_title = output_html($get_stats_pages_per_year_title);
 				$inp_title_mysql = quote_smart($link, $get_stats_pages_per_year_title);
 				mysqli_query($link, "UPDATE $t_stats_pages_visits_per_year SET stats_pages_per_year_title=$inp_title_mysql, stats_pages_per_year_title_fetched=1 WHERE stats_pages_per_year_id=$get_stats_pages_per_year_id") or die(mysqli_error($link));
@@ -580,6 +582,9 @@ else{
 			<span>ID</span>
 		   </th>
 		   <th scope=\"col\">
+			<span>Date</span>
+		   </th>
+		   <th scope=\"col\">
 			<span>Type</span>
 		   </th>
 		   <th scope=\"col\">
@@ -614,13 +619,13 @@ else{
 		 <tbody>
 		";
 		$editor_language_mysql = quote_smart($link, $editor_language);
-		$query = "SELECT tracker_id, tracker_ip, tracker_ip_masked, tracker_month, tracker_month_short, tracker_year, tracker_time_start, tracker_hour_minute_start, tracker_time_end, tracker_hour_minute_end, tracker_seconds_spent, tracker_time_spent, tracker_os, tracker_browser, tracker_type, tracker_country_name, tracker_accept_language, tracker_language, tracker_last_url_value, tracker_last_url_title, tracker_last_url_title_fetched, tracker_hits FROM $t_stats_tracker_index WHERE tracker_language=$editor_language_mysql ORDER BY tracker_id DESC LIMIT 0,300";
+		$query = "SELECT tracker_id, tracker_ip, tracker_ip_masked, tracker_day, tracker_month, tracker_month_short, tracker_year, tracker_time_start, tracker_hour_minute_start, tracker_time_end, tracker_hour_minute_end, tracker_seconds_spent, tracker_time_spent, tracker_os, tracker_browser, tracker_type, tracker_country_name, tracker_accept_language, tracker_language, tracker_last_url_value, tracker_last_url_title, tracker_last_url_title_fetched, tracker_hits FROM $t_stats_tracker_index WHERE tracker_language=$editor_language_mysql ORDER BY tracker_id DESC LIMIT 0,300";
 		$result = mysqli_query($link, $query);
 		while($row = mysqli_fetch_row($result)) {
-			list($get_tracker_id, $get_tracker_ip, $get_tracker_ip_masked, $get_tracker_month, $get_tracker_month_short, $get_tracker_year, $get_tracker_time_start, $get_tracker_hour_minute_start, $get_tracker_time_end, $get_tracker_hour_minute_end, $get_tracker_seconds_spent, $get_tracker_time_spent, $get_tracker_os, $get_tracker_browser, $get_tracker_type, $get_tracker_country_name, $get_tracker_accept_language, $get_tracker_language, $get_tracker_last_url_value, $get_tracker_last_url_title, $get_tracker_last_url_title_fetched, $get_tracker_hits) = $row;
+			list($get_tracker_id, $get_tracker_ip, $get_tracker_ip_masked, $get_tracker_day, $get_tracker_month, $get_tracker_month_short, $get_tracker_year, $get_tracker_time_start, $get_tracker_hour_minute_start, $get_tracker_time_end, $get_tracker_hour_minute_end, $get_tracker_seconds_spent, $get_tracker_time_spent, $get_tracker_os, $get_tracker_browser, $get_tracker_type, $get_tracker_country_name, $get_tracker_accept_language, $get_tracker_language, $get_tracker_last_url_value, $get_tracker_last_url_title, $get_tracker_last_url_title_fetched, $get_tracker_hits) = $row;
 			
 			if($get_tracker_last_url_title_fetched == "0"){
-				$inp_url_title = get_title($get_tracker_last_url_value);
+				$inp_url_title = get_title($get_tracker_last_url_value, $cmsNameSav, $cmsVersionSav, $cmsWebsiteSav);
 				$inp_url_title = output_html($inp_url_title);
 				if($inp_url_title == ""){
 					$inp_url_title = "$get_tracker_last_url_title";
@@ -635,7 +640,10 @@ else{
 			echo"
 			 <tr>
 			  <td>
-				<span><a href=\"index.php?open=dashboard&amp;page=statistics_tracker&amp;tracker_id=$get_tracker_id&amp;editor_language=$editor_language\">$get_tracker_id</a></span>
+				<span><a href=\"index.php?open=$open&amp;page=statistics_tracker&amp;tracker_id=$get_tracker_id&amp;editor_language=$editor_language\">$get_tracker_id</a></span>
+			  </td>
+			  <td>
+				<span>$get_tracker_day $get_tracker_month_short $get_tracker_year</span>
 			  </td>
 			  <td>
 				<span>$get_tracker_type</span>

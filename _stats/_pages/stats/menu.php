@@ -20,15 +20,15 @@ if($page == "menu"){
 	<h1>Stats</h1>
 	<div class=\"vertical\">
 		<ul>
-			<li><a href=\"index.php?open=stats\">Stats</a></li>
+			<li><a href=\"index.php?open=stats&amp;editor_language=$editor_language\">Stats</a></li>
 
 	";
 }
 
 
 echo"
-			<li><a href=\"index.php?open=stats&amp;page=statistics\"";if($page == "statistics"){echo" class=\"selected\"";}echo">Statistics</a></li>
-			<li><a href=\"index.php?open=stats&amp;page=user_agents\"";if($page == "user_agents"){echo" class=\"selected\"";}echo">User agents</a></li>
+			<li><a href=\"index.php?open=stats&amp;page=statistics&amp;editor_language=$editor_language\"";if($page == "statistics"){echo" class=\"selected\"";}echo">Statistics</a></li>
+			<li><a href=\"index.php?open=stats&amp;page=user_agents&amp;editor_language=$editor_language\"";if($page == "user_agents"){echo" class=\"selected\"";}echo">User agents</a></li>
 
 ";
 

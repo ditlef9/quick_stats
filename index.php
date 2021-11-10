@@ -1,5 +1,6 @@
 <?php
 /* Stats */
+$time_start = microtime(true);
 include("_stats/reg_stats.php");
 
 
@@ -93,7 +94,10 @@ echo"<!DOCTYPE html>
 				<p>
 				<a href=\"example_3.php\">Example 3</a>
 				&nbsp;
-				<a href=\"https://ditlef.net\">Quick Stats Copyright &copy; 2021 Ditlefsen</a>
+				<a href=\"https://ditlef.net\">Quick Stats Copyright &copy; 2021 Ditlefsen</a>";
+				$time_stop = microtime(true);
+				$diff = round($time_stop-$time_start, 3);
+				echo"&nbsp; Loaded in $diff seconds
 				</p>
 			</footer>
 		<!-- //Footer -->

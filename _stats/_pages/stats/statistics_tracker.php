@@ -63,12 +63,12 @@ $t_search_engine_searches = $dbPrefixSav . "search_engine_searches";
 $t_stats_tracker_index = $dbPrefixSav . "stats_tracker_index";
 $t_stats_tracker_urls  = $dbPrefixSav . "stats_tracker_urls";
 
-/*- Translation ----------------------------------------------------------------------- */
-include("_translations/admin/$l/dashboard/t_default.php");
+$t_languages 		= $dbPrefixSav . "languages";
+$t_languages_active 	= $dbPrefixSav . "languages_active";
 
 
 /*- Functions ----------------------------------------------------------------------- */
-function get_title($url) {
+function get_title($url, $cmsNameSav, $cmsVersionSav, $cmsWebsiteSav) {
 	$url = str_replace("&amp;", "&", $url);
 
 	$options = array(
@@ -76,7 +76,7 @@ function get_title($url) {
 	    'method'=>"GET",
 	    'header'=>"Accept-language: en\r\n" .
 	              "Cookie: foo=bar\r\n" .  // check function.stream-context-create on php.net
-	              "User-Agent:  Mozilla/5.0 (compatible; QuickCMS/1; +http://software.frindex.net)\r\n"
+	              "User-Agent:  Mozilla/5.0 (compatible; $cmsNameSav/$cmsVersionSav; +$cmsWebsiteSav)\r\n"
 	  )
 	);
 
@@ -85,7 +85,6 @@ function get_title($url) {
 	$title = preg_match('/<title[^>]*>(.*?)<\/title>/ims', $page, $match) ? $match[1] : null;
 	return $title;
 }
-
 
 /*- Variables -------------------------------------------------------------------------- */
 if(isset($_GET['tracker_id'])) {
@@ -121,13 +120,13 @@ else{
 	
 	<!-- Where am I? -->
 		<p><b>You are here:</b><br />
-		<a href=\"index.php?open=$open&amp;page=statistics&amp;l=$l\">Statistics</a>
+		<a href=\"index.php?open=$open&amp;page=statistics&amp;editor_language=$editor_language\">Statistics</a>
 		&gt;
-		<a href=\"index.php?open=$open&amp;page=statistics_year&amp;stats_year=$year&amp;editor_language=$editor_language&amp;l=$l\">Stats $year</a>
+		<a href=\"index.php?open=$open&amp;page=statistics_year&amp;stats_year=$year&amp;editor_language=$editor_language\">Stats $year</a>
 		&gt;
-		<a href=\"index.php?open=$open&amp;page=statistics_year&amp;stats_year=$year&amp;editor_language=$editor_language&amp;l=$l#trackers\">Trackers</a>
+		<a href=\"index.php?open=$open&amp;page=statistics_year&amp;stats_year=$year&amp;editor_language=$editor_language#trackers\">Trackers</a>
 		&gt;
-		<a href=\"index.php?open=$open&amp;page=statistics_tracker&amp;tracker_id=$get_current_tracker_id&amp;editor_language=$editor_language&amp;l=$l\">Tracker $get_current_tracker_id</a>
+		<a href=\"index.php?open=$open&amp;page=statistics_tracker&amp;tracker_id=$get_current_tracker_id&amp;editor_language=$editor_language\">Tracker $get_current_tracker_id</a>
 		</p>
 	<!-- //Where am I? -->
 
@@ -146,9 +145,9 @@ else{
 		  </td>
 		  <td style=\"padding-right: 10px;vertical-align: top;\">
 			<span>
-			$get_current_tracker_ip [<a href=\"index.php?open=dashboard&amp;page=banned&amp;action=add_new_banned_ip&amp;l=$l&amp;editor_language=$editor_language\">Ban</a>]<br />
-			$get_current_tracker_hostname [<a href=\"index.php?open=dashboard&amp;page=banned&amp;action=add_new_banned_hostname&amp;l=$l&amp;editor_language=$editor_language\">Ban</a>]<br />
-			$get_current_tracker_user_agent [<a href=\"$configControlPanelURLSav/index.php?open=dashboard&amp;page=user_agents&amp;mode=ban_hostname&amp;user_agent_sum=$user_agent_sum&amp;editor_language=$editor_language&amp;l=$l\">Ban</a>]<br />
+			$get_current_tracker_ip [<a href=\"index.php?open=$open&amp;page=banned&amp;action=add_new_banned_ip&amp;editor_language=$editor_language\">Ban</a>]<br />
+			$get_current_tracker_hostname [<a href=\"index.php?open=$open&amp;page=banned&amp;action=add_new_banned_hostname&amp;editor_language=$editor_language\">Ban</a>]<br />
+			$get_current_tracker_user_agent [<a href=\"$configStatsURLSav/index.php?open=$open&amp;page=user_agents&amp;mode=ban_hostname&amp;user_agent_sum=$user_agent_sum&amp;editor_language=$editor_language\">Ban</a>]<br />
 			$get_current_tracker_os<br />
 			$get_current_tracker_browser<br />
 			$get_current_tracker_type
@@ -238,25 +237,22 @@ else{
 							WHERE url_id=$last_url_id") or die(mysqli_error($link));
 
 				echo"<div class=\"info\"><p>Calculating ID $last_url_id from $last_time_spent to $calculate_time_spent_on_last</p></div>
-				<meta http-equiv=refresh content=\"1; URL=index.php?open=dashboard&amp;page=statistics_tracker&amp;tracker_id=$get_current_tracker_id&amp;editor_language=$editor_language&amp;l=$l\">
+				<meta http-equiv=refresh content=\"1; URL=index.php?open=$open&amp;page=statistics_tracker&amp;tracker_id=$get_current_tracker_id&amp;editor_language=$editor_language\">
 				";
 			}
 
 			// We need to visit the site in order to get the correct page title
 			if($get_url_title_fetched == "0"){
-				$inp_title = get_title($get_url_value);
+				$inp_title = get_title($get_url_value, $cmsNameSav, $cmsVersionSav, $cmsWebsiteSav);
+
+				if($inp_title  == ""){
+					$inp_title = "$get_url_value";
+				}
 				$inp_title = output_html($inp_title);
 				$inp_title_mysql = quote_smart($link, $inp_title);
 				$inp_url_value_mysql = quote_smart($link, $get_url_value);
-				if($inp_title != ""){
-					mysqli_query($link, "UPDATE $t_stats_tracker_urls SET url_title=$inp_title_mysql, url_title_fetched=1 WHERE url_value=$inp_url_value_mysql") or die(mysqli_error($link));
-					$get_url_title = "$inp_title";
-				}
-				else{
-					echo"<div class=\"info\"><p>Could not find a title from URL <a href=\"$get_url_value\">$get_url_value</a></p></div>";
-					mysqli_query($link, "UPDATE $t_stats_tracker_urls SET url_title_fetched=1 WHERE url_value=$inp_url_value_mysql") or die(mysqli_error($link));
-
-				}
+				mysqli_query($link, "UPDATE $t_stats_tracker_urls SET url_title=$inp_title_mysql, url_title_fetched=1 WHERE url_value=$inp_url_value_mysql") or die(mysqli_error($link));
+				$get_url_title = "$inp_title";
 			}
 
 			// Headline

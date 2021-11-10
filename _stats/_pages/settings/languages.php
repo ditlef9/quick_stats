@@ -181,11 +181,11 @@ if($action == ""){
 						<table>
 						 <tr>
        						  <td style=\"padding-right:4px;\">
-							<span><a href=\"?open=settings&amp;page=languages&amp;action=remove_language&amp;process=1&amp;language_id=$get_language_active_id\" style=\"color:#000;\"><img src=\"../$get_language_active_flag_path_16x16/$get_language_active_flag_16x16\" alt=\"$get_language_active_flag_16x16\" /></a></span>
+							<span><a href=\"?open=settings&amp;page=languages&amp;action=remove_language&amp;process=1&amp;language_id=$get_language_active_id&amp;editor_language=$editor_language\" style=\"color:#000;\"><img src=\"../$get_language_active_flag_path_16x16/$get_language_active_flag_16x16\" alt=\"$get_language_active_flag_16x16\" /></a></span>
 						
 						  </td>
        						  <td>
-          						<span><a href=\"?open=settings&amp;page=languages&amp;action=remove_language&amp;process=1&amp;language_id=$get_language_active_id\" style=\"color:#000;\">$get_language_active_name</a></span>
+          						<span><a href=\"?open=settings&amp;page=languages&amp;action=remove_language&amp;process=1&amp;language_id=$get_language_active_id&amp;editor_language=$editor_language\" style=\"color:#000;\">$get_language_active_name</a></span>
 						  </td>
      						 </tr>
 						</table>

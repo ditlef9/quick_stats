@@ -25,7 +25,7 @@ if(file_exists($db_config_file)){
 	$t_users		= $dbPrefixSav . "users";
 }
 else{
-	echo"No mysql"; die;
+	echo"<a href=\"_stats\">Install</a>"; die;
 }
 
 include("_stats/_data/meta.php");
@@ -1202,17 +1202,22 @@ $result = mysqli_query($link, $query);
 $row = mysqli_fetch_row($result);
 list($get_tracker_id, $get_tracker_time_start, $get_tracker_hits) = $row;
 if($get_tracker_id == ""){
-	$inp_tracker_ip_masked = substr($my_ip, -12);
-	$inp_tracker_ip_masked = "..." . $inp_tracker_ip_masked;
+	if($configStatsHideIPsSav == "md5"){
+		$inp_tracker_ip_masked = md5($my_ip);
+	}
+	else{
+		$inp_tracker_ip_masked = substr($my_ip, -12);
+		$inp_tracker_ip_masked = "..." . $inp_tracker_ip_masked;
+	}
 	$inp_tracker_ip_masked_mysql = quote_smart($link, $inp_tracker_ip_masked);
 	mysqli_query($link, "INSERT INTO $t_stats_tracker_index 
-	(tracker_id, tracker_ip, tracker_ip_masked, tracker_hostname, tracker_month, 
+	(tracker_id, tracker_ip, tracker_ip_masked, tracker_hostname, tracker_day, tracker_month, 
 	tracker_month_short, tracker_year, tracker_time_start, tracker_hour_minute_start, tracker_time_end, 
 	tracker_hour_minute_end, tracker_seconds_spent, tracker_time_spent, tracker_user_agent, tracker_os, 
 	tracker_browser, tracker_type, tracker_accept_language, tracker_language, tracker_country_name, 
 	tracker_hits, tracker_last_url_value, tracker_last_url_title, tracker_last_url_title_fetched) 
 	VALUES
-	(NULL, $my_ip_mysql, $inp_tracker_ip_masked_mysql, $my_hostname_mysql, '$inp_month', '$inp_month_short', 
+	(NULL, $my_ip_mysql, $inp_tracker_ip_masked_mysql, $my_hostname_mysql, $inp_day, '$inp_month', '$inp_month_short', 
 	'$inp_year', '$inp_unix_time', '$inp_hour_minute', '$inp_unix_time', '$inp_hour_minute',
 	 0, 0, $my_user_agent_mysql, $inp_user_agent_os_mysql, $inp_user_agent_browser_mysql, '$get_stats_user_agent_type', 
 	$inp_accpeted_language_mysql, '$get_current_language_active_iso_two', $inp_geoname_country_name_mysql, 1, $inp_url_mysql, 
@@ -1256,6 +1261,10 @@ else{
 	$inp_tracker_time_spent_mysql = quote_smart($link, $inp_tracker_time_spent);
 
 	mysqli_query($link, "UPDATE $t_stats_tracker_index SET 
+						tracker_day=$inp_day, 
+						tracker_month='$inp_month', 
+						tracker_month_short='$inp_month_short', 
+						tracker_year='$inp_year',
 						tracker_time_end='$inp_unix_time', 
 						tracker_hour_minute_end='$inp_hour_minute', 
 						tracker_seconds_spent='$inp_seconds_spent',

@@ -64,9 +64,9 @@ echo"
 
 <!-- Where am I? -->
 	<p><b>You are here:</b><br />
-	<a href=\"index.php?open=settings&amp;page=users\">Users</a>
+	<a href=\"index.php?open=settings&amp;page=users&amp;editor_language=$editor_language\">Users</a>
 	&gt;
-	<a href=\"index.php?open=settings&amp;page=users_delete&amp;user_id=$get_current_user_id\">Delete user $get_current_user_name</a>
+	<a href=\"index.php?open=settings&amp;page=users_delete&amp;user_id=$get_current_user_id&amp;editor_language=$editor_language\">Delete user $get_current_user_name</a>
 	
 	</p>
 <!-- //Where am I? -->
@@ -86,7 +86,7 @@ echo"
 	</p>
 
 	<p>
-	<a href=\"index.php?open=$open&amp;page=users_delete&amp;user_id=$user_id&amp;process=1\" class=\"btn_danger\">Confirm</a>
+	<a href=\"index.php?open=$open&amp;page=users_delete&amp;user_id=$user_id&amp;editor_language=$editor_language&amp;process=1\" class=\"btn_danger\">Confirm</a>
 	</p>
 <!-- //Delete user form -->
 ";

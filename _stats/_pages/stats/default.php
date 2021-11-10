@@ -28,6 +28,8 @@ $t_stats_users_registered_per_week 	= $dbPrefixSav . "stats_users_registered_per
 $t_stats_comments_per_year 		= $dbPrefixSav . "stats_comments_per_year";
 $t_stats_comments_per_week		= $dbPrefixSav . "stats_comments_per_week";
 
+$t_languages 		= $dbPrefixSav . "languages";
+$t_languages_active 	= $dbPrefixSav . "languages_active";
 
 /*- Variables -------------------------------------------------------------------------- */
 if(isset($_GET['week'])) {
@@ -96,6 +98,20 @@ elseif($month == "12"){
 	$month_saying = "January";
 }
 
+// Editor language
+if($editor_language == ""){
+	// Select a language
+	$query = "SELECT language_active_id, language_active_iso_two FROM $t_languages_active WHERE language_active_default=1";
+	$result = mysqli_query($link, $query);
+	$row = mysqli_fetch_row($result);
+	list($get_active_language_id, $editor_language) = $row;
+	if($get_active_language_id == ""){
+		echo"<p>Please set a <a href=\"index.php?open=settings&amp;page=languages&amp;editor_language=\">active language</a></p>";
+	}
+
+	
+}
+
 echo"
 
 
@@ -119,7 +135,7 @@ echo"
 	";
 	if(file_exists("setup/index.php")){
 		echo"
-		<div class=\"white_bg_box\"><span><b>Security issue:</b> The setup folder exists. Do you want to <a href=\"index.php?open=$open&amp;page=delete_setup_folder\">delete the setup folder</a>?</span></div> 
+		<div class=\"white_bg_box\"><span><b>Security issue:</b> The setup folder exists. Do you want to <a href=\"index.php?open=$open&amp;page=delete_setup_folder&amp;editor_language=$editor_language\">delete the setup folder</a>?</span></div> 
 		";
 	}
 	echo"
@@ -347,7 +363,7 @@ echo"
 			  <td>
 				<a id=\"#year$get_stats_visit_per_year_year\"></a>
 				<span>
-				<a href=\"index.php?open=$open&amp;page=statistics_year&amp;stats_year=$get_stats_visit_per_year_year\">$get_stats_visit_per_year_year</a>
+				<a href=\"index.php?open=$open&amp;page=statistics_year&amp;stats_year=$get_stats_visit_per_year_year&amp;editor_language=$editor_language\">$get_stats_visit_per_year_year</a>
 				</span>
 			  </td>
 			  <td>
@@ -395,7 +411,7 @@ echo"
 				  <td style=\"padding-left: 10px;\">
 					<a id=\"#month$get_stats_visit_per_year_year$get_stats_visit_per_month_month\"></a>
 					<span>
-					<a href=\"index.php?open=$open&amp;page=statistics_month&amp;stats_year=$get_stats_visit_per_year_year&amp;stats_month=$get_stats_visit_per_month_month\">$get_stats_visit_per_month_month_full $get_stats_visit_per_year_year</a>
+					<a href=\"index.php?open=$open&amp;page=statistics_month&amp;stats_year=$get_stats_visit_per_year_year&amp;stats_month=$get_stats_visit_per_month_month&amp;editor_language=$editor_language\">$get_stats_visit_per_month_month_full $get_stats_visit_per_year_year</a>
 					</span>
 				  </td>
 				  <td>

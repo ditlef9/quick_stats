@@ -28,12 +28,12 @@ if($page == "menu"){
 
 
 echo"
-			<li><a href=\"index.php?open=settings&amp;page=default\"";if($page == "settings"){echo" class=\"selected\"";}echo">Settings</a></li>
-			<li><a href=\"index.php?open=settings&amp;page=users\"";if($page == "users"){echo" class=\"selected\"";}echo">Users</a></li>
-			<li><a href=\"index.php?open=settings&amp;page=languages\"";if($page == "languages"){echo" class=\"selected\"";}echo">Languages</a></li>
-			<li><a href=\"index.php?open=settings&amp;page=liquidbase\"";if($page == "liquidbase"){echo" class=\"selected\"";}echo">Liquidbase</a></li>
-			<li><a href=\"index.php?open=settings&amp;page=ipv4_to_country\"";if($page == "ipv4_to_country"){echo" class=\"selected\"";}echo">IPv4 to country</a></li>
-			<li><a href=\"index.php?open=settings&amp;page=ipv6_to_country\"";if($page == "ipv6_to_country"){echo" class=\"selected\"";}echo">IPv6 to country</a></li>
+			<li><a href=\"index.php?open=settings&amp;page=default&amp;editor_language=$editor_language\"";if($page == "settings"){echo" class=\"selected\"";}echo">Settings</a></li>
+			<li><a href=\"index.php?open=settings&amp;page=users&amp;editor_language=$editor_language\"";if($page == "users"){echo" class=\"selected\"";}echo">Users</a></li>
+			<li><a href=\"index.php?open=settings&amp;page=languages&amp;editor_language=$editor_language\"";if($page == "languages"){echo" class=\"selected\"";}echo">Languages</a></li>
+			<li><a href=\"index.php?open=settings&amp;page=liquidbase&amp;editor_language=$editor_language\"";if($page == "liquidbase"){echo" class=\"selected\"";}echo">Liquidbase</a></li>
+			<li><a href=\"index.php?open=settings&amp;page=ipv4_to_country&amp;editor_language=$editor_language\"";if($page == "ipv4_to_country"){echo" class=\"selected\"";}echo">IPv4 to country</a></li>
+			<li><a href=\"index.php?open=settings&amp;page=ipv6_to_country&amp;editor_language=$editor_language\"";if($page == "ipv6_to_country"){echo" class=\"selected\"";}echo">IPv6 to country</a></li>
 
 
 ";

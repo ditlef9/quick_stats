@@ -78,7 +78,7 @@ if($action == ""){
 
 	<!-- IPv6 List -->
 		<p>
-		<a href=\"index.php?open=$open&amp;page=$page&amp;action=export_to_txt_files\" class=\"btn_default\">Export to txt files</a>
+		<a href=\"index.php?open=$open&amp;page=$page&amp;action=export_to_txt_files&amp;editor_language=$editor_language\" class=\"btn_default\">Export to txt files</a>
 		</p>
 
 		<table class=\"hor-zebra\">

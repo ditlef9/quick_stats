@@ -186,9 +186,9 @@ echo"
 
 <!-- Where am I? -->
 	<p><b>You are here:</b><br />
-	<a href=\"index.php?open=settings&amp;page=users\">Users</a>
+	<a href=\"index.php?open=settings&amp;page=users&amp;editor_language=$editor_language\">Users</a>
 	&gt;
-	<a href=\"index.php?open=settings&amp;page=users_edit&amp;user_id=$get_current_user_id\">Edit user $get_current_user_name</a>
+	<a href=\"index.php?open=settings&amp;page=users_edit&amp;user_id=$get_current_user_id&amp;editor_language=$editor_language\">Edit user $get_current_user_name</a>
 	
 	</p>
 <!-- //Where am I? -->
